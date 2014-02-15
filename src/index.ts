@@ -22,6 +22,8 @@ if (args.length === 0) {
 }
 
 var options = formatter.createDefaultFormatCodeOptions();
+options.NewLineCharacter = "\n";
+options.ConvertTabsToSpaces = false;
 
 args.forEach(fileName => {
 	if (!fs.existsSync(fileName)) {
