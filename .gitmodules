@@ -1,0 +1,3 @@
+[submodule "typescript-toolbox"]
+	path = typescript-toolbox
+	url = git@github.com:vvakame/typescript-toolbox.git
