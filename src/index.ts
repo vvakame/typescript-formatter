@@ -1,12 +1,12 @@
 /// <reference path="./node.d.ts" />
-/// <reference path="./typings/commander/commander.d.ts" />
+/// <reference path="../typings/commander/commander.d.ts" />
 
-import formatter = require("./typescript-toolbox/src/formatter");
+import formatter = require("../typescript-toolbox/src/formatter");
 import program = require("commander");
 
 import fs = require("fs");
 
-var packageJson = JSON.parse(fs.readFileSync(__dirname + "/package.json").toString());
+var packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 
 program
 	.version(packageJson.version)
@@ -16,8 +16,10 @@ program
 
 var replace = !!(<any>program).replace;
 var args:string[] = (<any>program).args;
-
-console.log(replace, args);
+if (args.length === 0) {
+	(<any>program).outputHelp();
+	process.exit(1);
+}
 
 var options = formatter.createDefaultFormatCodeOptions();
 
@@ -31,6 +33,7 @@ args.forEach(fileName => {
 	var formattedCode = formatter.applyFormatterToContent(content, options);
 	if (replace) {
 		fs.writeFileSync(fileName, formattedCode);
+		console.log("replaced " + fileName);
 	} else {
 		console.log(formattedCode);
 	}

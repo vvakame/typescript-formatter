@@ -1,0 +1,13 @@
+.git/
+
+# for WebStorm
+.idea/
+
+# for npm
+node_modules/
+
+# for grunt
+typings/
+
+# codes
+test/
