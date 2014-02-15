@@ -34,8 +34,10 @@ args.forEach(fileName => {
 	var content = fs.readFileSync(fileName).toString();
 	var formattedCode = formatter.applyFormatterToContent(content, options);
 	if (replace) {
-		fs.writeFileSync(fileName, formattedCode);
-		console.log("replaced " + fileName);
+		if (content !== formattedCode) {
+			fs.writeFileSync(fileName, formattedCode);
+			console.log("replaced " + fileName);
+		}
 	} else {
 		console.log(formattedCode);
 	}
