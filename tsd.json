@@ -6,7 +6,7 @@
     "bundle": "typings/tsd.d.ts",
     "installed": {
         "commander/commander.d.ts": {
-            "commit": "654d7e89d06ea40099cf29189c5ecfbb5bb4420d"
+            "commit": "486d47c1a5721468ef8bbd9d2395b813678b2bb0"
         }
     }
 }
