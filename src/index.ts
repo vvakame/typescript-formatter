@@ -10,8 +10,8 @@ var packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toS
 
 program
 	.version(packageJson.version)
-	.usage('[options] <file ...>')
-	.option('-r, --replace', 'Replace .ts file')
+	.usage("[options] <file ...>")
+	.option("-r, --replace", "Replace .ts file")
 	.parse(process.argv);
 
 var replace = !!(<any>program).replace;
