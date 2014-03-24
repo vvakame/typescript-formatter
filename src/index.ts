@@ -6,6 +6,10 @@ import program = require("commander");
 
 import fs = require("fs");
 
+import base = require("./provider/base");
+import editorconfig = require("./provider/editorconfig");
+import tslintjson = require("./provider/tslintjson");
+
 var packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 
 program
@@ -21,10 +25,6 @@ if (args.length === 0) {
 	process.exit(1);
 }
 
-var options = formatter.createDefaultFormatCodeOptions();
-options.NewLineCharacter = "\n";
-options.ConvertTabsToSpaces = false;
-
 args.forEach(fileName => {
 	if (!fs.existsSync(fileName)) {
 		console.error(fileName + " is not exists. process abort.");
@@ -32,6 +32,20 @@ args.forEach(fileName => {
 		return;
 	}
 	var content = fs.readFileSync(fileName).toString();
+
+	console.log("target:" + fileName);
+	var options = formatter.createDefaultFormatCodeOptions();
+	console.log("before:\n" + JSON.stringify(options, null, 2));
+
+	[
+		base,
+		editorconfig,
+		tslintjson
+	].forEach(provider=> provider.makeFormatCodeOptions(fileName, options));
+
+	console.log("after:\n" + JSON.stringify(options, null, 2));
+	return;
+
 	var formattedCode = formatter.applyFormatterToContent(content, options);
 	if (replace) {
 		if (content !== formattedCode) {
