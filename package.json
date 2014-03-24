@@ -7,8 +7,8 @@
         "tsfmt": "./index.js"
     },
     "scripts": {
-        "build": "tsc --module commonjs src/index.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "grunt default",
+        "test": "grunt test"
     },
     "keywords": [
         "TypeScript"
