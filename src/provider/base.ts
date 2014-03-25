@@ -43,7 +43,7 @@ export function makeFormatCodeOptions(fileName:string, options:TypeScript.Servic
 	if (!configFileName) {
 		return options;
 	}
-	console.log("read " + configFileName);
+	// console.log("read " + configFileName);
 
 	var config:ITsfmtSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
 	if (typeof config.insertSpaceAfterCommaDelimiter === "boolean") {

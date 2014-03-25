@@ -7,6 +7,12 @@
     "installed": {
         "commander/commander.d.ts": {
             "commit": "486d47c1a5721468ef8bbd9d2395b813678b2bb0"
+        },
+        "assert/assert.d.ts": {
+            "commit": "486d47c1a5721468ef8bbd9d2395b813678b2bb0"
+        },
+        "mocha/mocha.d.ts": {
+            "commit": "486d47c1a5721468ef8bbd9d2395b813678b2bb0"
         }
     }
 }

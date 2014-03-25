@@ -11,10 +11,23 @@ import tslintjson = require("./provider/tslintjson");
 var providers = [base, editorconfig, tslintjson];
 
 export interface IOptions {
-	replace:boolean;
+	dryRun?: boolean;
+	replace?:boolean;
 }
 
-export function processFiles(opts:IOptions, files:string[]) {
+export interface IResultMap {
+	[fileName:string]:IResult;
+}
+
+export interface IResult {
+	fileName: string;
+	options: TypeScript.Services.FormatCodeOptions;
+	src: string;
+	dest: string;
+}
+
+export function processFiles(opts:IOptions, files:string[]):IResultMap {
+	var result:IResultMap = {};
 	files.forEach(fileName => {
 		if (!fs.existsSync(fileName)) {
 			console.error(fileName + " is not exists. process abort.");
@@ -23,14 +36,8 @@ export function processFiles(opts:IOptions, files:string[]) {
 		}
 		var content = fs.readFileSync(fileName).toString();
 
-		console.log("target:" + fileName);
 		var options = formatter.createDefaultFormatCodeOptions();
-		console.log("before:\n" + JSON.stringify(options, null, 2));
-
 		providers.forEach(provider=> provider.makeFormatCodeOptions(fileName, options));
-
-		console.log("after:\n" + JSON.stringify(options, null, 2));
-		return;
 
 		var formattedCode = formatter.applyFormatterToContent(content, options);
 		if (opts && opts.replace) {
@@ -38,8 +45,15 @@ export function processFiles(opts:IOptions, files:string[]) {
 				fs.writeFileSync(fileName, formattedCode);
 				console.log("replaced " + fileName);
 			}
-		} else {
+		} else if (opts && !opts.dryRun) {
 			console.log(formattedCode);
 		}
+		result[fileName] = {
+			fileName: fileName,
+			options: options,
+			src: content,
+			dest: formattedCode
+		};
 	});
+	return result;
 }
