@@ -14,15 +14,16 @@ export function makeFormatCodeOptions(fileName:string, options:TypeScript.Servic
 		return options;
 	}
 	console.log("editorconfig makeFormatCodeOptions");
+	console.log(config);
 
 	if (config.indent_style === "tab") {
 		options.ConvertTabsToSpaces = false;
-		if (typeof config.tab_width === "string") {
-			options.TabSize = parseInt(config.tab_width);
-		}
-	} else if (typeof config.indent_size === "string") {
+		// if (typeof config.tab_width === "number") {
+		// 	options.TabSize = config.tab_width;
+		// }
+	} else if (typeof config.indent_size === "number") {
 		options.ConvertTabsToSpaces = true;
-		options.IndentSize = parseInt(config.indent_size);
+		options.IndentSize = config.indent_size;
 	}
 	if (config.end_of_line === "lf") {
 		options.NewLineCharacter = "\n";

@@ -2,8 +2,8 @@ declare module "editorconfig" {
 	export module EditorConfig {
 		export interface IFileInfo {
 			indent_style?:string;
-			indent_size?:string;
-			tab_width?: string;
+			indent_size?:number;
+			tab_width?: number;
 			end_of_line?: string;
 			charset?:string;
 			trim_trailing_whitespace?: string;
