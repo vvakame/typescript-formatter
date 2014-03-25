@@ -44,7 +44,7 @@
 
         "grunt-mocha-test": "0.10.0",
         "grunt-espower": "0.3.2",
-        "power-assert": "0.3.1",
+        "power-assert": "0.3.2",
 
         "grunt-exec": "0.4.5",
 
