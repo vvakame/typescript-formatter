@@ -10,19 +10,19 @@ import editorconfig = require("editorconfig");
 
 export function makeFormatCodeOptions(fileName:string, options:TypeScript.Services.FormatCodeOptions):TypeScript.Services.FormatCodeOptions {
 	var config = editorconfig.parse(fileName);
+	if (Object.keys(config).length === 0) {
+		return options;
+	}
 	console.log("editorconfig makeFormatCodeOptions");
-	// console.log("read " + JSON.stringify(config, null, 2));
 
 	if (config.indent_style === "tab") {
 		options.ConvertTabsToSpaces = false;
 		if (typeof config.tab_width === "string") {
 			options.TabSize = parseInt(config.tab_width);
 		}
-	} else {
+	} else if (typeof config.indent_size === "string") {
 		options.ConvertTabsToSpaces = true;
-		if (typeof config.indent_size === "string") {
-			options.IndentSize = parseInt(config.indent_size);
-		}
+		options.IndentSize = parseInt(config.indent_size);
 	}
 	if (config.end_of_line === "lf") {
 		options.NewLineCharacter = "\n";
