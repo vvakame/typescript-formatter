@@ -1,0 +1,10 @@
+{
+    "insertSpaceAfterCommaDelimiter": false,
+    "insertSpaceAfterSemicolonInForStatements": false,
+    "insertSpaceBeforeAndAfterBinaryOperators": false,
+    "insertSpaceAfterKeywordsInControlFlowStatements": false,
+    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+    "placeOpenBraceOnNewLineForFunctions": false,
+    "placeOpenBraceOnNewLineForControlBlocks": false
+}
