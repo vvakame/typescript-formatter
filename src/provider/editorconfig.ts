@@ -10,6 +10,7 @@ import editorconfig = require("editorconfig");
 
 export function makeFormatCodeOptions(fileName:string, options:TypeScript.Services.FormatCodeOptions):TypeScript.Services.FormatCodeOptions {
 	var config = editorconfig.parse(fileName);
+	console.log("editorconfig makeFormatCodeOptions");
 	// console.log("read " + JSON.stringify(config, null, 2));
 
 	if (config.indent_style === "tab") {
