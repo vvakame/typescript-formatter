@@ -13,8 +13,8 @@ export function makeFormatCodeOptions(fileName:string, options:TypeScript.Servic
 	if (Object.keys(config).length === 0) {
 		return options;
 	}
-	console.log("editorconfig makeFormatCodeOptions");
-	console.log(config);
+	// console.log("editorconfig makeFormatCodeOptions");
+	// console.log(config);
 
 	if (config.indent_style === "tab") {
 		options.ConvertTabsToSpaces = false;

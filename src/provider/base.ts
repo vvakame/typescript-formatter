@@ -43,7 +43,7 @@ export function makeFormatCodeOptions(fileName:string, options:TypeScript.Servic
 	if (!configFileName) {
 		return options;
 	}
-	console.log("base makeFormatCodeOptions");
+	// console.log("base makeFormatCodeOptions");
 	// console.log("read " + configFileName);
 
 	var config:ITsfmtSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
@@ -78,7 +78,6 @@ export function makeFormatCodeOptions(fileName:string, options:TypeScript.Servic
 		options.TabSize = config.tabSize;
 	}
 	if (typeof config.newLineCharacter === "string") {
-		// TODO 環境依存のアレを入れる
 		options.NewLineCharacter = config.newLineCharacter;
 	}
 	if (typeof config.convertTabsToSpaces === "boolean") {

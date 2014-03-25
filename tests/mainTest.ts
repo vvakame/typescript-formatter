@@ -34,7 +34,6 @@ describe("tsfmt test", () => {
 			.filter(fileName=> /\.ts$/.test(fileName))
 			.forEach(fileName=> {
 				it(fileName, ()=> {
-					console.log("test " + fileName);
 					var resultMap = lib.processFiles({dryRun: true}, [fileName]);
 					var result = resultMap[fileName];
 					assert(result !== null);

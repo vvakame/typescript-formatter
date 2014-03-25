@@ -44,7 +44,7 @@ export function makeFormatCodeOptions(fileName:string, options:TypeScript.Servic
 	if (!configFileName) {
 		return options;
 	}
-	console.log("tslint makeFormatCodeOptions");
+	// console.log("tslint makeFormatCodeOptions");
 	// console.log("read " + configFileName);
 
 	var config:ITslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
