@@ -3,3 +3,4 @@ class Sample {
 }
 
 var s=new Sample();
+if(s===s) { console.log(s.hello()); }

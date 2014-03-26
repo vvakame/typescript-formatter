@@ -1,5 +1,6 @@
 class Sample {
-hello(word="world"){return "Hello, " + word;}
+hello(word:string="world"):string{return "Hello, " + word;}
 }
 
-var s=new Sample();
+var s:Sample=new Sample();
+if(s===s){console.log(s.hello());}
