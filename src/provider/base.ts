@@ -23,13 +23,21 @@ function getConfigFileName(baseFileName:string, configFileName:string):string {
 
 interface ITsfmtSettings {
 	// from FormatCodeOptions
+	// コンマ区切り記号の後にスペースを追加する
 	insertSpaceAfterCommaDelimiter?: boolean;
+	// 'for' ステートメントでセミコロンの後にスペースを挿入する
 	insertSpaceAfterSemicolonInForStatements?: boolean;
+	// 二項演算子の前後にスペースを挿入する
 	insertSpaceBeforeAndAfterBinaryOperators?: boolean;
+	// 制御フローステートメント内のキーワードの後にスペースを追加する
 	insertSpaceAfterKeywordsInControlFlowStatements?: boolean;
+	// 匿名関数に対する関数キーワードの後にスペースを追加する
 	insertSpaceAfterFunctionKeywordForAnonymousFunctions?: boolean;
+	// かっこ内が空でない場合に始め括弧の後ろと終わりカッコの前にスペースを挿入する
 	insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis?: boolean;
+	// 新しい行に関数の始め中括弧を配置する
 	placeOpenBraceOnNewLineForFunctions?: boolean;
+	// 新しい行にコントロールブロックの始め中括弧を配置する
 	placeOpenBraceOnNewLineForControlBlocks?: boolean;
 	// from EditorOptions
 	indentSize?: number;
