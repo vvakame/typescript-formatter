@@ -37,10 +37,13 @@
 
         "grunt-contrib-clean": "0.5.0",
 
-        "grunt-ts": "1.8.2",
+        "grunt-ts": "1.9.1",
         "typescript": "0.9.7",
         "grunt-tslint": "0.4.1",
         "grunt-tsd": "0.0.4",
+
+        "tslint": "0.4.7",
+        "q": "1.0.1",
 
         "grunt-mocha-test": "0.10.0",
         "grunt-espower": "0.3.2",

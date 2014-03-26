@@ -6,13 +6,19 @@
     "bundle": "typings/tsd.d.ts",
     "installed": {
         "commander/commander.d.ts": {
-            "commit": "486d47c1a5721468ef8bbd9d2395b813678b2bb0"
-        },
-        "assert/assert.d.ts": {
-            "commit": "486d47c1a5721468ef8bbd9d2395b813678b2bb0"
+            "commit": "2f592be9e61a1720e4aa5178ee09e07c5c6bbad9"
         },
         "mocha/mocha.d.ts": {
-            "commit": "486d47c1a5721468ef8bbd9d2395b813678b2bb0"
+            "commit": "2f592be9e61a1720e4aa5178ee09e07c5c6bbad9"
+        },
+        "assert/assert.d.ts": {
+            "commit": "2f592be9e61a1720e4aa5178ee09e07c5c6bbad9"
+        },
+        "jquery/jquery.d.ts": {
+            "commit": "2f592be9e61a1720e4aa5178ee09e07c5c6bbad9"
+        },
+        "q/Q.d.ts": {
+            "commit": "2f592be9e61a1720e4aa5178ee09e07c5c6bbad9"
         }
     }
 }
