@@ -1,14 +1,14 @@
 declare module "editorconfig" {
 	export module EditorConfig {
 		export interface IFileInfo {
-			indent_style?:string;
-			indent_size?:number;
+			indent_style?: string;
+			indent_size?: number;
 			tab_width?: number;
 			end_of_line?: string;
-			charset?:string;
+			charset?: string;
 			trim_trailing_whitespace?: string;
 			insert_final_newline?: string;
-			root?:string;
+			root?: string;
 		}
 
 		export interface IParseOptions {

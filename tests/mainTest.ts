@@ -73,12 +73,12 @@ describe("tsfmt test", () => {
 	var fixtureDir = "./tests/fixture";
 	var expectedDir = "./tests/expected";
 
-	describe("processFiles function", ()=> {
+	describe("processFiles function", () => {
 		var fileNames = collectFileName(fixtureDir);
 		fileNames
 			.filter(fileName=> /\.ts$/.test(fileName))
 			.forEach(fileName=> {
-				it(fileName, (done)=> {
+				it(fileName, (done) => {
 					var resultMap = lib.processFiles([fileName], {
 						dryRun: true,
 						replace: false,
@@ -124,7 +124,7 @@ describe("tsfmt test", () => {
 						checkByTslint(tslintConfigName, expectedTsFileName, false)
 					]).catch(errorMsg=> {
 						assert(false, errorMsg);
-					}).finally(()=> {
+					}).finally(() => {
 						done();
 					}).done();
 				});

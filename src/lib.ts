@@ -20,7 +20,7 @@ export interface IOptions {
 }
 
 export interface IResultMap {
-	[fileName:string]:IResult;
+	[fileName: string]: IResult;
 }
 
 export interface IResult {

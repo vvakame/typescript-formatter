@@ -24,17 +24,17 @@ function getConfigFileName(baseFileName:string, configFileName:string):string {
 interface ITslintSettings {
 	rules: {
 		indent: {
-			0:boolean;
-			1:number;
+			0: boolean;
+			1: number;
 		};
 		whitespace: {
-			0:boolean;
-			1:string;
-			2:string;
-			3:string;
-			4:string;
-			5:string;
-			[key:string]:any;
+			0: boolean;
+			1: string;
+			2: string;
+			3: string;
+			4: string;
+			5: string;
+			[key: string]: any;
 		};
 	};
 }
