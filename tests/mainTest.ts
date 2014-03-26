@@ -79,7 +79,13 @@ describe("tsfmt test", () => {
 			.filter(fileName=> /\.ts$/.test(fileName))
 			.forEach(fileName=> {
 				it(fileName, (done)=> {
-					var resultMap = lib.processFiles({dryRun: true}, [fileName]);
+					var resultMap = lib.processFiles([fileName], {
+						dryRun: true,
+						replace: false,
+						tslint: true,
+						editorconfig: true,
+						tsfmt: true
+					});
 					var result = resultMap[fileName];
 					assert(result !== null);
 

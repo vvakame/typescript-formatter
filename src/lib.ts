@@ -8,11 +8,15 @@ import base = require("./provider/base");
 import editorconfig = require("./provider/editorconfig");
 import tslintjson = require("./provider/tslintjson");
 
-var providers = [base, editorconfig, tslintjson];
+var providers = [];
 
 export interface IOptions {
 	dryRun?: boolean;
-	replace?:boolean;
+	verbose?: boolean;
+	replace: boolean;
+	tslint: boolean;
+	editorconfig: boolean;
+	tsfmt: boolean;
 }
 
 export interface IResultMap {
@@ -26,7 +30,7 @@ export interface IResult {
 	dest: string;
 }
 
-export function processFiles(opts:IOptions, files:string[]):IResultMap {
+export function processFiles(files:string[], opts:IOptions):IResultMap {
 	var result:IResultMap = {};
 	files.forEach(fileName => {
 		if (!fs.existsSync(fileName)) {
@@ -37,6 +41,15 @@ export function processFiles(opts:IOptions, files:string[]):IResultMap {
 		var content = fs.readFileSync(fileName).toString();
 
 		var options = formatter.createDefaultFormatCodeOptions();
+		if (opts.tsfmt) {
+			providers.push(base);
+		}
+		if (opts.editorconfig) {
+			providers.push(editorconfig);
+		}
+		if (opts.tslint) {
+			providers.push(tslintjson);
+		}
 		providers.forEach(provider=> provider.makeFormatCodeOptions(fileName, options));
 
 		var formattedCode = formatter.applyFormatterToContent(content, options);
