@@ -1,56 +1,48 @@
 {
-    "name": "typescript-formatter",
-    "version": "0.1.0",
-    "description": "Formatter of TypeScript code",
-    "main": "index.js",
-    "bin": {
-        "tsfmt": "./index.js"
-    },
-    "scripts": {
-        "build": "grunt default",
-        "test": "grunt test"
-    },
-    "keywords": [
-        "TypeScript"
-    ],
-    "author": "vvakame+dev@gmail.com",
-    "license": "MIT",
-    "homepage": "https://github.com/vvakame/typescript-formatter",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:vvakame/typescript-formatter.git"
-    },
-    "bugs": {
-        "url": "https://github.com/vvakame/typescript-formatter/issues"
-    },
-
-    "engines": {
-        "node": ">= 0.10.0"
-    },
-
-    "dependencies": {
-        "commander": "2.1.0",
-        "editorconfig": "0.11.4"
-    },
-    "devDependencies": {
-        "grunt": "0.4.4",
-
-        "grunt-contrib-clean": "0.5.0",
-
-        "grunt-ts": "1.9.1",
-        "typescript": "0.9.7",
-        "grunt-tslint": "0.4.1",
-        "grunt-tsd": "0.0.4",
-
-        "tslint": "0.4.7",
-        "q": "1.0.1",
-
-        "grunt-mocha-test": "0.10.0",
-        "grunt-espower": "0.3.2",
-        "power-assert": "0.3.2",
-
-        "grunt-exec": "0.4.5",
-
-        "matchdep": "0.3.0"
-    }
+  "name": "typescript-formatter",
+  "version": "0.1.1",
+  "description": "Formatter of TypeScript code",
+  "main": "index.js",
+  "bin": {
+    "tsfmt": "./index.js"
+  },
+  "scripts": {
+    "build": "grunt default",
+    "test": "grunt test"
+  },
+  "keywords": [
+    "TypeScript"
+  ],
+  "author": "vvakame+dev@gmail.com",
+  "license": "MIT",
+  "homepage": "https://github.com/vvakame/typescript-formatter",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vvakame/typescript-formatter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vvakame/typescript-formatter/issues"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {
+    "commander": "2.1.0",
+    "editorconfig": "0.11.4"
+  },
+  "devDependencies": {
+    "grunt": "0.4.4",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-ts": "1.9.1",
+    "typescript": "0.9.7",
+    "grunt-tslint": "0.4.1",
+    "grunt-tsd": "0.0.4",
+    "tslint": "0.4.7",
+    "q": "1.0.1",
+    "grunt-mocha-test": "0.10.0",
+    "grunt-espower": "0.3.2",
+    "power-assert": "0.3.2",
+    "grunt-exec": "0.4.5",
+    "matchdep": "0.3.0"
+  }
 }
