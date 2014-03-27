@@ -1,6 +1,6 @@
 /// <reference path="./node.d.ts" />
 
-import formatter = require("../typescript-toolbox/src/formatter");
+import formatter = require("../typescript-toolbox/lib/formatter");
 
 import fs = require("fs");
 

@@ -1,4 +1,4 @@
-/// <reference path="../../typescript-toolbox/src/formatter.ts" />
+/// <reference path="../../typescript-toolbox/lib/formatter.ts" />
 
 /// <reference path="../node.d.ts" />
 
