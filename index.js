@@ -1,3 +1,1 @@
-#!/usr/bin/env node
-
-require("./lib/cli");
+module.exports = require("./lib/lib");

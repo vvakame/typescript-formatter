@@ -2,9 +2,9 @@
   "name": "typescript-formatter",
   "version": "0.1.1",
   "description": "Formatter of TypeScript code",
-  "main": "index.js",
+  "main": "./index",
   "bin": {
-    "tsfmt": "./index.js"
+    "tsfmt": "./bin/tsfmt"
   },
   "scripts": {
     "build": "grunt default",
