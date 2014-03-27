@@ -33,15 +33,15 @@
   "devDependencies": {
     "grunt": "0.4.4",
     "grunt-contrib-clean": "0.5.0",
-    "grunt-ts": "1.9.1",
+    "grunt-ts": "1.9.2",
     "typescript": "0.9.7",
     "grunt-tslint": "0.4.1",
-    "grunt-tsd": "0.0.4",
+    "grunt-tsd": "0.1.0",
     "tslint": "0.4.7",
     "q": "1.0.1",
     "grunt-mocha-test": "0.10.0",
-    "grunt-espower": "0.3.2",
-    "power-assert": "0.3.2",
+    "grunt-espower": "0.4.0",
+    "power-assert": "0.4.0",
     "grunt-exec": "0.4.5",
     "matchdep": "0.3.0"
   }
