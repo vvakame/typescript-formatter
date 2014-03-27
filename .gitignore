@@ -4,4 +4,7 @@ node_modules/
 typings/
 .tscache/
 
-*.js
+lib/**/*.js
+tests/**/*.js
+testEspowered/**/*.js
+example/*.js
