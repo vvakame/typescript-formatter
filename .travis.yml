@@ -4,7 +4,7 @@ node_js:
 
 before_install:
   - npm install -g grunt-cli
-  - grunt setup
+  - ./setup.sh
 
 notifications:
   email: true
