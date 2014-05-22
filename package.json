@@ -1,6 +1,6 @@
 {
   "name": "typescript-formatter",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Formatter of TypeScript code",
   "main": "./index",
   "bin": {
