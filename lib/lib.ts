@@ -1,6 +1,11 @@
-/// <reference path="./node.d.ts" />
+/// <reference path="../typings/node/node.d.ts" />
 
-import formatter = require("../typescript-toolbox/lib/formatter");
+"use strict";
+
+import toolbox = require("../typescript-toolbox/lib/index");
+
+import ts = toolbox.ts;
+import formatter = toolbox.formatter;
 
 import fs = require("fs");
 
@@ -8,7 +13,7 @@ import base = require("./provider/base");
 import editorconfig = require("./provider/editorconfig");
 import tslintjson = require("./provider/tslintjson");
 
-var providers = [];
+var providers: {makeFormatCodeOptions: Function;}[] = [];
 
 export interface IOptions {
 	dryRun?: boolean;
@@ -25,12 +30,14 @@ export interface IResultMap {
 
 export interface IResult {
 	fileName: string;
-	options: TypeScript.Services.FormatCodeOptions;
+	options: ts.FormatCodeOptions;
 	src: string;
 	dest: string;
 }
 
 export function processFiles(files:string[], opts:IOptions):IResultMap {
+	"use strict";
+
 	var result:IResultMap = {};
 	files.forEach(fileName => {
 		if (!fs.existsSync(fileName)) {
@@ -40,7 +47,7 @@ export function processFiles(files:string[], opts:IOptions):IResultMap {
 		}
 		var content = fs.readFileSync(fileName).toString();
 
-		var options = formatter.createDefaultFormatCodeOptions();
+		var options = toolbox.utils.createDefaultFormatCodeOptions();
 		if (opts.tsfmt) {
 			providers.push(base);
 		}

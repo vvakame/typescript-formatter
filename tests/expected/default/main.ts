@@ -60,12 +60,12 @@ class Color {
 
     static toDrawingColor(c: Color) {
         var legalize = d => d > 1 ? 1 : d;
-		return {
+        return {
             r: Math.floor(legalize(c.r) * 255),
             g: Math.floor(legalize(c.g) * 255),
             b: Math.floor(legalize(c.b) * 255)
         }
-	}
+    }
 
 }
 
@@ -157,7 +157,7 @@ class Plane implements Thing {
 
     constructor(norm: Vector, offset: number, public surface: Surface) {
         this.normal = function(pos: Vector) { return norm; }
-		this.intersect = function(ray: Ray): Intersection {
+        this.intersect = function(ray: Ray): Intersection {
             var denom = Vector.dot(norm, ray.dir);
             if (denom > 0) {
                 return null;
@@ -166,20 +166,20 @@ class Plane implements Thing {
                 return { thing: this, ray: ray, dist: dist };
             }
         }
-	}
+    }
 
 }
 
 module Surfaces {
 
-	export var shiny: Surface = {
+    export var shiny: Surface = {
         diffuse: function(pos) { return Color.white; },
         specular: function(pos) { return Color.grey; },
         reflect: function(pos) { return 0.7; },
         roughness: 250
     }
 
-	export var checkerboard: Surface = {
+    export var checkerboard: Surface = {
         diffuse: function(pos) {
             if ((Math.floor(pos.z) + Math.floor(pos.x)) % 2 !== 0) {
                 return Color.white;
@@ -270,7 +270,7 @@ class RayTracer {
                     Color.times(thing.surface.specular(pos), scolor)));
             }
         }
-		return scene.lights.reduce(addLight, Color.defaultColor);
+        return scene.lights.reduce(addLight, Color.defaultColor);
     }
 
     render(scene, ctx, screenWidth, screenHeight) {
@@ -279,7 +279,7 @@ class RayTracer {
             var recenterY = y => -(y - (screenHeight / 2.0)) / 2.0 / screenHeight;
             return Vector.norm(Vector.plus(camera.forward, Vector.plus(Vector.times(recenterX(x), camera.right), Vector.times(recenterY(y), camera.up))));
         }
-		for (var y = 0; y < screenHeight; y++) {
+        for (var y = 0; y < screenHeight; y++) {
             for (var x = 0; x < screenWidth; x++) {
                 var color = this.traceRay({ start: scene.camera.pos, dir: getPoint(x, y, scene.camera) }, scene, 0);
                 var c = Color.toDrawingColor(color);

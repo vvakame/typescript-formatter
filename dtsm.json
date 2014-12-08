@@ -1,0 +1,26 @@
+{
+  "baseRepo": "https://github.com/borisyankov/DefinitelyTyped.git",
+  "baseRef": "master",
+  "path": "typings",
+  "bundle": "typings/bundle.d.ts",
+  "dependencies": {
+    "node/node.d.ts": {
+      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+    },
+    "commander/commander.d.ts": {
+      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+    },
+    "mocha/mocha.d.ts": {
+      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+    },
+    "power-assert/power-assert.d.ts": {
+      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+    },
+    "jquery/jquery.d.ts": {
+      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+    },
+    "q/Q.d.ts": {
+      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+    }
+  }
+}

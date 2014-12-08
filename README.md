@@ -46,6 +46,10 @@ class Sample { hello(word= "world") { return "Hello, " + word; } }
 new Sample().hello("TypeScript");
 ```
 
+## Note
+
+now `indentSize` parameter is ignored. it is TypeScript compiler matters.
+
 ## Read Settings From Files
 
 1st. Read settings from tsfmt.json.
@@ -104,7 +108,7 @@ insert_final_newline = true
 ### Read Settings Rules
 
 ```
-$ tree -a                                                                                       [~/Dropbox/work/typescript-formatter/example]
+$ tree -a
 .
 ├── foo
 │   ├── bar

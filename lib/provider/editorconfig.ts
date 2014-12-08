@@ -1,14 +1,18 @@
 /// <reference path="../../typescript-toolbox/lib/formatter.ts" />
 
-/// <reference path="../node.d.ts" />
+/// <reference path="../../typings/node/node.d.ts" />
 /// <reference path="../editorconfig.d.ts" />
 
-import path = require("path");
-import fs = require("fs");
+"use strict";
+
+import toolbox = require("../../typescript-toolbox/lib/index");
+import ts = toolbox.ts;
 
 import editorconfig = require("editorconfig");
 
-export function makeFormatCodeOptions(fileName:string, options:TypeScript.Services.FormatCodeOptions):TypeScript.Services.FormatCodeOptions {
+export function makeFormatCodeOptions(fileName:string, options:ts.FormatCodeOptions):ts.FormatCodeOptions {
+	"use strict";
+
 	var config = editorconfig.parse(fileName);
 	if (Object.keys(config).length === 0) {
 		return options;

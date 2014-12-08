@@ -1,4 +1,4 @@
-/// <reference path="./node.d.ts" />
+/// <reference path="../typings/node/node.d.ts" />
 /// <reference path="../typings/commander/commander.d.ts" />
 
 import fs = require("fs");
