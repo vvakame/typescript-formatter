@@ -20,9 +20,6 @@
     "power-assert/power-assert.d.ts": {
       "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
-    "jquery/jquery.d.ts": {
-      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
-    },
     "q/Q.d.ts": {
       "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     }
