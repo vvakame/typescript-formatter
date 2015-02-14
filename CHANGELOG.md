@@ -1,0 +1,20 @@
+<a name="0.2.0"></a>
+## 0.2.0 (2015-02-14)
+
+TypeScript 1.4.1 support!
+
+#### Bug Fixes
+
+* **deps:**
+  * bump editorconfig version ([68140595](git@github.com:vvakame/typescript-formatter/commit/681405952ed68071cd97d5358bc0fb153f76d841))
+  * remove jquery.d.ts dependency ([ae3b52c6](git@github.com:vvakame/typescript-formatter/commit/ae3b52c6faa69bec862f370fc6dd8e86e429a92d))
+
+
+#### Features
+
+* **deps:**
+  * add grunt-conventional-chagelog ([bbe79771](git@github.com:vvakame/typescript-formatter/commit/bbe797712227c0ce6a70bf2e7baf95e41f939126))
+  * remove grunt-espower and add espower-loader, refactor project ([4f213464](git@github.com:vvakame/typescript-formatter/commit/4f21346472cca229c089dd91abd65667c03c6c66))
+* **grunt:** remove TypeScript compiler specified ([b241945a](git@github.com:vvakame/typescript-formatter/commit/b241945a13e77ca1db25fdb35d1dd4e9ba3dff27))
+* **tsfmt:** add typescript package to dependencies and remove typescript-toolbox submodule ([48d176e9](git@github.com:vvakame/typescript-formatter/commit/48d176e967e67ec41aef2402f299fd99330cde33))
+
