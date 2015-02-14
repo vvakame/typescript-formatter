@@ -33,20 +33,19 @@
   "devDependencies": {
     "grunt": "0.4.5",
     "q": "1.1.2",
-
     "typescript": "1.4.1",
     "grunt-ts": "3.0.0",
-
     "grunt-contrib-clean": "0.6.0",
     "grunt-tslint": "2.0.0",
     "grunt-dtsm": "0.2.3",
-
     "grunt-exec": "0.4.6",
-
     "grunt-mocha-test": "0.12.7",
     "grunt-espower": "0.10.0",
     "power-assert": "0.10.1",
-
     "load-grunt-tasks": "3.1.0"
+  },
+  "directories": {
+    "example": "example",
+    "test": "tests"
   }
 }
