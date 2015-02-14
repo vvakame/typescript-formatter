@@ -9,7 +9,7 @@
   "bundle": "typings/bundle.d.ts",
   "dependencies": {
     "node/node.d.ts": {
-      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+      "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
     },
     "typescript/typescript.d.ts": {
       "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
@@ -18,10 +18,10 @@
       "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
     },
     "mocha/mocha.d.ts": {
-      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+      "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
     },
     "power-assert/power-assert.d.ts": {
-      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+      "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
     }
   }
 }
