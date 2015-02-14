@@ -30,10 +30,6 @@ function collectFileName(dirName:string):string[] {
 }
 
 function checkByTslint(configFileName:string, tsfileName:string, errorExpected:boolean):Promise<boolean> {
-	if (tsfileName === "./test/expected/tslint/a/main.ts") {
-		// unknown error inside tslint...
-		return Promise.resolve(true);
-	}
 	var process = childProcess.spawn("./node_modules/.bin/tslint", ["-c", configFileName, "-f", tsfileName]);
 
 	var stdout = '';
@@ -49,27 +45,21 @@ function checkByTslint(configFileName:string, tsfileName:string, errorExpected:b
 	return new Promise((resolve, reject)=> {
 		process.on("exit", (code:number) => {
 			var success = !code; // 0 - exit with success
-			var action:string;
 			if (!errorExpected) {
 				// expected error
 				if (success) {
-					action = "resolve";
 					resolve(true);
 				} else {
-					action = "reject";
 					reject(tsfileName + " must be a good code.\n" + stdout);
 				}
 			} else {
 				// expected success
 				if (success) {
-					action = "reject";
 					reject(tsfileName + " must be a bad code.");
 				} else {
-					action = "resolve";
 					resolve(true);
 				}
 			}
-			// console.log("\n", tsfileName, code, "success=" + success, "errorExpected=" + errorExpected, action, "stdout=" + stdout.length);
 		});
 	});
 }
@@ -83,16 +73,18 @@ describe("tsfmt test", () => {
 		fileNames
 			.filter(fileName=> /\.ts$/.test(fileName))
 			.forEach(fileName=> {
-				var _it:(expectation:string, assertion?:(done:MochaDone) => void) => void = it;
 				var ignoreList = [
-					"./test/fixture/editorconfig/space/main.ts",
-					"./test/fixture/tsfmt/a/main.ts",
-					"./test/fixture/tslint/indent/main.ts"
+					"./test/fixture/editorconfig/space/main.ts", // TypeScript ignore indentSize: 8
+					"./test/fixture/tsfmt/a/main.ts", // TypeScript ignore indentSize: 1
+					"./test/fixture/tslint/indent/main.ts" // TypeScript ignore indentSize: 6
 				];
 				if (ignoreList.indexOf(fileName) !== -1) {
-					_it = it.skip;
+					it.skip(fileName, ()=> {
+						false;
+					});
+					return;
 				}
-				_it(fileName, () => {
+				it(fileName, () => {
 					return lib
 						.processFiles([fileName], {
 							dryRun: true,
