@@ -21,7 +21,7 @@ function getConfigFileName(baseFileName:string, configFileName:string):string {
 	return getConfigFileName(baseDir, configFileName);
 }
 
-interface ITslintSettings {
+interface TslintSettings {
 	rules: {
 		indent: {
 			0: boolean;
@@ -49,7 +49,7 @@ export function makeFormatCodeOptions(fileName:string, options:ts.FormatCodeOpti
 	// console.log("tslint makeFormatCodeOptions");
 	// console.log("read " + configFileName);
 
-	var config:ITslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+	var config:TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
 	if (!config.rules) {
 		return options;
 	}

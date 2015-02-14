@@ -21,7 +21,7 @@ function getConfigFileName(baseFileName:string, configFileName:string):string {
 	return getConfigFileName(baseDir, configFileName);
 }
 
-interface ITsfmtSettings {
+interface TsfmtSettings {
 	// from FormatCodeOptions
 	// コンマ区切り記号の後にスペースを追加する
 	insertSpaceAfterCommaDelimiter?: boolean;
@@ -56,7 +56,7 @@ export function makeFormatCodeOptions(fileName:string, options:ts.FormatCodeOpti
 	// console.log("base makeFormatCodeOptions");
 	// console.log("read " + configFileName);
 
-	var config:ITsfmtSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+	var config:TsfmtSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
 	if (typeof config.insertSpaceAfterCommaDelimiter === "boolean") {
 		options.InsertSpaceAfterCommaDelimiter = config.insertSpaceAfterCommaDelimiter;
 	}
