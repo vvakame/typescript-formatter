@@ -30,7 +30,7 @@ function collectFileName(dirName:string):string[] {
 
 function checkByTslint(configFileName:string, tsfileName:string, errorExpected:boolean):Q.IPromise<boolean> {
 	var d = Q.defer<boolean>();
-	if (tsfileName === "./tests/expected/tslint/a/main.ts") {
+	if (tsfileName === "./test/expected/tslint/a/main.ts") {
 		// unknown error inside tslint...
 		d.resolve(true);
 		return d.promise;
@@ -75,8 +75,8 @@ function checkByTslint(configFileName:string, tsfileName:string, errorExpected:b
 }
 
 describe("tsfmt test", () => {
-	var fixtureDir = "./tests/fixture";
-	var expectedDir = "./tests/expected";
+	var fixtureDir = "./test/fixture";
+	var expectedDir = "./test/expected";
 
 	describe("processFiles function", () => {
 		var fileNames = collectFileName(fixtureDir);
@@ -85,9 +85,9 @@ describe("tsfmt test", () => {
 			.forEach(fileName=> {
 				var _it:(expectation: string, assertion?: (done: MochaDone) => void) => void = it;
 				var ignoreList = [
-					"./tests/fixture/editorconfig/space/main.ts",
-					"./tests/fixture/tsfmt/a/main.ts",
-					"./tests/fixture/tslint/indent/main.ts"
+					"./test/fixture/editorconfig/space/main.ts",
+					"./test/fixture/tsfmt/a/main.ts",
+					"./test/fixture/tslint/indent/main.ts"
 				];
 				if (ignoreList.indexOf(fileName) !== -1) {
 					_it = it.skip;
@@ -127,7 +127,7 @@ describe("tsfmt test", () => {
 						done();
 						return;
 					}
-					if (fileName === "./tests/fixture/tslint/indent/main.ts") {
+					if (fileName === "./test/fixture/tslint/indent/main.ts") {
 						// NOTE indent enforces consistent indentation levels (currently disabled).
 						done();
 						return;
