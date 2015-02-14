@@ -2,10 +2,10 @@
   "name": "typescript-formatter",
   "version": "0.1.4",
   "dependencies": {
-    "commander": {
-      "version": "2.6.0",
-      "from": "commander@2.6.0",
-      "resolved": "https://registry.npmjs.org/commander/-/commander-2.6.0.tgz"
+    "commandpost": {
+      "version": "0.1.1",
+      "from": "commandpost@0.1.1",
+      "resolved": "https://registry.npmjs.org/commandpost/-/commandpost-0.1.1.tgz"
     },
     "editorconfig": {
       "version": "0.11.4",
@@ -35,6 +35,11 @@
           "resolved": "https://registry.npmjs.org/sigmund/-/sigmund-1.0.0.tgz"
         }
       }
+    },
+    "es6-promise": {
+      "version": "2.0.1",
+      "from": "es6-promise@2.0.1",
+      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-2.0.1.tgz"
     },
     "espower-loader": {
       "version": "0.10.0",
@@ -359,7 +364,7 @@
         },
         "rimraf": {
           "version": "2.2.8",
-          "from": "rimraf@2.2.8",
+          "from": "rimraf@>=2.2.8 <2.3.0",
           "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz"
         },
         "lodash": {
@@ -374,7 +379,7 @@
         },
         "which": {
           "version": "1.0.8",
-          "from": "which@1.0.8",
+          "from": "which@>=1.0.5 <1.1.0",
           "resolved": "https://registry.npmjs.org/which/-/which-1.0.8.tgz"
         },
         "js-yaml": {
@@ -460,16 +465,6 @@
           "version": "0.6.1",
           "from": "dtsm@>=0.6.1 <0.7.0",
           "dependencies": {
-            "commandpost": {
-              "version": "0.1.1",
-              "from": "commandpost@0.1.1",
-              "resolved": "https://registry.npmjs.org/commandpost/-/commandpost-0.1.1.tgz"
-            },
-            "es6-promise": {
-              "version": "2.0.1",
-              "from": "es6-promise@2.0.1",
-              "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-2.0.1.tgz"
-            },
             "fs-git": {
               "version": "0.4.1",
               "from": "fs-git@0.4.1"
@@ -1050,7 +1045,7 @@
                       "dependencies": {
                         "ansi-regex": {
                           "version": "0.2.1",
-                          "from": "ansi-regex@>=0.2.0 <0.3.0",
+                          "from": "ansi-regex@>=0.2.1 <0.3.0",
                           "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-0.2.1.tgz"
                         }
                       }
@@ -1062,7 +1057,7 @@
                       "dependencies": {
                         "ansi-regex": {
                           "version": "0.2.1",
-                          "from": "ansi-regex@>=0.2.0 <0.3.0",
+                          "from": "ansi-regex@>=0.2.1 <0.3.0",
                           "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-0.2.1.tgz"
                         }
                       }
@@ -1403,7 +1398,7 @@
                 },
                 "readable-stream": {
                   "version": "1.0.33",
-                  "from": "readable-stream@>=1.0.26 <1.1.0",
+                  "from": "readable-stream@>=1.0.26-2 <1.1.0",
                   "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.0.33.tgz",
                   "dependencies": {
                     "core-util-is": {
@@ -1637,7 +1632,7 @@
         },
         "escape-string-regexp": {
           "version": "1.0.2",
-          "from": "escape-string-regexp@>=1.0.0 <2.0.0",
+          "from": "escape-string-regexp@1.0.2",
           "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.2.tgz"
         },
         "glob": {
@@ -1811,11 +1806,6 @@
           "resolved": "https://registry.npmjs.org/xtend/-/xtend-4.0.0.tgz"
         }
       }
-    },
-    "q": {
-      "version": "1.1.2",
-      "from": "q@1.1.2",
-      "resolved": "https://registry.npmjs.org/q/-/q-1.1.2.tgz"
     },
     "tslint": {
       "version": "2.1.1",

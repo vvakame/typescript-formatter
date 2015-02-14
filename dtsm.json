@@ -14,16 +14,13 @@
     "typescript/typescript.d.ts": {
       "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
     },
-    "commander/commander.d.ts": {
-      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    "es6-promise/es6-promise.d.ts": {
+      "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
     },
     "mocha/mocha.d.ts": {
       "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
     "power-assert/power-assert.d.ts": {
-      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
-    },
-    "q/Q.d.ts": {
       "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     }
   }

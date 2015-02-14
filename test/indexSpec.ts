@@ -1,9 +1,10 @@
+/// <reference path="../typings/es6-promise/es6-promise.d.ts" />
 /// <reference path="../typings/mocha/mocha.d.ts" />
 /// <reference path="../typings/power-assert/power-assert.d.ts" />
-/// <reference path="../typings/q/Q.d.ts" />
+
+require("es6-promise").polyfill();
 
 import assert = require("power-assert");
-import Q = require("q");
 
 // collision between node.d.ts to typescriptServices
 var fs = require("fs");
@@ -28,12 +29,10 @@ function collectFileName(dirName:string):string[] {
 	return fileName;
 }
 
-function checkByTslint(configFileName:string, tsfileName:string, errorExpected:boolean):Q.IPromise<boolean> {
-	var d = Q.defer<boolean>();
+function checkByTslint(configFileName:string, tsfileName:string, errorExpected:boolean):Promise<boolean> {
 	if (tsfileName === "./test/expected/tslint/a/main.ts") {
 		// unknown error inside tslint...
-		d.resolve(true);
-		return d.promise;
+		return Promise.resolve(true);
 	}
 	var process = childProcess.spawn("./node_modules/.bin/tslint", ["-c", configFileName, "-f", tsfileName]);
 
@@ -47,31 +46,32 @@ function checkByTslint(configFileName:string, tsfileName:string, errorExpected:b
 		stderr += data.toString();
 	});
 
-	process.on("exit", (code:number) => {
-		var success = !code; // 0 - exit with success
-		var action:string;
-		if (!errorExpected) {
-			// expected error
-			if (success) {
-				action = "resolve";
-				d.resolve(true);
+	return new Promise((resolve, reject)=> {
+		process.on("exit", (code:number) => {
+			var success = !code; // 0 - exit with success
+			var action:string;
+			if (!errorExpected) {
+				// expected error
+				if (success) {
+					action = "resolve";
+					resolve(true);
+				} else {
+					action = "reject";
+					reject(tsfileName + " must be a good code.\n" + stdout);
+				}
 			} else {
-				action = "reject";
-				d.reject(tsfileName + " must be a good code.\n" + stdout);
+				// expected success
+				if (success) {
+					action = "reject";
+					reject(tsfileName + " must be a bad code.");
+				} else {
+					action = "resolve";
+					resolve(true);
+				}
 			}
-		} else {
-			// expected success
-			if (success) {
-				action = "reject";
-				d.reject(tsfileName + " must be a bad code.");
-			} else {
-				action = "resolve";
-				d.resolve(true);
-			}
-		}
-		// console.log("\n", tsfileName, code, "success=" + success, "errorExpected=" + errorExpected, action, "stdout=" + stdout.length);
+			// console.log("\n", tsfileName, code, "success=" + success, "errorExpected=" + errorExpected, action, "stdout=" + stdout.length);
+		});
 	});
-	return d.promise;
 }
 
 describe("tsfmt test", () => {
@@ -83,7 +83,7 @@ describe("tsfmt test", () => {
 		fileNames
 			.filter(fileName=> /\.ts$/.test(fileName))
 			.forEach(fileName=> {
-				var _it:(expectation: string, assertion?: (done: MochaDone) => void) => void = it;
+				var _it:(expectation:string, assertion?:(done:MochaDone) => void) => void = it;
 				var ignoreList = [
 					"./test/fixture/editorconfig/space/main.ts",
 					"./test/fixture/tsfmt/a/main.ts",
@@ -92,7 +92,7 @@ describe("tsfmt test", () => {
 				if (ignoreList.indexOf(fileName) !== -1) {
 					_it = it.skip;
 				}
-				_it(fileName, (done) => {
+				_it(fileName, () => {
 					var resultMap = lib.processFiles([fileName], {
 						dryRun: true,
 						replace: false,
@@ -124,23 +124,17 @@ describe("tsfmt test", () => {
 
 					var tslintConfigName = path.dirname(fileName) + "/tslint.json";
 					if (!fs.existsSync(tslintConfigName)) {
-						done();
 						return;
 					}
 					if (fileName === "./test/fixture/tslint/indent/main.ts") {
 						// NOTE indent enforces consistent indentation levels (currently disabled).
-						done();
 						return;
 					}
 
-					Q.all([
+					return Promise.all([
 						checkByTslint(tslintConfigName, fileName, true),
 						checkByTslint(tslintConfigName, expectedTsFileName, false)
-					]).catch(errorMsg=> {
-						assert(false, errorMsg);
-					}).finally(() => {
-						done();
-					}).done();
+					]);
 				});
 			});
 	});

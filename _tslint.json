@@ -12,7 +12,7 @@
     "eofline": false,
     "forin": false,
     "indent": [true, 4],
-    "interface-name": true,
+    "interface-name": false,
     "jsdoc-format": true,
     "label-position": true,
     "label-undefined": true,
