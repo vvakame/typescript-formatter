@@ -1,26 +1,30 @@
 {
-  "baseRepo": "https://github.com/borisyankov/DefinitelyTyped.git",
-  "baseRef": "master",
+  "repos": [
+    {
+      "url": "https://github.com/borisyankov/DefinitelyTyped.git",
+      "ref": "master"
+    }
+  ],
   "path": "typings",
   "bundle": "typings/bundle.d.ts",
   "dependencies": {
     "node/node.d.ts": {
-      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
     "commander/commander.d.ts": {
-      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
     "mocha/mocha.d.ts": {
-      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
     "power-assert/power-assert.d.ts": {
-      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
     "jquery/jquery.d.ts": {
-      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
     "q/Q.d.ts": {
-      "ref": "a17e409c11c91b7e9b4c6d01736c885e1ec48d5a"
+      "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     }
   }
 }
