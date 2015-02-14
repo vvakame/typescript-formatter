@@ -4,7 +4,7 @@
 import fs = require("fs");
 import program = require("commander");
 
-import lib = require("./lib");
+import lib = require("./index");
 
 var packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 

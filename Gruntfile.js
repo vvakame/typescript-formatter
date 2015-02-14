@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 				src: ['lib/cli.ts']
 			},
 			clientTest: {
-				src: ['tests/mainTest.ts']
+				src: ['tests/indexSpec.ts']
 			}
 		},
 		tslint: {
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
 					ui: 'bdd'
 				},
 				src: [
-					'testEspowered/mainTest.js'
+					'testEspowered/indexSpec.js'
 				]
 			}
 		}

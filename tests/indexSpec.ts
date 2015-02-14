@@ -10,7 +10,7 @@ var fs = require("fs");
 var path = require("path");
 var childProcess = require("child_process");
 
-import lib = require("../lib/lib");
+import lib = require("../lib/index");
 
 function collectFileName(dirName:string):string[] {
 	var fileName:string[] = [];
