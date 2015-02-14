@@ -11,6 +11,9 @@
     "node/node.d.ts": {
       "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },
+    "typescript/typescript.d.ts": {
+      "ref": "7d298be1db15bbd1e17638b9c37423efc38fa602"
+    },
     "commander/commander.d.ts": {
       "ref": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
     },

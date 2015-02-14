@@ -1,11 +1,11 @@
 /// <reference path="../typings/node/node.d.ts" />
+/// <reference path="../typings/typescript/typescript.d.ts" />
 
 "use strict";
 
-import toolbox = require("../typescript-toolbox/lib/index");
-
-import ts = toolbox.ts;
-import formatter = toolbox.formatter;
+import ts = require("typescript");
+import formatter = require("./formatter");
+import utils = require("./utils");
 
 import fs = require("fs");
 
@@ -47,7 +47,7 @@ export function processFiles(files:string[], opts:IOptions):IResultMap {
 		}
 		var content = fs.readFileSync(fileName).toString();
 
-		var options = toolbox.utils.createDefaultFormatCodeOptions();
+		var options = utils.createDefaultFormatCodeOptions();
 		if (opts.tsfmt) {
 			providers.push(base);
 		}
@@ -59,7 +59,7 @@ export function processFiles(files:string[], opts:IOptions):IResultMap {
 		}
 		providers.forEach(provider=> provider.makeFormatCodeOptions(fileName, options));
 
-		var formattedCode = formatter.applyFormatterToContent(content, options);
+		var formattedCode = formatter(content, options);
 		// TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
 		if (opts && opts.replace) {
 			if (content !== formattedCode) {

@@ -5,6 +5,8 @@ typings/
 .tscache/
 
 lib/**/*.js
+lib/**/*.js.map
 tests/**/*.js
-testEspowered/**/*.js
+tests/**/*.js.map
+testEspowered/
 example/*.js

@@ -1,12 +1,8 @@
-/// <reference path="../../typescript-toolbox/lib/formatter.ts" />
-
-/// <reference path="../../typings/node/node.d.ts" />
 /// <reference path="../editorconfig.d.ts" />
 
 "use strict";
 
-import toolbox = require("../../typescript-toolbox/lib/index");
-import ts = toolbox.ts;
+import ts = require("typescript");
 
 import editorconfig = require("editorconfig");
 

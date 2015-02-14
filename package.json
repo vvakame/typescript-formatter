@@ -27,13 +27,13 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
+    "typescript": "1.4.1",
     "commander": "2.6.0",
     "editorconfig": "0.11.4"
   },
   "devDependencies": {
     "grunt": "0.4.5",
     "q": "1.1.2",
-    "typescript": "1.4.1",
     "grunt-ts": "3.0.0",
     "grunt-contrib-clean": "0.6.0",
     "grunt-tslint": "2.0.0",
