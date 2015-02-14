@@ -47,24 +47,30 @@ var root = commandpost
 				console.log("tsfmt:        " + (tsfmt ? "ON" : "OFF"));
 			}
 
-			lib.processFiles(args.files, {
-				replace: replace,
-				tslint: tslint,
-				editorconfig: editorconfig,
-				tsfmt: tsfmt
-			});
+			lib
+				.processFiles(args.files, {
+					replace: replace,
+					tslint: tslint,
+					editorconfig: editorconfig,
+					tsfmt: tsfmt
+				})
+				.catch(errorHandler);
 		}
 	});
 
 commandpost
 	.exec(root, process.argv)
-	.catch(err => {
-		if (err instanceof Error) {
-			console.error(err.stack);
-		} else {
-			console.error(err);
-		}
-		return Promise.resolve(null).then(()=> {
-			process.exit(1);
-		});
+	.catch(errorHandler);
+
+function errorHandler(err:any) {
+	"use strict";
+
+	if (err instanceof Error) {
+		console.error(err.stack);
+	} else {
+		console.error(err);
+	}
+	return Promise.resolve(null).then(()=> {
+		process.exit(1);
 	});
+}

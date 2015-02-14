@@ -13,8 +13,6 @@ import base = require("./provider/base");
 import editorconfig = require("./provider/editorconfig");
 import tslintjson = require("./provider/tslintjson");
 
-var providers: {makeFormatCodeOptions: Function;}[] = [];
-
 export interface IOptions {
 	dryRun?: boolean;
 	verbose?: boolean;
@@ -35,11 +33,11 @@ export interface IResult {
 	dest: string;
 }
 
-export function processFiles(files:string[], opts:IOptions):IResultMap {
+export function processFiles(files:string[], opts:IOptions):Promise<IResultMap> {
 	"use strict";
 
 	var result:IResultMap = {};
-	files.forEach(fileName => {
+	var promises = files.map(fileName => {
 		if (!fs.existsSync(fileName)) {
 			console.error(fileName + " is not exists. process abort.");
 			process.exit(1);
@@ -48,33 +46,36 @@ export function processFiles(files:string[], opts:IOptions):IResultMap {
 		var content = fs.readFileSync(fileName).toString();
 
 		var options = utils.createDefaultFormatCodeOptions();
+		var optGenPromises:any[] = [];
 		if (opts.tsfmt) {
-			providers.push(base);
+			optGenPromises.push(base.makeFormatCodeOptions(fileName, options));
 		}
 		if (opts.editorconfig) {
-			providers.push(editorconfig);
+			optGenPromises.push(editorconfig.makeFormatCodeOptions(fileName, options));
 		}
 		if (opts.tslint) {
-			providers.push(tslintjson);
+			optGenPromises.push(tslintjson.makeFormatCodeOptions(fileName, options));
 		}
-		providers.forEach(provider=> provider.makeFormatCodeOptions(fileName, options));
-
-		var formattedCode = formatter(content, options);
-		// TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
-		if (opts && opts.replace) {
-			if (content !== formattedCode) {
-				fs.writeFileSync(fileName, formattedCode);
-				console.log("replaced " + fileName);
-			}
-		} else if (opts && !opts.dryRun) {
-			console.log(formattedCode);
-		}
-		result[fileName] = {
-			fileName: fileName,
-			options: options,
-			src: content,
-			dest: formattedCode
-		};
+		return Promise
+			.all(optGenPromises)
+			.then(()=> {
+				var formattedCode = formatter(content, options);
+				// TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
+				if (opts && opts.replace) {
+					if (content !== formattedCode) {
+						fs.writeFileSync(fileName, formattedCode);
+						console.log("replaced " + fileName);
+					}
+				} else if (opts && !opts.dryRun) {
+					console.log(formattedCode);
+				}
+				result[fileName] = {
+					fileName: fileName,
+					options: options,
+					src: content,
+					dest: formattedCode
+				};
+			});
 	});
-	return result;
+	return Promise.all(promises).then(()=> result);
 }

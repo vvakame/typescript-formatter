@@ -93,48 +93,51 @@ describe("tsfmt test", () => {
 					_it = it.skip;
 				}
 				_it(fileName, () => {
-					var resultMap = lib.processFiles([fileName], {
-						dryRun: true,
-						replace: false,
-						tslint: true,
-						editorconfig: true,
-						tsfmt: true
-					});
-					var result = resultMap[fileName];
-					assert(result !== null);
+					return lib
+						.processFiles([fileName], {
+							dryRun: true,
+							replace: false,
+							tslint: true,
+							editorconfig: true,
+							tsfmt: true
+						})
+						.then(resultMap => {
+							var result = resultMap[fileName];
+							assert(result !== null);
 
-					var expectedTsFileName = fileName.replace(fixtureDir, expectedDir);
-					// console.log(fileName, expectedFileName);
+							var expectedTsFileName = fileName.replace(fixtureDir, expectedDir);
+							// console.log(fileName, expectedFileName);
 
-					if (!fs.existsSync(expectedTsFileName)) {
-						fs.writeFileSync(expectedTsFileName, result.dest);
-					}
+							if (!fs.existsSync(expectedTsFileName)) {
+								fs.writeFileSync(expectedTsFileName, result.dest);
+							}
 
-					var expected = fs.readFileSync(expectedTsFileName, "utf-8");
-					assert(expected === result.dest);
+							var expected = fs.readFileSync(expectedTsFileName, "utf-8");
+							assert(expected === result.dest);
 
-					var expectedOptionsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
+							var expectedOptionsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
 
-					if (!fs.existsSync(expectedOptionsFileName)) {
-						fs.writeFileSync(expectedOptionsFileName, JSON.stringify(result.options, null, 2));
-					}
+							if (!fs.existsSync(expectedOptionsFileName)) {
+								fs.writeFileSync(expectedOptionsFileName, JSON.stringify(result.options, null, 2));
+							}
 
-					var expectedOptions = JSON.parse(fs.readFileSync(expectedOptionsFileName, "utf-8"));
-					assert.deepEqual(expectedOptions, result.options);
+							var expectedOptions = JSON.parse(fs.readFileSync(expectedOptionsFileName, "utf-8"));
+							assert.deepEqual(expectedOptions, result.options);
 
-					var tslintConfigName = path.dirname(fileName) + "/tslint.json";
-					if (!fs.existsSync(tslintConfigName)) {
-						return;
-					}
-					if (fileName === "./test/fixture/tslint/indent/main.ts") {
-						// NOTE indent enforces consistent indentation levels (currently disabled).
-						return;
-					}
+							var tslintConfigName = path.dirname(fileName) + "/tslint.json";
+							if (!fs.existsSync(tslintConfigName)) {
+								return;
+							}
+							if (fileName === "./test/fixture/tslint/indent/main.ts") {
+								// NOTE indent enforces consistent indentation levels (currently disabled).
+								return;
+							}
 
-					return Promise.all([
-						checkByTslint(tslintConfigName, fileName, true),
-						checkByTslint(tslintConfigName, expectedTsFileName, false)
-					]);
+							return Promise.all([
+								checkByTslint(tslintConfigName, fileName, true),
+								checkByTslint(tslintConfigName, expectedTsFileName, false)
+							]);
+						});
 				});
 			});
 	});

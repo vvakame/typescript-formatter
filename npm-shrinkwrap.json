@@ -8,10 +8,15 @@
       "resolved": "https://registry.npmjs.org/commandpost/-/commandpost-0.1.1.tgz"
     },
     "editorconfig": {
-      "version": "0.11.4",
-      "from": "editorconfig@0.11.4",
-      "resolved": "https://registry.npmjs.org/editorconfig/-/editorconfig-0.11.4.tgz",
+      "version": "0.12.1",
+      "from": "editorconfig@0.12.1",
+      "resolved": "https://registry.npmjs.org/editorconfig/-/editorconfig-0.12.1.tgz",
       "dependencies": {
+        "bluebird": {
+          "version": "2.9.9",
+          "from": "bluebird@>=2.3.6 <3.0.0",
+          "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-2.9.9.tgz"
+        },
         "commander": {
           "version": "1.1.1",
           "from": "commander@>=1.1.1 <1.2.0",
@@ -459,7 +464,7 @@
     },
     "grunt-conventional-changelog": {
       "version": "1.1.0",
-      "from": "grunt-conventional-changelog@*",
+      "from": "grunt-conventional-changelog@>=1.1.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/grunt-conventional-changelog/-/grunt-conventional-changelog-1.1.0.tgz",
       "dependencies": {
         "conventional-changelog": {
@@ -1258,7 +1263,7 @@
                       "dependencies": {
                         "ansi-regex": {
                           "version": "0.2.1",
-                          "from": "ansi-regex@>=0.2.1 <0.3.0",
+                          "from": "ansi-regex@>=0.2.0 <0.3.0",
                           "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-0.2.1.tgz"
                         }
                       }
@@ -1270,7 +1275,7 @@
                       "dependencies": {
                         "ansi-regex": {
                           "version": "0.2.1",
-                          "from": "ansi-regex@>=0.2.1 <0.3.0",
+                          "from": "ansi-regex@>=0.2.0 <0.3.0",
                           "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-0.2.1.tgz"
                         }
                       }
@@ -1659,7 +1664,7 @@
         },
         "lodash": {
           "version": "2.4.1",
-          "from": "lodash@2.4.1",
+          "from": "lodash@>=2.4.1 <2.5.0",
           "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
         },
         "underscore": {
@@ -1669,7 +1674,7 @@
         },
         "underscore.string": {
           "version": "2.3.3",
-          "from": "underscore.string@2.3.3",
+          "from": "underscore.string@>=2.3.3 <2.4.0",
           "resolved": "https://registry.npmjs.org/underscore.string/-/underscore.string-2.3.3.tgz"
         },
         "es6-promise": {
