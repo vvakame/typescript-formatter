@@ -28,11 +28,11 @@ module.exports = function (grunt) {
 			},
 			files: {
 				src: [
-                    'lib/**/*.ts',
-                    '!lib/**/*.d.ts',
-                    'tests/**/*.ts',
-                    '!tests/**/*.ts' // TODO
-                ]
+					'lib/**/*.ts',
+					'!lib/**/*.d.ts',
+					'tests/**/*.ts',
+					'!tests/**/*.ts' // TODO
+				]
 			}
 		},
 		dtsm: {
