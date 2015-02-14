@@ -5,15 +5,14 @@ module.exports = function (grunt) {
 		ts: {
 			options: {
 				compile: true,                 // perform compilation. [true (default) | false]
-				comments: false,               // same as !removeComments. [true | false (default)]
+				comments: true,                // same as !removeComments. [true | false (default)]
 				target: 'es5',                 // target javascript language. [es3 (default) | es5]
 				module: 'commonjs',            // target javascript module style. [amd (default) | commonjs]
 				noImplicitAny: true,
 				sourceMap: false,              // generate a source map for every output js file. [true (default) | false]
 				sourceRoot: '',                // where to locate TypeScript files. [(default) '' == source ts location]
 				mapRoot: '',                   // where to locate .map.js files. [(default) '' == generated js location.]
-				declaration: false,            // generate a declaration .d.ts file for every output js file. [true | false (default)]
-				compiler: './typescript-toolbox/typescript/master/44eca0//tsc.js'
+				declaration: false             // generate a declaration .d.ts file for every output js file. [true | false (default)]
 			},
 			clientMain: {
 				src: ['lib/cli.ts']
