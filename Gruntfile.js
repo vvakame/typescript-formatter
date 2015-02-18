@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 				sourceMap: false,              // generate a source map for every output js file. [true (default) | false]
 				sourceRoot: '',                // where to locate TypeScript files. [(default) '' == source ts location]
 				mapRoot: '',                   // where to locate .map.js files. [(default) '' == generated js location.]
-				declaration: false             // generate a declaration .d.ts file for every output js file. [true | false (default)]
+				declaration: true              // generate a declaration .d.ts file for every output js file. [true | false (default)]
 			},
 			clientMain: {
 				src: ['<%= opt.client.tsMain %>/cli.ts']
@@ -67,6 +67,17 @@ module.exports = function (grunt) {
 				]
 			}
 		},
+		dts_bundle: {
+			build: {
+				options: {
+					name: "tsfmt",
+					main: "lib/index.d.ts",
+					baseDir: "",
+					out: "typescript-formatter.d.ts",
+					prefix: ''
+				}
+			}
+		},
 		mochaTest: {
 			test: {
 				options: {
@@ -90,8 +101,7 @@ module.exports = function (grunt) {
 			}
 		},
 		changelog: {
-			options: {
-			}
+			options: {}
 		}
 	});
 
@@ -101,11 +111,11 @@ module.exports = function (grunt) {
 
 	grunt.registerTask(
 		'default',
-		['clean:clientScript', 'ts:clientMain', 'tslint']);
+		['clean:clientScript', 'ts:clientMain', 'tslint', 'dts_bundle']);
 
 	grunt.registerTask(
 		'test',
-		['clean:clientScript', 'ts', 'tslint', 'mochaTest']);
+		['default', 'ts:clientTest', 'mochaTest']);
 
 	require('load-grunt-tasks')(grunt);
 };
