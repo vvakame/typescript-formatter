@@ -1,3 +1,12 @@
+<a name="0.2.1"></a>
+### 0.2.1 (2015-02-18)
+
+
+#### Features
+
+* **tsfmt:** add grunt-dts-bundle and generate typescript-formatter.d.ts ([c846cf37](git@github.com:vvakame/typescript-formatter/commit/c846cf3762982b9bb23bc6b617155488c125d2ad))
+
+
 <a name="0.2.0"></a>
 ## 0.2.0 (2015-02-14)
 
