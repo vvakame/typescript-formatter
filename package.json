@@ -41,12 +41,12 @@
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
     "grunt-conventional-changelog": "^1.1.0",
-    "grunt-dtsm": "0.2.3",
+    "grunt-dtsm": "0.2.4",
     "grunt-exec": "0.4.6",
     "grunt-mocha-test": "0.12.7",
     "grunt-ts": "3.0.0",
     "grunt-tslint": "2.0.0",
     "load-grunt-tasks": "3.1.0",
-    "power-assert": "0.10.1"
+    "power-assert": "0.10.2"
   }
 }
