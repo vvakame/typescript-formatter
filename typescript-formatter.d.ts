@@ -2,7 +2,7 @@
 // Dependencies for this module:
 //   typings/typescript/typescript.d.ts
 
-declare module 'tsfmt' {
+declare module 'typescript-formatter' {
     import ts = require("typescript");
     export interface Options {
         dryRun?: boolean;

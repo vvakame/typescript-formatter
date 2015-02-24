@@ -70,7 +70,7 @@ module.exports = function (grunt) {
 		dts_bundle: {
 			build: {
 				options: {
-					name: "tsfmt",
+					name: "typescript-formatter",
 					main: "lib/index.d.ts",
 					baseDir: "",
 					out: "typescript-formatter.d.ts",
