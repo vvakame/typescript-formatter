@@ -42,7 +42,7 @@
     "grunt-contrib-clean": "0.6.0",
     "grunt-conventional-changelog": "^1.1.0",
     "grunt-dts-bundle": "0.2.0",
-    "grunt-dtsm": "0.2.4",
+    "grunt-dtsm": "0.2.5",
     "grunt-exec": "0.4.6",
     "grunt-mocha-test": "0.12.7",
     "grunt-ts": "3.0.0",
