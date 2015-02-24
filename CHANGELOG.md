@@ -1,3 +1,12 @@
+<a name="0.2.2"></a>
+### 0.2.2 (2015-02-24)
+
+
+#### Bug Fixes
+
+* **tsfmt:** fix .d.ts file generation refs #7 ([f5520ec6](git@github.com:vvakame/typescript-formatter/commit/f5520ec65c2a034c40884e07276abc4a9a210ca9))
+
+
 <a name="0.2.1"></a>
 ### 0.2.1 (2015-02-18)
 
