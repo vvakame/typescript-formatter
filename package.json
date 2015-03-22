@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "commandpost": "0.1.1",
-    "editorconfig": "0.12.1",
+    "editorconfig": "0.12.2",
     "es6-promise": "2.0.1",
     "typescript": "1.4.1"
   },
@@ -42,7 +42,7 @@
     "grunt-contrib-clean": "0.6.0",
     "grunt-conventional-changelog": "^1.1.0",
     "grunt-dts-bundle": "0.2.0",
-    "grunt-dtsm": "0.2.5",
+    "grunt-dtsm": "0.2.7",
     "grunt-exec": "0.4.6",
     "grunt-mocha-test": "0.12.7",
     "grunt-ts": "3.0.0",
