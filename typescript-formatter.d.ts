@@ -22,5 +22,7 @@ declare module 'typescript-formatter' {
         dest: string;
     }
     export function processFiles(files: string[], opts: Options): Promise<ResultMap>;
+    export function processStream(fileName: string, input: NodeJS.ReadableStream, opts: Options): Promise<Result>;
+    export function processString(fileName: string, content: string, opts: Options): Promise<Result>;
 }
 

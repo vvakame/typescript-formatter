@@ -6,10 +6,10 @@ require("es6-promise").polyfill();
 
 import assert = require("power-assert");
 
-// collision between node.d.ts to typescriptServices
-var fs = require("fs");
-var path = require("path");
-var childProcess = require("child_process");
+import fs = require("fs");
+import path = require("path");
+import childProcess = require("child_process");
+import stream = require("stream");
 
 import lib = require("../lib/index");
 
@@ -132,5 +132,27 @@ describe("tsfmt test", () => {
 						});
 				});
 			});
+	});
+
+
+	describe("processStream function", () => {
+		var fileName = "test/fixture/default/main.ts";
+		it(fileName, () => {
+			var input = new stream.Readable();
+			input.push(`class Sample{getString():string{return "hi!";}}`);
+			input.push(null);
+			return lib
+				.processStream(fileName, input, {
+					dryRun: true,
+					replace: false,
+					tslint: true,
+					editorconfig: true,
+					tsfmt: true
+				})
+				.then(result=> {
+					assert(result !== null);
+					assert(result.dest === `class Sample { getString(): string { return "hi!"; } }`);
+				});
+		});
 	});
 });

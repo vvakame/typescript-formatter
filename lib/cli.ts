@@ -13,6 +13,7 @@ var packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toS
 
 interface RootOptions {
 	replace:boolean;
+	stdin:boolean;
 	tslint:boolean;
 	editorconfig:boolean;
 	tsfmt:boolean;
@@ -27,26 +28,41 @@ var root = commandpost
 	.create<RootOptions, RootArguments>("tsfmt [files...]")
 	.version(packageJson.version, "-v, --version")
 	.option("-r, --replace", "replace .ts file")
+	.option("--stdin", "get formatting content from stdin")
 	.option("--no-tslint", "don't read a tslint.json")
 	.option("--no-editorconfig", "don't read a .editorconfig")
 	.option("--no-tsfmt", "don't read a tsfmt.json")
 	.option("--verbose", "makes output more verbose")
 	.action((opts, args)=> {
 		var replace = !!opts.replace;
+		var stdin = !!opts.stdin;
 		var tslint = !!opts.tslint;
 		var editorconfig = !!opts.editorconfig;
 		var tsfmt = !!opts.tsfmt;
 
 		if (args.files.length === 0) {
 			process.stdout.write(root.helpText() + '\n');
-		} else {
-			if (opts.verbose) {
-				console.log("replace:      " + (replace ? "ON" : "OFF"));
-				console.log("tslint:       " + (tslint ? "ON" : "OFF"));
-				console.log("editorconfig: " + (editorconfig ? "ON" : "OFF"));
-				console.log("tsfmt:        " + (tsfmt ? "ON" : "OFF"));
-			}
+			return;
+		}
 
+		if (opts.verbose) {
+			console.log("replace:	  " + (replace ? "ON" : "OFF"));
+			console.log("stdin:		" + (stdin ? "ON" : "OFF"));
+			console.log("tslint:	   " + (tslint ? "ON" : "OFF"));
+			console.log("editorconfig: " + (editorconfig ? "ON" : "OFF"));
+			console.log("tsfmt:		" + (tsfmt ? "ON" : "OFF"));
+		}
+
+		if (opts.stdin) {
+			lib
+				.processStream(args.files[0], process.stdin, {
+					replace: replace,
+					tslint: tslint,
+					editorconfig: editorconfig,
+					tsfmt: tsfmt
+				})
+				.catch(errorHandler);
+		} else {
 			lib
 				.processFiles(args.files, {
 					replace: replace,
