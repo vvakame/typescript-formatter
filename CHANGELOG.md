@@ -1,3 +1,12 @@
+<a name="0.3.0"></a>
+## 0.3.0 (2015-03-22)
+
+
+#### Features
+
+* **tsfmt:** support --stdin option refs #9 ([e322fc74](git@github.com:vvakame/typescript-formatter/commit/e322fc74eb4b62f908a8a7c0f8c0c736bd933631))
+
+
 <a name="0.2.2"></a>
 ### 0.2.2 (2015-02-24)
 
