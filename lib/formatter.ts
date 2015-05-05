@@ -5,13 +5,13 @@ import utils = require("./utils");
 
 // from https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter
 
-// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently 
-//       exposed in the public typescript.d.ts. The typings should be exposed in the next release. 
+// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
+//       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
 function format(text:string, options = utils.createDefaultFormatCodeOptions()) {
 	"use strict";
 
 	// Parse the source text
-	var sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, "0");
+	var sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, (<any>/* backward compat for typescript-1.4.1 */"0"));
 	fixupParentReferences(sourceFile);
 
 	// Get the formatting edits on the input sources
@@ -33,8 +33,20 @@ function format(text:string, options = utils.createDefaultFormatCodeOptions()) {
 		var result = text;
 		for (var i = edits.length - 1; i >= 0; i--) {
 			var change = edits[i];
-			var head = result.slice(0, change.span.start());
-			var tail = result.slice(change.span.start() + change.span.length());
+			var head: string;
+			if (typeof change.span.start === "number") {
+				head = result.slice(0, change.span.start);
+			} else {
+				// backward compat for typescript-1.4.1
+				head = result.slice(0, (<any>change.span.start)());
+			}
+			var tail: string;
+			if (typeof change.span.start === "number") {
+				tail = result.slice(change.span.start + change.span.length);
+			} else {
+				// backward compat for typescript-1.4.1
+				tail = result.slice((<any>change.span.start)() + (<any>change.span.length)());
+			}
 			result = head + change.newText + tail;
 		}
 		return result;

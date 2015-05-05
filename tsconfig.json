@@ -1,0 +1,47 @@
+{
+    "version": "1.5.0-alpha",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts",
+        "./node_modules/typescript/bin/typescript.d.ts",
+        "!./example/**/*.ts",
+        "!./test/fixture/**/*.ts",
+        "!./test/expected/**/*.ts",
+        "!./*.d.ts"
+    ],
+    "files": [
+        "./lib/cli.d.ts",
+        "./lib/cli.ts",
+        "./lib/editorconfig.d.ts",
+        "./lib/formatter.d.ts",
+        "./lib/formatter.ts",
+        "./lib/index.d.ts",
+        "./lib/index.ts",
+        "./lib/provider/base.d.ts",
+        "./lib/provider/base.ts",
+        "./lib/provider/editorconfig.d.ts",
+        "./lib/provider/editorconfig.ts",
+        "./lib/provider/tslintjson.d.ts",
+        "./lib/provider/tslintjson.ts",
+        "./lib/utils.d.ts",
+        "./lib/utils.ts",
+        "./test/indexSpec.d.ts",
+        "./test/indexSpec.ts",
+        "./typings/bundle.d.ts",
+        "./typings/empower/empower.d.ts",
+        "./typings/es6-promise/es6-promise.d.ts",
+        "./typings/mocha/mocha.d.ts",
+        "./typings/node/node.d.ts",
+        "./typings/power-assert-formatter/power-assert-formatter.d.ts",
+        "./typings/power-assert/power-assert.d.ts",
+        "./node_modules/typescript/bin/typescript.d.ts"
+    ]
+}

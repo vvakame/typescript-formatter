@@ -31,7 +31,7 @@ class Vector/*
 	static norm( v: Vector )/* 
  */	{
 		var mag=Vector.mag( v );
-		var div=( mag===0 )?Infinity:1.0/mag;
+		var div=( mag===0 )? Infinity:1.0/mag;
 		return Vector.times( div,v );
 	}
 
@@ -72,7 +72,7 @@ class Color/*
 
 	static toDrawingColor( c: Color )/* 
  */	{
-		var legalize=d => d>1?1:d;
+		var legalize=d => d>1? 1:d;
 		return {
 			r: Math.floor( legalize( c.r )*255 ),
 			g: Math.floor( legalize( c.g )*255 ),
@@ -295,7 +295,7 @@ class RayTracer/*
 		var reflectDir=Vector.minus( d,Vector.times( 2,Vector.times( Vector.dot( normal,d ),normal ) ) );
 		var naturalColor=Color.plus( Color.background,
 			this.getNaturalColor( isect.thing,pos,normal,reflectDir,scene ) );
-		var reflectedColor=( depth>=this.maxDepth )?Color.grey:this.getReflectionColor( isect.thing,pos,normal,reflectDir,scene,depth );
+		var reflectedColor=( depth>=this.maxDepth )? Color.grey:this.getReflectionColor( isect.thing,pos,normal,reflectDir,scene,depth );
 		return Color.plus( naturalColor,reflectedColor );
 	}
 
@@ -311,17 +311,17 @@ class RayTracer/*
 			var ldis=Vector.minus( light.pos,pos );
 			var livec=Vector.norm( ldis );
 			var neatIsect=this.testRay( { start: pos,dir: livec },scene );
-			var isInShadow=( neatIsect===undefined )?false:( neatIsect<=Vector.mag( ldis ) );
+			var isInShadow=( neatIsect===undefined )? false:( neatIsect<=Vector.mag( ldis ) );
 			if( isInShadow )/* 
  */			{
 				return col;
 			} else/* 
  */			{
 				var illum=Vector.dot( livec,norm );
-				var lcolor=( illum>0 )?Color.scale( illum,light.color )
+				var lcolor=( illum>0 )? Color.scale( illum,light.color )
 					:Color.defaultColor;
 				var specular=Vector.dot( livec,Vector.norm( rd ) );
-				var scolor=( specular>0 )?Color.scale( Math.pow( specular,thing.surface.roughness ),light.color )
+				var scolor=( specular>0 )? Color.scale( Math.pow( specular,thing.surface.roughness ),light.color )
 					:Color.defaultColor;
 				return Color.plus( col,Color.plus( Color.times( thing.surface.diffuse( pos ),lcolor ),
 					Color.times( thing.surface.specular( pos ),scolor ) ) );
