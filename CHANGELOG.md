@@ -1,3 +1,12 @@
+<a name"0.3.1"></a>
+### 0.3.1 (2015-05-06)
+
+
+#### Features
+
+* **tsfmt:** support typescript@1.5.0-beta ([a5f7f19a](https://github.com/vvakame/typescript-formatter/commit/a5f7f19a))
+
+
 <a name="0.3.0"></a>
 ## 0.3.0 (2015-03-22)
 
