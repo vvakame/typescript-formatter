@@ -12,6 +12,7 @@ $ tsfmt
     -h, --help         output usage information
     -V, --version      output the version number
     -r, --replace      replace .ts file
+    --stdin            get formatting content from stdin
     --no-tslint        don't read a tslint.json
     --no-editorconfig  don't read a .editorconfig
     --no-tsfmt         don't read a tsfmt.json
@@ -33,6 +34,13 @@ new Sample().hello("TypeScript");
 ```bash
 # basic. read file, output to stdout.
 $ tsfmt sample.ts
+class Sample { hello(word= "world") { return "Hello, " + word; } }
+new Sample().hello("TypeScript");
+```
+
+```bash
+# from stdin. read from stdin, output to stdout.
+$ cat sample.ts | tsfmt --stdin sample.ts
 class Sample { hello(word= "world") { return "Hello, " + word; } }
 new Sample().hello("TypeScript");
 ```
