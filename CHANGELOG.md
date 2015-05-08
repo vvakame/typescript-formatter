@@ -1,3 +1,12 @@
+<a name"0.3.2"></a>
+### 0.3.2 (2015-05-08)
+
+
+#### Features
+
+* **tsfmt:** change --stdio option to do not required fileName ([32055514](https://github.com/vvakame/typescript-formatter/commit/32055514))
+
+
 <a name"0.3.1"></a>
 ### 0.3.1 (2015-05-06)
 
