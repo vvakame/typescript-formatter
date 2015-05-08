@@ -72,7 +72,7 @@ now `indentSize` parameter is ignored. it is TypeScript compiler matters.
 
 ```
 
-2nd. Read settings from .editoconfig ([editorconfig](http://editorconfig.org/))
+2nd. Read settings from .editorconfig ([editorconfig](http://editorconfig.org/))
 
 ```text
 # EditorConfig is awesome: http://EditorConfig.org
