@@ -40,7 +40,7 @@ new Sample().hello("TypeScript");
 
 ```bash
 # from stdin. read from stdin, output to stdout.
-$ cat sample.ts | tsfmt --stdin sample.ts
+$ cat sample.ts | tsfmt --stdin
 class Sample { hello(word= "world") { return "Hello, " + word; } }
 new Sample().hello("TypeScript");
 ```
