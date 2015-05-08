@@ -40,7 +40,7 @@ var root = commandpost
 		var editorconfig = !!opts.editorconfig;
 		var tsfmt = !!opts.tsfmt;
 
-		if (args.files.length === 0) {
+		if (args.files.length === 0 && !opts.stdin) {
 			process.stdout.write(root.helpText() + '\n');
 			return;
 		}
@@ -54,8 +54,12 @@ var root = commandpost
 		}
 
 		if (opts.stdin) {
+			if (opts.replace) {
+				errorHandler("--stdin option can not use with --replace option");
+				return;
+			}
 			lib
-				.processStream(args.files[0], process.stdin, {
+				.processStream(args.files[0] || "temp.ts", process.stdin, {
 					replace: replace,
 					tslint: tslint,
 					editorconfig: editorconfig,
