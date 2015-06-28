@@ -1,3 +1,12 @@
+<a name"0.4.0"></a>
+## 0.4.0 (2015-06-28)
+
+
+#### Features
+
+* **tsfmt:** support --verify option ([8dd0f8ee](https://github.com/vvakame/typescript-formatter/commit/8dd0f8ee), closes [#15](https://github.com/vvakame/typescript-formatter/issues/15))
+
+
 <a name"0.3.2"></a>
 ### 0.3.2 (2015-05-08)
 
