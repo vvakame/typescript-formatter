@@ -7,18 +7,23 @@
   ],
   "path": "typings",
   "bundle": "typings/bundle.d.ts",
+  "link": {
+    "npm": {
+      "include": true
+    }
+  },
   "dependencies": {
     "node/node.d.ts": {
-      "ref": "575d70adcad0086ec8c6f672a5eb569a4689486c"
+      "ref": "6f04d25ad38982d372cc3cda62fa4c0eef9e24d7"
     },
     "es6-promise/es6-promise.d.ts": {
-      "ref": "575d70adcad0086ec8c6f672a5eb569a4689486c"
+      "ref": "6f04d25ad38982d372cc3cda62fa4c0eef9e24d7"
     },
     "mocha/mocha.d.ts": {
-      "ref": "575d70adcad0086ec8c6f672a5eb569a4689486c"
+      "ref": "6f04d25ad38982d372cc3cda62fa4c0eef9e24d7"
     },
     "power-assert/power-assert.d.ts": {
-      "ref": "575d70adcad0086ec8c6f672a5eb569a4689486c"
+      "ref": "6f04d25ad38982d372cc3cda62fa4c0eef9e24d7"
     }
   }
 }

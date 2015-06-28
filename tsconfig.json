@@ -12,6 +12,7 @@
         "./**/*.ts",
         "!./node_modules/**/*.ts",
         "./node_modules/typescript/bin/typescript.d.ts",
+        "./node_modules/typescript/bin/lib.es6.d.ts",
         "!./example/**/*.ts",
         "!./test/fixture/**/*.ts",
         "!./test/expected/**/*.ts",
@@ -42,6 +43,7 @@
         "./typings/node/node.d.ts",
         "./typings/power-assert-formatter/power-assert-formatter.d.ts",
         "./typings/power-assert/power-assert.d.ts",
-        "./node_modules/typescript/bin/typescript.d.ts"
+        "./node_modules/typescript/bin/typescript.d.ts",
+        "./node_modules/typescript/bin/lib.es6.d.ts"
     ]
 }

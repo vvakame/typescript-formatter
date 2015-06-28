@@ -1,5 +1,4 @@
 /// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/es6-promise/es6-promise.d.ts" />
 /// <reference path="../node_modules/commandpost/commandpost.d.ts" />
 
 require("es6-promise").polyfill();
@@ -82,7 +81,7 @@ commandpost
 	.exec(root, process.argv)
 	.catch(errorHandler);
 
-function errorHandler(err:any) {
+function errorHandler(err:any): Promise<any> {
 	"use strict";
 
 	if (err instanceof Error) {
@@ -92,5 +91,6 @@ function errorHandler(err:any) {
 	}
 	return Promise.resolve(null).then(()=> {
 		process.exit(1);
+		return null;
 	});
 }
