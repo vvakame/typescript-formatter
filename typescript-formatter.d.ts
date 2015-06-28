@@ -8,6 +8,7 @@ declare module 'typescript-formatter' {
         dryRun?: boolean;
         verbose?: boolean;
         replace: boolean;
+        verify: boolean;
         tslint: boolean;
         editorconfig: boolean;
         tsfmt: boolean;
@@ -18,6 +19,8 @@ declare module 'typescript-formatter' {
     export interface Result {
         fileName: string;
         options: ts.FormatCodeOptions;
+        message: string;
+        error: boolean;
         src: string;
         dest: string;
     }

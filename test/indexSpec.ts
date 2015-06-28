@@ -88,6 +88,7 @@ describe("tsfmt test", () => {
 						.processFiles([fileName], {
 							dryRun: true,
 							replace: false,
+							verify: false,
 							tslint: true,
 							editorconfig: true,
 							tsfmt: true
@@ -95,6 +96,7 @@ describe("tsfmt test", () => {
 						.then(resultMap => {
 							var result = resultMap[fileName];
 							assert(result !== null);
+							assert(result.error === false);
 
 							var expectedTsFileName = fileName.replace(fixtureDir, expectedDir);
 							// console.log(fileName, expectedFileName);
@@ -131,8 +133,24 @@ describe("tsfmt test", () => {
 						});
 				});
 			});
-	});
 
+			it("verify unformatted file", () => {
+				var fileName = "./test/fixture/tsfmt/a/main.ts";
+				return lib
+					.processFiles([fileName], {
+						dryRun: true,
+						replace: false,
+						verify: true,
+						tslint: true,
+						editorconfig: true,
+						tsfmt: true
+					})
+					.then(resultMap => {
+						assert(resultMap[fileName].error);
+						assert(resultMap[fileName].message === "./test/fixture/tsfmt/a/main.ts is not formatted");
+					});
+			});
+	});
 
 	describe("processStream function", () => {
 		var fileName = "test/fixture/default/main.ts";
@@ -144,12 +162,14 @@ describe("tsfmt test", () => {
 				.processStream(fileName, input, {
 					dryRun: true,
 					replace: false,
+					verify: false,
 					tslint: true,
 					editorconfig: true,
 					tsfmt: true
 				})
 				.then(result=> {
 					assert(result !== null);
+					assert(result.error === false);
 					assert(result.dest === `class Sample { getString(): string { return "hi!"; } }`);
 				});
 		});
