@@ -5,13 +5,12 @@ A TypeScript code formatter powered by TypeScript Compiler Service.
 ```bash
 $ tsfmt
 
-  Usage: tsfmt [options] <file ...>
+  Usage: tsfmt [options] [--] [files...]
 
   Options:
 
-    -h, --help         output usage information
-    -V, --version      output the version number
     -r, --replace      replace .ts file
+    --verify           checking file format
     --stdin            get formatting content from stdin
     --no-tslint        don't read a tslint.json
     --no-editorconfig  don't read a .editorconfig
@@ -52,6 +51,14 @@ replaced sample.ts
 $ cat sample.ts
 class Sample { hello(word= "world") { return "Hello, " + word; } }
 new Sample().hello("TypeScript");
+```
+
+```bash
+# verify. checking file format.
+$ tsfmt --verify sample.ts
+sample.ts is not formatted
+$ echo $?
+1
 ```
 
 ## Note
