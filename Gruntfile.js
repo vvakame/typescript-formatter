@@ -100,7 +100,7 @@ module.exports = function (grunt) {
 				]
 			}
 		},
-		changelog: {
+		conventionalChangelog: {
 			options: {}
 		}
 	});
