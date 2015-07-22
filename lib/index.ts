@@ -78,7 +78,7 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 
         input.on("end", () => {
             if (fragment.slice(-1) === "\n") {
-                fragment = fragment.slice(0,-1)
+                fragment = fragment.slice(0, -1);
             }
             resolve(fragment);
         });
