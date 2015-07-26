@@ -77,9 +77,6 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
         });
 
         input.on("end", () => {
-            if (fragment.slice(-1) === "\n") {
-                fragment = fragment.slice(0, -1);
-            }
             resolve(fragment);
         });
     });
@@ -105,6 +102,11 @@ export function processString(fileName: string, content: string, opts: Options):
         .all(optGenPromises)
         .then(() => {
             var formattedCode = formatter(content, options);
+            if ((<any>formattedCode).trimRight) {
+                formattedCode = (<any>formattedCode).trimRight();
+                formattedCode += "\n";
+            }
+
             // TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
             var message: string;
             var error = false;

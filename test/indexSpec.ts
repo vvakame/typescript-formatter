@@ -170,7 +170,7 @@ describe("tsfmt test", () => {
 				.then(result=> {
 					assert(result !== null);
 					assert(result.error === false);
-					assert(result.dest === `class Sample { getString(): string { return "hi!"; } }`);
+					assert(result.dest === "class Sample { getString(): string { return \"hi!\"; } }\n");
 				});
 		});
 	});
