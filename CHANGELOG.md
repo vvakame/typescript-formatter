@@ -1,3 +1,13 @@
+<a name="0.4.2"></a>
+## 0.4.2 (2015-07-26)
+
+
+### Bug Fixes
+
+* **tsfmt:** remove trailing white chars and add linefeed ([3843e40](https://github.com/vvakame/typescript-formatter/commit/3843e40))
+
+
+
 <a name"0.4.0"></a>
 ## 0.4.0 (2015-06-28)
 
