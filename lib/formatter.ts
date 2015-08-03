@@ -7,11 +7,11 @@ import utils = require("./utils");
 
 // Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
 //       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
-function format(text: string, options = utils.createDefaultFormatCodeOptions()) {
+function format(fileName: string, text: string, options = utils.createDefaultFormatCodeOptions()) {
     "use strict";
 
     // Parse the source text
-    var sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, (<any>/* backward compat for typescript-1.4.1 */"0"));
+    var sourceFile = ts.createSourceFile(fileName, text, ts.ScriptTarget.Latest, (<any>/* backward compat for typescript-1.4.1 */"0"));
     fixupParentReferences(sourceFile);
 
     // Get the formatting edits on the input sources

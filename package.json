@@ -1,6 +1,6 @@
 {
   "name": "typescript-formatter",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Formatter of TypeScript code",
   "main": "./index",
   "bin": {
@@ -34,7 +34,7 @@
     "commandpost": "0.1.1",
     "editorconfig": "0.12.2",
     "es6-promise": "2.3.0",
-    "typescript": "1.5.3"
+    "typescript": "1.6.0-dev.20150803"
   },
   "devDependencies": {
     "espower-loader": "0.11.0",

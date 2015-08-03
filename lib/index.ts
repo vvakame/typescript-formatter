@@ -1,6 +1,6 @@
 /// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../node_modules/typescript/bin/typescript.d.ts" />
-/// <reference path="../node_modules/typescript/bin/lib.es6.d.ts" />
+/// <reference path="../node_modules/typescript/lib/typescript.d.ts" />
+/// <reference path="../node_modules/typescript/lib/lib.es6.d.ts" />
 
 "use strict";
 
@@ -46,7 +46,7 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
             var result: Result = {
                 fileName: fileName,
                 options: null,
-                message: `${fileName} is not exists. process abort.`,
+                message: `${fileName} is not exists. process abort.\n`,
                 error: true,
                 src: "",
                 dest: ""
@@ -101,7 +101,7 @@ export function processString(fileName: string, content: string, opts: Options):
     return Promise
         .all(optGenPromises)
         .then(() => {
-            var formattedCode = formatter(content, options);
+            var formattedCode = formatter(fileName, content, options);
             if ((<any>formattedCode).trimRight) {
                 formattedCode = (<any>formattedCode).trimRight();
                 formattedCode += "\n";
@@ -112,13 +112,13 @@ export function processString(fileName: string, content: string, opts: Options):
             var error = false;
             if (opts && opts.verify) {
                 if (content !== formattedCode) {
-                    message = `${fileName} is not formatted`;
+                    message = `${fileName} is not formatted\n`;
                     error = true;
                 }
             } else if (opts && opts.replace) {
                 if (content !== formattedCode) {
                     fs.writeFileSync(fileName, formattedCode);
-                    message = `replaced ${fileName}`;
+                    message = `replaced ${fileName}\n`;
                 }
             } else if (opts && !opts.dryRun) {
                 message = formattedCode;
