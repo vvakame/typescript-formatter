@@ -40,13 +40,13 @@
     "espower-loader": "0.11.0",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
-    "grunt-conventional-changelog": "2.0.1",
+    "grunt-conventional-changelog": "3.0.0",
     "grunt-dts-bundle": "0.2.0",
     "grunt-dtsm": "0.2.9",
     "grunt-exec": "0.4.6",
     "grunt-mocha-test": "0.12.7",
-    "grunt-ts": "4.2.0-beta.1",
-    "grunt-tslint": "2.3.1-beta",
+    "grunt-ts": "4.2.0",
+    "grunt-tslint": "2.4.0",
     "load-grunt-tasks": "3.2.0",
     "power-assert": "0.11.0"
   }

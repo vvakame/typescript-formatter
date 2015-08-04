@@ -29,7 +29,7 @@ function collectFileName(dirName:string):string[] {
 }
 
 function checkByTslint(configFileName:string, tsfileName:string, errorExpected:boolean):Promise<boolean> {
-	var process = childProcess.spawn("./node_modules/.bin/tslint", ["-c", configFileName, "-f", tsfileName]);
+	var process = childProcess.spawn("./node_modules/.bin/tslint", ["-c", configFileName, tsfileName]);
 
 	var stdout = '';
 	process.stdout.on('data', (data:any) => {
