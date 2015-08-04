@@ -101,7 +101,7 @@ export function processString(fileName: string, content: string, opts: Options):
     return Promise
         .all(optGenPromises)
         .then(() => {
-            var formattedCode = formatter(content, options);
+            var formattedCode = formatter(fileName, content, options);
             if ((<any>formattedCode).trimRight) {
                 formattedCode = (<any>formattedCode).trimRight();
                 formattedCode += "\n";
