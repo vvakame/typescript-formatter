@@ -1,3 +1,13 @@
+<a name="0.4.3"></a>
+## 0.4.3 (2015-08-04)
+
+
+### Features
+
+* **tsfmt:** pass specified file name to typescript language service. support tsx files. ([b9196e9](https://github.com/vvakame/typescript-formatter/commit/b9196e9))
+
+
+
 <a name="0.4.2"></a>
 ## 0.4.2 (2015-07-26)
 
