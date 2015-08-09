@@ -34,13 +34,13 @@
     "commandpost": "0.1.1",
     "editorconfig": "0.12.2",
     "es6-promise": "2.3.0",
-    "typescript": "1.5.3"
+    "typescript": "^1.5.3"
   },
   "devDependencies": {
     "espower-loader": "0.11.0",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
-    "grunt-conventional-changelog": "3.0.0",
+    "grunt-conventional-changelog": "4.0.0",
     "grunt-dts-bundle": "0.2.0",
     "grunt-dtsm": "0.2.9",
     "grunt-exec": "0.4.6",
