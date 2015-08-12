@@ -109,7 +109,7 @@ function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
             .map(fileName => resultMap[fileName])
             .forEach(result => {
                 if (result.message) {
-                    process.stdout.write(result.message.replace(/^\s+$/g, "").replace(/\n\n^$/mg, ""));
+                    process.stdout.write(result.message.replace(/^\s+$/mg, "").replace(/\n\n^$/mg, ""));
                 }
             });
     }
