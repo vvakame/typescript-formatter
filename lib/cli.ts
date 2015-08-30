@@ -5,6 +5,7 @@ require("es6-promise").polyfill();
 
 import fs = require("fs");
 import commandpost = require("commandpost");
+import path = require("path");
 
 import lib = require("./index");
 
@@ -42,7 +43,12 @@ var root = commandpost
         var editorconfig = !!opts.editorconfig;
         var tsfmt = !!opts.tsfmt;
 
-        if (args.files.length === 0 && !opts.stdin) {
+        var files = args.files;
+        if (files.length === 0 && fs.existsSync("tsconfig.json")) {
+            files = readFilesFromTsconfig("tsconfig.json");
+        }
+
+        if (files.length === 0 && !opts.stdin) {
             process.stdout.write(root.helpText() + '\n');
             return;
         }
@@ -62,7 +68,7 @@ var root = commandpost
                 return;
             }
             lib
-                .processStream(args.files[0] || "temp.ts", process.stdin, {
+                .processStream(files[0] || "temp.ts", process.stdin, {
                     replace: replace,
                     verify: verify,
                     tslint: tslint,
@@ -78,7 +84,7 @@ var root = commandpost
                 .catch(errorHandler);
         } else {
             lib
-                .processFiles(args.files, {
+                .processFiles(files, {
                     replace: replace,
                     verify: verify,
                     tslint: tslint,
@@ -128,4 +134,17 @@ function errorHandler(err: any): Promise<any> {
         process.exit(1);
         return null;
     });
+}
+
+function readFilesFromTsconfig(configPath: string) {
+    "use strict";
+
+    var tsconfigDir = path.dirname(configPath);
+    var tsconfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    if (tsconfig.files) {
+        var files: string[] = tsconfig.files;
+        return files.map(filePath => path.resolve(tsconfigDir, filePath));
+    } else {
+        throw new Error(`No "files" section present in tsconfig.json`);
+    }
 }

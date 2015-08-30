@@ -24,6 +24,8 @@ $ tsfmt
 
 ## Usage
 
+### Format or verify specific TypeScript files
+
 ```bash
 $ cat sample.ts
 class Sample {hello(word="world"){return "Hello, "+word;}}
@@ -59,6 +61,17 @@ $ tsfmt --verify sample.ts
 sample.ts is not formatted
 $ echo $?
 1
+```
+
+### Reformat all files in a TypeScript project
+
+If no files are specified on the command line but
+a TypeScript project file (tsconfig.json) exists,
+the list of files will be read from the project file.
+
+```bash
+# reads list of files to format from tsconfig.json
+tsfmt -r
 ```
 
 ## Note
