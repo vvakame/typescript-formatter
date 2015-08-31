@@ -34,6 +34,7 @@
         "./lib/provider/tslintjson.ts",
         "./lib/utils.d.ts",
         "./lib/utils.ts",
+        "./test/cli/main.ts",
         "./test/indexSpec.d.ts",
         "./test/indexSpec.ts",
         "./typings/bundle.d.ts",
@@ -43,6 +44,7 @@
         "./typings/node/node.d.ts",
         "./typings/power-assert-formatter/power-assert-formatter.d.ts",
         "./typings/power-assert/power-assert.d.ts",
+        "./typings/typescript/typescript.d.ts",
         "./node_modules/typescript/bin/typescript.d.ts",
         "./node_modules/typescript/bin/lib.es6.d.ts"
     ]
