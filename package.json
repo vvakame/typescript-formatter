@@ -48,6 +48,7 @@
     "grunt-ts": "4.2.0-beta.1",
     "grunt-tslint": "2.3.1-beta",
     "load-grunt-tasks": "3.2.0",
-    "power-assert": "0.11.0"
+    "power-assert": "0.11.0",
+    "typescript": "^1.7.0-dev.20150903"
   }
 }
