@@ -1,6 +1,6 @@
 {
   "name": "typescript-formatter",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "dependencies": {
     "commandpost": {
       "version": "0.1.1",
@@ -3082,9 +3082,9 @@
       }
     },
     "typescript": {
-      "version": "1.6.0-dev.20150803",
-      "from": "https://registry.npmjs.org/typescript/-/typescript-1.6.0-dev.20150803.tgz",
-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-1.6.0-dev.20150803.tgz"
+      "version": "1.6.0-dev.20150906",
+      "from": "typescript@next",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-1.6.0-dev.20150906.tgz"
     }
   }
 }
