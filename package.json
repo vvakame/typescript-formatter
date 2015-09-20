@@ -24,30 +24,32 @@
     "url": "https://github.com/vvakame/typescript-formatter/issues"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 0.12.0"
   },
   "directories": {
     "example": "example",
     "test": "test"
   },
   "dependencies": {
-    "commandpost": "0.1.1",
+    "commandpost": "0.2.4",
     "editorconfig": "0.12.2",
-    "es6-promise": "2.3.0",
-    "typescript": "^1.5.3"
+    "es6-promise": "3.0.2",
+    "typescript": "^1.6.2"
   },
   "devDependencies": {
-    "espower-loader": "0.11.0",
+    "espower-loader": "1.0.0",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
-    "grunt-conventional-changelog": "4.0.0",
-    "grunt-dts-bundle": "0.2.0",
+    "grunt-conventional-changelog": "4.1.0",
     "grunt-dtsm": "0.2.9",
     "grunt-exec": "0.4.6",
     "grunt-mocha-test": "0.12.7",
-    "grunt-ts": "4.2.0",
-    "grunt-tslint": "2.4.0",
+    "grunt-ts": "5.0.0-beta.5",
+    "grunt-tsconfig-update": "0.0.1",
+    "grunt-tslint": "2.5.0",
     "load-grunt-tasks": "3.2.0",
-    "power-assert": "0.11.0"
+    "mocha": "2.3.2",
+    "power-assert": "1.0.1",
+    "tslint": "2.5.0"
   }
 }

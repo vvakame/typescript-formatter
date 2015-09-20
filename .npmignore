@@ -14,6 +14,10 @@ typings/
 # codes
 test/
 
+# for https://github.com/Microsoft/TypeScript/issues/4667
+lib/**/*.ts
+!lib/**/*.d.ts
+
 # misc
 .gitignore
 .editorconfig

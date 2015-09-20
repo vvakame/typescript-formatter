@@ -35,6 +35,7 @@ interface TsfmtSettings {
     insertSpaceAfterFunctionKeywordForAnonymousFunctions?: boolean;
     // かっこ内が空でない場合に始め括弧の後ろと終わりカッコの前にスペースを挿入する
     insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis?: boolean;
+    insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets?: boolean;
     // 新しい行に関数の始め中括弧を配置する
     placeOpenBraceOnNewLineForFunctions?: boolean;
     // 新しい行にコントロールブロックの始め中括弧を配置する
@@ -74,6 +75,9 @@ export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOp
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis === "boolean") {
         options.InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis;
+    }
+    if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets === "boolean") {
+        options.InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets;
     }
     if (typeof config.placeOpenBraceOnNewLineForFunctions === "boolean") {
         options.PlaceOpenBraceOnNewLineForFunctions = config.placeOpenBraceOnNewLineForFunctions;

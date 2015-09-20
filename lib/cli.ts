@@ -1,6 +1,3 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../node_modules/commandpost/commandpost.d.ts" />
-
 require("es6-promise").polyfill();
 
 import fs = require("fs");

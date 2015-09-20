@@ -14,16 +14,13 @@
   },
   "dependencies": {
     "node/node.d.ts": {
-      "ref": "02271c53872b38f2f669f3162438c4c837a6fe20"
-    },
-    "es6-promise/es6-promise.d.ts": {
-      "ref": "02271c53872b38f2f669f3162438c4c837a6fe20"
+      "ref": "273a567b0a0bcc34cbf2a2470b2febc95796b644"
     },
     "mocha/mocha.d.ts": {
-      "ref": "02271c53872b38f2f669f3162438c4c837a6fe20"
+      "ref": "273a567b0a0bcc34cbf2a2470b2febc95796b644"
     },
     "power-assert/power-assert.d.ts": {
-      "ref": "02271c53872b38f2f669f3162438c4c837a6fe20"
+      "ref": "273a567b0a0bcc34cbf2a2470b2febc95796b644"
     }
   }
 }

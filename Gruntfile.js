@@ -12,22 +12,15 @@ module.exports = function (grunt) {
 		},
 
 		ts: {
-			options: {
-				compile: true,                 // perform compilation. [true (default) | false]
-				comments: true,                // same as !removeComments. [true | false (default)]
-				target: 'es5',                 // target javascript language. [es3 (default) | es5]
-				module: 'commonjs',            // target javascript module style. [amd (default) | commonjs]
-				noImplicitAny: true,
-				sourceMap: false,              // generate a source map for every output js file. [true (default) | false]
-				sourceRoot: '',                // where to locate TypeScript files. [(default) '' == source ts location]
-				mapRoot: '',                   // where to locate .map.js files. [(default) '' == generated js location.]
-				declaration: true              // generate a declaration .d.ts file for every output js file. [true | false (default)]
-			},
-			clientMain: {
-				src: ['<%= opt.client.tsMain %>/cli.ts']
-			},
-			clientTest: {
-				src: ['<%= opt.client.tsTest %>/indexSpec.ts']
+			default: {
+				tsconfig: {
+					tsconfig: "./tsconfig.json",
+					updateFiles:false
+				}
+			}
+		},
+		tsconfig: {
+			main: {
 			}
 		},
 		tslint: {
@@ -65,17 +58,6 @@ module.exports = function (grunt) {
 					'<%= opt.client.tsTest %>/*.js',
 					'<%= opt.client.tsTest %>/*.js.map'
 				]
-			}
-		},
-		dts_bundle: {
-			build: {
-				options: {
-					name: "typescript-formatter",
-					main: "lib/index.d.ts",
-					baseDir: "",
-					out: "typescript-formatter.d.ts",
-					prefix: ''
-				}
 			}
 		},
 		mochaTest: {
@@ -131,11 +113,11 @@ module.exports = function (grunt) {
 
 	grunt.registerTask(
 		'default',
-		['clean:clientScript', 'ts:clientMain', 'tslint', 'dts_bundle']);
+		['clean:clientScript', 'tsconfig', 'ts', 'tslint']);
 
 	grunt.registerTask(
 		'test',
-		['default', 'ts:clientTest', 'mochaTest']);
+		['default', 'mochaTest']);
 
 	require('load-grunt-tasks')(grunt);
 };
