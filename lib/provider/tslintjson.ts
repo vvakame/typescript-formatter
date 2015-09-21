@@ -23,10 +23,6 @@ function getConfigFileName(baseFileName: string, configFileName: string): string
 
 interface TslintSettings {
     rules: {
-        indent: {
-            0: boolean;
-            1: number;
-        };
         whitespace: {
             0: boolean;
             1: string;
@@ -52,9 +48,6 @@ export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOp
     var config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
         return options;
-    }
-    if (config.rules.indent && config.rules.indent[0]) {
-        options.IndentSize = config.rules.indent[1];
     }
     if (config.rules.whitespace && config.rules.whitespace[0]) {
         for (var p in config.rules.whitespace) {
