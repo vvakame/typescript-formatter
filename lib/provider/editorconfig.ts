@@ -1,3 +1,5 @@
+/// <reference path="../typings/editorconfig.d.ts" />
+
 "use strict";
 
 import * as ts from "typescript";
