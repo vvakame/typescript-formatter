@@ -5,7 +5,7 @@ import * as ts from "typescript";
 import * as path from "path";
 import * as fs from "fs";
 
-import {Options, AdditionalFormatOptions} from "../";
+import {Options} from "../";
 import {getConfigFileName} from "../utils";
 
 interface TslintSettings {
@@ -15,7 +15,6 @@ interface TslintSettings {
             1: string;
         };
         "no-consecutive-blank-lines": boolean,
-        "no-trailing-whitespace": boolean,
         whitespace: {
             0: boolean;
             1: string;
@@ -28,7 +27,11 @@ interface TslintSettings {
     };
 }
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions, additionalOptions: AdditionalFormatOptions): ts.FormatCodeOptions {
+export interface AdditionalFormatOptions {
+    noConsecutiveBlankLines: boolean;
+}
+
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
     "use strict";
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
@@ -65,13 +68,39 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
         }
     }
 
+    return formatOptions;
+}
+
+export function postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string {
+    "use strict";
+
+    let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
+    let configFileName = getConfigFileName(baseDir, "tslint.json");
+    if (!configFileName) {
+        return formattedCode;
+    }
+
+    let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    if (!config.rules) {
+        return formattedCode;
+    }
+
+    let additionalOptions = createDefaultAdditionalFormatCodeOptions();
     if (config.rules["no-consecutive-blank-lines"] === true) {
         additionalOptions.noConsecutiveBlankLines = true;
     }
 
-    if (config.rules["no-trailing-whitespace"] === true) {
-        additionalOptions.noTrailingWhitespace = true;
+    if (additionalOptions.noConsecutiveBlankLines) {
+        formattedCode = formattedCode.replace(/\n+^$/mg, "\n");
     }
 
-    return formatOptions;
+    return formattedCode;
+}
+
+function createDefaultAdditionalFormatCodeOptions(): AdditionalFormatOptions {
+    "use strict";
+
+    return {
+        noConsecutiveBlankLines: false
+    };
 }

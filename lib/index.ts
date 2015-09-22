@@ -2,13 +2,13 @@
 
 import * as ts from "typescript";
 import formatter from "./formatter";
-import {createDefaultFormatCodeOptions, createDefaultAdditionalFormatCodeOptions} from "./utils";
+import {createDefaultFormatCodeOptions} from "./utils";
 
 import * as fs from "fs";
 
 import base from "./provider/base";
 import editorconfig from "./provider/editorconfig";
-import tslintjson from "./provider/tslintjson";
+import tslintjson, {postProcess as tslintPostProcess} from "./provider/tslintjson";
 
 export interface Options {
     dryRun?: boolean;
@@ -19,6 +19,10 @@ export interface Options {
     tslint: boolean;
     editorconfig: boolean;
     tsfmt: boolean;
+}
+
+export interface PostProcess {
+    (fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string;
 }
 
 export interface ResultMap {
@@ -32,11 +36,6 @@ export interface Result {
     error: boolean;
     src: string;
     dest: string;
-}
-
-export interface AdditionalFormatOptions {
-    noConsecutiveBlankLines: boolean;
-    noTrailingWhitespace: boolean;
 }
 
 export function processFiles(files: string[], opts: Options): Promise<ResultMap> {
@@ -89,8 +88,8 @@ export function processString(fileName: string, content: string, opts: Options):
     "use strict";
 
     let formatOptions = createDefaultFormatCodeOptions();
-    let additionalOptions = createDefaultAdditionalFormatCodeOptions();
     let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
+    let postProcesses: PostProcess[] = [];
     if (opts.tsfmt) {
         optGenPromises.push(base(fileName, opts, formatOptions));
     }
@@ -98,7 +97,8 @@ export function processString(fileName: string, content: string, opts: Options):
         optGenPromises.push(editorconfig(fileName, opts, formatOptions));
     }
     if (opts.tslint) {
-        optGenPromises.push(tslintjson(fileName, opts, formatOptions, additionalOptions));
+        optGenPromises.push(tslintjson(fileName, opts, formatOptions));
+        postProcesses.push(tslintPostProcess);
     }
 
     return Promise
@@ -110,13 +110,9 @@ export function processString(fileName: string, content: string, opts: Options):
                 formattedCode += "\n";
             }
 
-            if (additionalOptions.noTrailingWhitespace) {
-                formattedCode = formattedCode.replace(/^\s+$/mg, "");
-            }
-
-            if (additionalOptions.noConsecutiveBlankLines) {
-                formattedCode = formattedCode.replace(/\n\n^$/mg, "");
-            }
+            postProcesses.forEach(postProcess => {
+                formattedCode = postProcess(fileName, formattedCode, opts, formatOptions) || formattedCode;
+            });
 
             // TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
             let message: string;

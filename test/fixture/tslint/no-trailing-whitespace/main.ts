@@ -1,0 +1,5 @@
+class Sample {
+	test() {
+		return "";      			
+	}
+}
