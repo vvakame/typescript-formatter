@@ -31,6 +31,7 @@
         "./lib/provider/editorconfig.ts",
         "./lib/provider/tslintjson.ts",
         "./lib/utils.ts",
+        "./test/cli/main.ts",
         "./test/indexSpec.ts",
         "./typings/bundle.d.ts",
         "./typings/empower/empower.d.ts",
