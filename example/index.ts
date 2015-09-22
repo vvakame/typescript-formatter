@@ -1,4 +1,4 @@
-import tsfmt = require("typescript-formatter");
+import * as tsfmt from "typescript-formatter";
 
 tsfmt
 .processFiles(["./index.ts"], {
