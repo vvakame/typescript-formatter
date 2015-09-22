@@ -29,12 +29,13 @@ interface TslintSettings {
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
     "use strict";
 
-    let configFileName = getConfigFileName(path.dirname(path.resolve(fileName)), "tslint.json");
+    let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
+    let configFileName = getConfigFileName(baseDir, "tslint.json");
     if (!configFileName) {
         return formatOptions;
     }
     if (opts.verbose) {
-      console.log(`read ${configFileName} for ${fileName}`);
+        console.log(`read ${configFileName} for ${fileName}`);
     }
 
     let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));

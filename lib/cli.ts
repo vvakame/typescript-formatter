@@ -12,6 +12,7 @@ let packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toS
 interface RootOptions {
     replace: boolean;
     verify: boolean;
+    baseDir: string[];
     stdin: boolean;
     tslint: boolean;
     editorconfig: boolean;
@@ -28,6 +29,7 @@ let root = commandpost
     .version(packageJson.version, "-v, --version")
     .option("-r, --replace", "replace .ts file")
     .option("--verify", "checking file format")
+    .option("--baseDir <path>", "config file lookup from <path>")
     .option("--stdin", "get formatting content from stdin")
     .option("--no-tslint", "don't read a tslint.json")
     .option("--no-editorconfig", "don't read a .editorconfig")
@@ -36,6 +38,7 @@ let root = commandpost
     .action((opts, args) => {
         let replace = !!opts.replace;
         let verify = !!opts.verify;
+        let baseDir = opts.baseDir ? opts.baseDir[0] : null;
         let stdin = !!opts.stdin;
         let tslint = !!opts.tslint;
         let editorconfig = !!opts.editorconfig;
@@ -45,7 +48,7 @@ let root = commandpost
         let files = args.files;
         let useTsconfig = false;
         if (files.length === 0) {
-            let configFileName = getConfigFileName(process.cwd(), "tsconfig.json");
+            let configFileName = getConfigFileName(baseDir || process.cwd(), "tsconfig.json");
             if (configFileName) {
                 files = readFilesFromTsconfig(configFileName);
                 if (verbose) {
@@ -63,6 +66,7 @@ let root = commandpost
         if (verbose) {
             console.log("replace:	  " + (replace ? "ON" : "OFF"));
             console.log("verify:	   " + (verify ? "ON" : "OFF"));
+            console.log("baseDir:	   " + (baseDir ? baseDir : process.cwd()));
             console.log("stdin:		" + (stdin ? "ON" : "OFF"));
             console.log("tsconfig:	 " + (useTsconfig ? "ON" : "OFF"));
             console.log("tslint:	   " + (tslint ? "ON" : "OFF"));
@@ -79,6 +83,7 @@ let root = commandpost
                 .processStream(files[0] || "temp.ts", process.stdin, {
                     replace: replace,
                     verify: verify,
+                    baseDir: baseDir,
                     tslint: tslint,
                     editorconfig: editorconfig,
                     tsfmt: tsfmt,
@@ -96,6 +101,7 @@ let root = commandpost
                 .processFiles(files, {
                     replace: replace,
                     verify: verify,
+                    baseDir: baseDir,
                     tslint: tslint,
                     editorconfig: editorconfig,
                     tsfmt: tsfmt,

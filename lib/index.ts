@@ -13,6 +13,7 @@ import tslintjson from "./provider/tslintjson";
 export interface Options {
     dryRun?: boolean;
     verbose?: boolean;
+    baseDir?: string;
     replace: boolean;
     verify: boolean;
     tslint: boolean;

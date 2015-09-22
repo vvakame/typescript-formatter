@@ -6,8 +6,15 @@ import * as editorconfig from "editorconfig";
 
 import {Options} from "../";
 
+let emitBaseDirWarning = false;
+
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
     "use strict";
+
+    if (opts.verbose && opts.baseDir && !emitBaseDirWarning) {
+        console.log("editorconfig is not supported baseDir options");
+        emitBaseDirWarning = true;
+    }
 
     return editorconfig
         .parse(fileName)
