@@ -31,7 +31,7 @@
     "test": "test"
   },
   "dependencies": {
-    "commandpost": "0.2.4",
+    "commandpost": "0.2.5",
     "editorconfig": "0.12.2",
     "es6-promise": "3.0.2",
     "typescript": "^1.6.2"
@@ -47,8 +47,8 @@
     "grunt-ts": "5.0.0-beta.5",
     "grunt-tsconfig-update": "0.0.1",
     "grunt-tslint": "2.5.0",
-    "load-grunt-tasks": "3.2.0",
-    "mocha": "2.3.2",
+    "load-grunt-tasks": "3.3.0",
+    "mocha": "2.3.3",
     "power-assert": "1.0.1",
     "tslint": "2.5.0"
   }
