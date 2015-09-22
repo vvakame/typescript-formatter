@@ -82,22 +82,22 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 export function processString(fileName: string, content: string, opts: Options): Promise<Result> {
     "use strict";
 
-    let options = createDefaultFormatCodeOptions();
+    let formatOptions = createDefaultFormatCodeOptions();
     let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
     if (opts.tsfmt) {
-        optGenPromises.push(base(fileName, options));
+        optGenPromises.push(base(fileName, opts, formatOptions));
     }
     if (opts.editorconfig) {
-        optGenPromises.push(editorconfig(fileName, options));
+        optGenPromises.push(editorconfig(fileName, opts, formatOptions));
     }
     if (opts.tslint) {
-        optGenPromises.push(tslintjson(fileName, options));
+        optGenPromises.push(tslintjson(fileName, opts, formatOptions));
     }
 
     return Promise
         .all(optGenPromises)
         .then(() => {
-            let formattedCode = formatter(fileName, content, options);
+            let formattedCode = formatter(fileName, content, formatOptions);
             if ((<any>formattedCode).trimRight) {
                 formattedCode = (<any>formattedCode).trimRight();
                 formattedCode += "\n";
@@ -122,7 +122,7 @@ export function processString(fileName: string, content: string, opts: Options):
 
             let result: Result = {
                 fileName: fileName,
-                options: options,
+                options: formatOptions,
                 message: message,
                 error: error,
                 src: content,

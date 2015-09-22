@@ -40,6 +40,7 @@ let root = commandpost
         let tslint = !!opts.tslint;
         let editorconfig = !!opts.editorconfig;
         let tsfmt = !!opts.tsfmt;
+        let verbose = !!opts.verbose;
 
         let files = args.files;
         let useTsconfig = false;
@@ -47,6 +48,9 @@ let root = commandpost
             let configFileName = getConfigFileName(process.cwd(), "tsconfig.json");
             if (configFileName) {
                 files = readFilesFromTsconfig(configFileName);
+                if (verbose) {
+                    console.log(`read: ${configFileName}`);
+                }
                 useTsconfig = true;
             }
         }
@@ -56,7 +60,7 @@ let root = commandpost
             return;
         }
 
-        if (opts.verbose) {
+        if (verbose) {
             console.log("replace:	  " + (replace ? "ON" : "OFF"));
             console.log("verify:	   " + (verify ? "ON" : "OFF"));
             console.log("stdin:		" + (stdin ? "ON" : "OFF"));
@@ -66,8 +70,8 @@ let root = commandpost
             console.log("tsfmt:		" + (tsfmt ? "ON" : "OFF"));
         }
 
-        if (opts.stdin) {
-            if (opts.replace) {
+        if (stdin) {
+            if (replace) {
                 errorHandler("--stdin option can not use with --replace option");
                 return;
             }
@@ -77,7 +81,8 @@ let root = commandpost
                     verify: verify,
                     tslint: tslint,
                     editorconfig: editorconfig,
-                    tsfmt: tsfmt
+                    tsfmt: tsfmt,
+                    verbose: verbose
                 })
                 .then(result => {
                     let resultMap: lib.ResultMap = {};
@@ -93,7 +98,8 @@ let root = commandpost
                     verify: verify,
                     tslint: tslint,
                     editorconfig: editorconfig,
-                    tsfmt: tsfmt
+                    tsfmt: tsfmt,
+                    verbose: verbose
                 })
                 .then(showResultHandler)
                 .catch(errorHandler);

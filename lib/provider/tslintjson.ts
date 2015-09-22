@@ -5,6 +5,7 @@ import * as ts from "typescript";
 import * as path from "path";
 import * as fs from "fs";
 
+import {Options} from "../";
 import {getConfigFileName} from "../utils";
 
 interface TslintSettings {
@@ -25,40 +26,41 @@ interface TslintSettings {
     };
 }
 
-export default function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
     "use strict";
 
     let configFileName = getConfigFileName(path.dirname(path.resolve(fileName)), "tslint.json");
     if (!configFileName) {
-        return options;
+        return formatOptions;
     }
-    // console.log("tslint makeFormatCodeOptions");
-    // console.log("read " + configFileName);
+    if (opts.verbose) {
+      console.log(`read ${configFileName} for ${fileName}`);
+    }
 
     let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
-        return options;
+        return formatOptions;
     }
     if (config.rules.indent && config.rules.indent[0]) {
-        options.IndentSize = config.rules.indent[1];
+        formatOptions.IndentSize = config.rules.indent[1];
     }
     if (config.rules.whitespace && config.rules.whitespace[0]) {
         for (let p in config.rules.whitespace) {
             let value = config.rules.whitespace[p];
             if (value === "check-branch") {
-                options.InsertSpaceAfterKeywordsInControlFlowStatements = true;
+                formatOptions.InsertSpaceAfterKeywordsInControlFlowStatements = true;
             } else if (value === "check-decl") {
                 // none?
             } else if (value === "check-operator") {
-                options.InsertSpaceBeforeAndAfterBinaryOperators = true;
+                formatOptions.InsertSpaceBeforeAndAfterBinaryOperators = true;
             } else if (value === "check-separator") {
-                options.InsertSpaceAfterCommaDelimiter = true;
-                options.InsertSpaceAfterSemicolonInForStatements = true;
+                formatOptions.InsertSpaceAfterCommaDelimiter = true;
+                formatOptions.InsertSpaceAfterSemicolonInForStatements = true;
             } else if (value === "check-type") {
                 // none?
             }
         }
     }
 
-    return options;
+    return formatOptions;
 }

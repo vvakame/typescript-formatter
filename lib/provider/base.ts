@@ -5,6 +5,7 @@ import * as ts from "typescript";
 import * as path from "path";
 import * as fs from "fs";
 
+import {Options} from "../";
 import {getConfigFileName} from "../utils";
 
 interface TsfmtSettings {
@@ -33,56 +34,58 @@ interface TsfmtSettings {
     convertTabsToSpaces?: boolean;
 }
 
-export default function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
     "use strict";
 
     var configFileName = getConfigFileName(path.dirname(path.resolve(fileName)), "tsfmt.json");
     if (!configFileName) {
-        return options;
+        return formatOptions;
     }
-    // console.log("base makeFormatCodeOptions");
-    // console.log("read " + configFileName);
+
+    if (opts.verbose) {
+        console.log(`read ${configFileName}`);
+    }
 
     var config: TsfmtSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
     if (typeof config.insertSpaceAfterCommaDelimiter === "boolean") {
-        options.InsertSpaceAfterCommaDelimiter = config.insertSpaceAfterCommaDelimiter;
+        formatOptions.InsertSpaceAfterCommaDelimiter = config.insertSpaceAfterCommaDelimiter;
     }
     if (typeof config.insertSpaceAfterSemicolonInForStatements === "boolean") {
-        options.InsertSpaceAfterSemicolonInForStatements = config.insertSpaceAfterSemicolonInForStatements;
+        formatOptions.InsertSpaceAfterSemicolonInForStatements = config.insertSpaceAfterSemicolonInForStatements;
     }
     if (typeof config.insertSpaceBeforeAndAfterBinaryOperators === "boolean") {
-        options.InsertSpaceBeforeAndAfterBinaryOperators = config.insertSpaceBeforeAndAfterBinaryOperators;
+        formatOptions.InsertSpaceBeforeAndAfterBinaryOperators = config.insertSpaceBeforeAndAfterBinaryOperators;
     }
     if (typeof config.insertSpaceAfterKeywordsInControlFlowStatements === "boolean") {
-        options.InsertSpaceAfterKeywordsInControlFlowStatements = config.insertSpaceAfterKeywordsInControlFlowStatements;
+        formatOptions.InsertSpaceAfterKeywordsInControlFlowStatements = config.insertSpaceAfterKeywordsInControlFlowStatements;
     }
     if (typeof config.insertSpaceAfterFunctionKeywordForAnonymousFunctions === "boolean") {
-        options.InsertSpaceAfterFunctionKeywordForAnonymousFunctions = config.insertSpaceAfterFunctionKeywordForAnonymousFunctions;
+        formatOptions.InsertSpaceAfterFunctionKeywordForAnonymousFunctions = config.insertSpaceAfterFunctionKeywordForAnonymousFunctions;
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis === "boolean") {
-        options.InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis;
+        formatOptions.InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis;
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets === "boolean") {
-        options.InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets;
+        formatOptions.InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets;
     }
     if (typeof config.placeOpenBraceOnNewLineForFunctions === "boolean") {
-        options.PlaceOpenBraceOnNewLineForFunctions = config.placeOpenBraceOnNewLineForFunctions;
+        formatOptions.PlaceOpenBraceOnNewLineForFunctions = config.placeOpenBraceOnNewLineForFunctions;
     }
     if (typeof config.placeOpenBraceOnNewLineForControlBlocks === "boolean") {
-        options.PlaceOpenBraceOnNewLineForControlBlocks = config.placeOpenBraceOnNewLineForControlBlocks;
+        formatOptions.PlaceOpenBraceOnNewLineForControlBlocks = config.placeOpenBraceOnNewLineForControlBlocks;
     }
     if (typeof config.indentSize === "number") {
-        options.IndentSize = config.indentSize;
+        formatOptions.IndentSize = config.indentSize;
     }
     if (typeof config.tabSize === "number") {
-        options.TabSize = config.tabSize;
+        formatOptions.TabSize = config.tabSize;
     }
     if (typeof config.newLineCharacter === "string") {
-        options.NewLineCharacter = config.newLineCharacter;
+        formatOptions.NewLineCharacter = config.newLineCharacter;
     }
     if (typeof config.convertTabsToSpaces === "boolean") {
-        options.ConvertTabsToSpaces = config.convertTabsToSpaces;
+        formatOptions.ConvertTabsToSpaces = config.convertTabsToSpaces;
     }
 
-    return options;
+    return formatOptions;
 }

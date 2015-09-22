@@ -4,35 +4,38 @@ import * as ts from "typescript";
 
 import * as editorconfig from "editorconfig";
 
-export default function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
+import {Options} from "../";
+
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
     "use strict";
 
     return editorconfig
         .parse(fileName)
         .then(config => {
             if (Object.keys(config).length === 0) {
-                return options;
+                return formatOptions;
             }
-            // console.log("editorconfig makeFormatCodeOptions");
-            // console.log(config);
+            if (opts.verbose) {
+                console.log("editorconfig: \n" + "file: " + fileName + "\n" + JSON.stringify(config, null, 2));
+            }
 
             if (config.indent_style === "tab") {
-                options.ConvertTabsToSpaces = false;
+                formatOptions.ConvertTabsToSpaces = false;
                 // if (typeof config.tab_width === "number") {
                 // 	options.TabSize = config.tab_width;
                 // }
             } else if (typeof config.indent_size === "number") {
-                options.ConvertTabsToSpaces = true;
-                options.IndentSize = config.indent_size;
+                formatOptions.ConvertTabsToSpaces = true;
+                formatOptions.IndentSize = config.indent_size;
             }
             if (config.end_of_line === "lf") {
-                options.NewLineCharacter = "\n";
+                formatOptions.NewLineCharacter = "\n";
             } else if (config.end_of_line === "cr") {
-                options.NewLineCharacter = "\r";
+                formatOptions.NewLineCharacter = "\r";
             } else if (config.end_of_line === "crlf") {
-                options.NewLineCharacter = "\r\n";
+                formatOptions.NewLineCharacter = "\r\n";
             }
 
-            return options;
+            return formatOptions;
         });
 }
