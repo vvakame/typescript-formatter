@@ -3,14 +3,14 @@
 A TypeScript code formatter powered by TypeScript Compiler Service.
 
 ```bash
-$ tsfmt
-
+$ tsfmt --help
   Usage: tsfmt [options] [--] [files...]
 
   Options:
 
     -r, --replace      replace .ts file
     --verify           checking file format
+    --baseDir <path>   config file lookup from <path>
     --stdin            get formatting content from stdin
     --no-tslint        don't read a tslint.json
     --no-editorconfig  don't read a .editorconfig
@@ -94,6 +94,7 @@ now `indentSize` parameter is ignored. it is TypeScript compiler matters.
   "insertSpaceAfterKeywordsInControlFlowStatements": true,
   "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+  "insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
   "placeOpenBraceOnNewLineForFunctions": false,
   "placeOpenBraceOnNewLineForControlBlocks": false
 }
