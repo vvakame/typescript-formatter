@@ -1,3 +1,20 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/vvakame/typescript-formatter/compare/0.4.3...v1.0.0) (2015-09-22)
+
+
+### Features
+
+* **ci:** use `sudo: false` and switch to node.js v4 ([29b0f45](https://github.com/vvakame/typescript-formatter/commit/29b0f45))
+* **tsfmt:** add baseDir options closes #23 ([b69c4b6](https://github.com/vvakame/typescript-formatter/commit/b69c4b6)), closes [#23](https://github.com/vvakame/typescript-formatter/issues/23)
+* **tsfmt:** add tsconfig.json support. thanks @robertknight #22 ([cb52bd4](https://github.com/vvakame/typescript-formatter/commit/cb52bd4))
+* **tsfmt:** change tsc version specied. strict to loose. ([ea4401c](https://github.com/vvakame/typescript-formatter/commit/ea4401c))
+* **tsfmt:** fix many issue by @myitcv #24 ([d0f2719](https://github.com/vvakame/typescript-formatter/commit/d0f2719)), closes [#24](https://github.com/vvakame/typescript-formatter/issues/24)
+* **tsfmt:** pass Options object to providers ([c425bac](https://github.com/vvakame/typescript-formatter/commit/c425bac))
+* **tsfmt:** refactor to es6 style ([2941857](https://github.com/vvakame/typescript-formatter/commit/2941857))
+* **tsfmt:** update dependencies, switch to typescript@1.6.2, change build process (tsconfig. ([d8f5670](https://github.com/vvakame/typescript-formatter/commit/d8f5670))
+
+
+
 <a name="0.4.3"></a>
 ## 0.4.3 (2015-08-04)
 
@@ -91,4 +108,3 @@ TypeScript 1.4.1 support!
   * remove grunt-espower and add espower-loader, refactor project ([4f213464](git@github.com:vvakame/typescript-formatter/commit/4f21346472cca229c089dd91abd65667c03c6c66))
 * **grunt:** remove TypeScript compiler specified ([b241945a](git@github.com:vvakame/typescript-formatter/commit/b241945a13e77ca1db25fdb35d1dd4e9ba3dff27))
 * **tsfmt:** add typescript package to dependencies and remove typescript-toolbox submodule ([48d176e9](git@github.com:vvakame/typescript-formatter/commit/48d176e967e67ec41aef2402f299fd99330cde33))
-
