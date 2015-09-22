@@ -5,21 +5,7 @@ import ts = require("typescript");
 import path = require("path");
 import fs = require("fs");
 
-function getConfigFileName(baseFileName: string, configFileName: string): string {
-    "use strict";
-
-    var baseDir = path.dirname(baseFileName);
-
-    if (fs.existsSync(baseDir + path.sep + configFileName)) {
-        return baseDir + path.sep + configFileName;
-    }
-
-    if (baseDir.length === path.dirname(baseDir).length) {
-        return null;
-    }
-
-    return getConfigFileName(baseDir, configFileName);
-}
+import utils = require("../utils");
 
 interface TslintSettings {
     rules: {
@@ -42,7 +28,7 @@ interface TslintSettings {
 export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
     "use strict";
 
-    var configFileName = getConfigFileName(path.resolve(fileName), "tslint.json");
+    var configFileName = utils.getConfigFileName(path.dirname(path.resolve(fileName)), "tslint.json");
     if (!configFileName) {
         return options;
     }

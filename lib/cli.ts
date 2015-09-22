@@ -5,6 +5,7 @@ import commandpost = require("commandpost");
 import path = require("path");
 
 import lib = require("./index");
+import utils = require("./utils");
 
 var packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 
@@ -41,8 +42,13 @@ var root = commandpost
         var tsfmt = !!opts.tsfmt;
 
         var files = args.files;
-        if (files.length === 0 && fs.existsSync("tsconfig.json")) {
-            files = readFilesFromTsconfig("tsconfig.json");
+        var useTsconfig = false;
+        if (files.length === 0) {
+            var configFileName = utils.getConfigFileName(process.cwd(), "tsconfig.json");
+            if (configFileName) {
+                files = readFilesFromTsconfig(configFileName);
+                useTsconfig = true;
+            }
         }
 
         if (files.length === 0 && !opts.stdin) {
@@ -54,6 +60,7 @@ var root = commandpost
             console.log("replace:	  " + (replace ? "ON" : "OFF"));
             console.log("verify:	   " + (verify ? "ON" : "OFF"));
             console.log("stdin:		" + (stdin ? "ON" : "OFF"));
+            console.log("tsconfig:	 " + (useTsconfig ? "ON" : "OFF"));
             console.log("tslint:	   " + (tslint ? "ON" : "OFF"));
             console.log("editorconfig: " + (editorconfig ? "ON" : "OFF"));
             console.log("tsfmt:		" + (tsfmt ? "ON" : "OFF"));
