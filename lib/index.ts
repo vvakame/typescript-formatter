@@ -33,6 +33,11 @@ export interface Result {
     dest: string;
 }
 
+export interface AdditionalFormatOptions {
+	noConsecutiveBlankLines: boolean;
+	noTrailingWhitespace: boolean;
+}
+
 export function processFiles(files: string[], opts: Options): Promise<ResultMap> {
     "use strict";
 
@@ -83,6 +88,7 @@ export function processString(fileName: string, content: string, opts: Options):
     "use strict";
 
     var options = utils.createDefaultFormatCodeOptions();
+	 var additionalOptions = utils.createDefaultAdditionalFormatCodeOptions();
     var optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
     if (opts.tsfmt) {
         optGenPromises.push(base.makeFormatCodeOptions(fileName, options));
@@ -91,7 +97,7 @@ export function processString(fileName: string, content: string, opts: Options):
         optGenPromises.push(editorconfig.makeFormatCodeOptions(fileName, options));
     }
     if (opts.tslint) {
-        optGenPromises.push(tslintjson.makeFormatCodeOptions(fileName, options));
+        optGenPromises.push(tslintjson.makeFormatCodeOptions(fileName, options, additionalOptions));
     }
 
     return Promise
@@ -102,6 +108,14 @@ export function processString(fileName: string, content: string, opts: Options):
                 formattedCode = (<any>formattedCode).trimRight();
                 formattedCode += "\n";
             }
+
+				if (additionalOptions.noTrailingWhitespace) {
+					formattedCode = formattedCode.replace(/^\s+$/mg, "");
+				}
+
+				if (additionalOptions.noConsecutiveBlankLines) {
+					formattedCode = formattedCode.replace(/\n\n^$/mg, "");
+				}
 
             // TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
             var message: string;

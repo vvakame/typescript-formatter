@@ -1,6 +1,7 @@
 "use strict";
 
 import ts = require("typescript");
+import lib = require("./index");
 
 export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
     "use strict";
@@ -19,5 +20,14 @@ export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
         InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets: false,
         PlaceOpenBraceOnNewLineForFunctions: false,
         PlaceOpenBraceOnNewLineForControlBlocks: false
+    };
+}
+
+export function createDefaultAdditionalFormatCodeOptions(): lib.AdditionalFormatOptions {
+    "use strict";
+
+    return {
+		 noConsecutiveBlankLines: false,
+		 noTrailingWhitespace: false
     };
 }

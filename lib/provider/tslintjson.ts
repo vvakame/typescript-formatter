@@ -4,6 +4,7 @@ import ts = require("typescript");
 
 import path = require("path");
 import fs = require("fs");
+import lib = require("../index");
 
 function getConfigFileName(baseFileName: string, configFileName: string): string {
     "use strict";
@@ -23,6 +24,8 @@ function getConfigFileName(baseFileName: string, configFileName: string): string
 
 interface TslintSettings {
     rules: {
+		  "no-consecutive-blank-lines": boolean,
+		  "no-trailing-whitespace": boolean,
         whitespace: {
             0: boolean;
             1: string;
@@ -35,15 +38,13 @@ interface TslintSettings {
     };
 }
 
-export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions, additionalOptions: lib.AdditionalFormatOptions): ts.FormatCodeOptions {
     "use strict";
 
     var configFileName = getConfigFileName(path.resolve(fileName), "tslint.json");
     if (!configFileName) {
         return options;
     }
-    // console.log("tslint makeFormatCodeOptions");
-    // console.log("read " + configFileName);
 
     var config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
@@ -66,6 +67,14 @@ export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOp
             }
         }
     }
+
+	 if (config.rules["no-consecutive-blank-lines"] === true) {
+		 additionalOptions.noConsecutiveBlankLines = true;
+	 }
+
+	 if (config.rules["no-trailing-whitespace"] === true) {
+		 additionalOptions.noTrailingWhitespace = true;
+	 }
 
     return options;
 }
