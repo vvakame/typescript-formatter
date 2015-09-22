@@ -1,5 +1,3 @@
-/// <reference path="../editorconfig.d.ts" />
-
 "use strict";
 
 import ts = require("typescript");
