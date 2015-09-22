@@ -2,7 +2,7 @@
 
 import * as ts from "typescript";
 import formatter from "./formatter";
-import utils = require("./utils");
+import {createDefaultFormatCodeOptions} from "./utils";
 
 import * as fs from "fs";
 
@@ -82,7 +82,7 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 export function processString(fileName: string, content: string, opts: Options): Promise<Result> {
     "use strict";
 
-    let options = utils.createDefaultFormatCodeOptions();
+    let options = createDefaultFormatCodeOptions();
     let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
     if (opts.tsfmt) {
         optGenPromises.push(base(fileName, options));
