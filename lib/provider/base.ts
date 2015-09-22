@@ -1,11 +1,11 @@
 "use strict";
 
-import ts = require("typescript");
+import * as ts from "typescript";
 
-import path = require("path");
-import fs = require("fs");
+import * as path from "path";
+import * as fs from "fs";
 
-import utils = require("../utils");
+import {getConfigFileName} from "../utils";
 
 interface TsfmtSettings {
     // from FormatCodeOptions
@@ -33,10 +33,10 @@ interface TsfmtSettings {
     convertTabsToSpaces?: boolean;
 }
 
-export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
     "use strict";
 
-    var configFileName = utils.getConfigFileName(path.dirname(path.resolve(fileName)), "tsfmt.json");
+    var configFileName = getConfigFileName(path.dirname(path.resolve(fileName)), "tsfmt.json");
     if (!configFileName) {
         return options;
     }

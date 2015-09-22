@@ -1,14 +1,14 @@
 "use strict";
 
-import ts = require("typescript");
-import formatter = require("./formatter");
+import * as ts from "typescript";
+import formatter from "./formatter";
 import utils = require("./utils");
 
-import fs = require("fs");
+import * as fs from "fs";
 
-import base = require("./provider/base");
-import editorconfig = require("./provider/editorconfig");
-import tslintjson = require("./provider/tslintjson");
+import base from "./provider/base";
+import editorconfig from "./provider/editorconfig";
+import tslintjson from "./provider/tslintjson";
 
 export interface Options {
     dryRun?: boolean;
@@ -36,10 +36,10 @@ export interface Result {
 export function processFiles(files: string[], opts: Options): Promise<ResultMap> {
     "use strict";
 
-    var resultMap: ResultMap = {};
-    var promises = files.map(fileName => {
+    let resultMap: ResultMap = {};
+    let promises = files.map(fileName => {
         if (!fs.existsSync(fileName)) {
-            var result: Result = {
+            let result: Result = {
                 fileName: fileName,
                 options: null,
                 message: `${fileName} is not exists. process abort.`,
@@ -50,7 +50,7 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
             return Promise.resolve(result);
         }
 
-        var content = fs.readFileSync(fileName).toString();
+        let content = fs.readFileSync(fileName).toString();
         return processString(fileName, content, opts);
     });
     return Promise.all(promises).then(resultList=> {
@@ -66,8 +66,8 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 
     input.setEncoding("utf8");
 
-    var promise = new Promise<string>((resolve, reject) => {
-        var fragment = "";
+    let promise = new Promise<string>((resolve, reject) => {
+        let fragment = "";
         input.on("data", (chunk: string) => {
             fragment += chunk;
         });
@@ -82,30 +82,30 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 export function processString(fileName: string, content: string, opts: Options): Promise<Result> {
     "use strict";
 
-    var options = utils.createDefaultFormatCodeOptions();
-    var optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
+    let options = utils.createDefaultFormatCodeOptions();
+    let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
     if (opts.tsfmt) {
-        optGenPromises.push(base.makeFormatCodeOptions(fileName, options));
+        optGenPromises.push(base(fileName, options));
     }
     if (opts.editorconfig) {
-        optGenPromises.push(editorconfig.makeFormatCodeOptions(fileName, options));
+        optGenPromises.push(editorconfig(fileName, options));
     }
     if (opts.tslint) {
-        optGenPromises.push(tslintjson.makeFormatCodeOptions(fileName, options));
+        optGenPromises.push(tslintjson(fileName, options));
     }
 
     return Promise
         .all(optGenPromises)
         .then(() => {
-            var formattedCode = formatter(fileName, content, options);
+            let formattedCode = formatter(fileName, content, options);
             if ((<any>formattedCode).trimRight) {
                 formattedCode = (<any>formattedCode).trimRight();
                 formattedCode += "\n";
             }
 
             // TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
-            var message: string;
-            var error = false;
+            let message: string;
+            let error = false;
             if (opts && opts.verify) {
                 if (content !== formattedCode) {
                     message = `${fileName} is not formatted`;
@@ -120,7 +120,7 @@ export function processString(fileName: string, content: string, opts: Options):
                 message = formattedCode;
             }
 
-            var result: Result = {
+            let result: Result = {
                 fileName: fileName,
                 options: options,
                 message: message,

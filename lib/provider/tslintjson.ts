@@ -1,11 +1,11 @@
 "use strict";
 
-import ts = require("typescript");
+import * as ts from "typescript";
 
-import path = require("path");
-import fs = require("fs");
+import * as path from "path";
+import * as fs from "fs";
 
-import utils = require("../utils");
+import {getConfigFileName} from "../utils";
 
 interface TslintSettings {
     rules: {
@@ -25,17 +25,17 @@ interface TslintSettings {
     };
 }
 
-export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): ts.FormatCodeOptions {
     "use strict";
 
-    var configFileName = utils.getConfigFileName(path.dirname(path.resolve(fileName)), "tslint.json");
+    let configFileName = getConfigFileName(path.dirname(path.resolve(fileName)), "tslint.json");
     if (!configFileName) {
         return options;
     }
     // console.log("tslint makeFormatCodeOptions");
     // console.log("read " + configFileName);
 
-    var config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
         return options;
     }
@@ -43,8 +43,8 @@ export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOp
         options.IndentSize = config.rules.indent[1];
     }
     if (config.rules.whitespace && config.rules.whitespace[0]) {
-        for (var p in config.rules.whitespace) {
-            var value = config.rules.whitespace[p];
+        for (let p in config.rules.whitespace) {
+            let value = config.rules.whitespace[p];
             if (value === "check-branch") {
                 options.InsertSpaceAfterKeywordsInControlFlowStatements = true;
             } else if (value === "check-decl") {

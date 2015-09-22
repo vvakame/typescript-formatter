@@ -1,10 +1,10 @@
 "use strict";
 
-import ts = require("typescript");
+import * as ts from "typescript";
 
-import editorconfig = require("editorconfig");
+import * as editorconfig from "editorconfig";
 
-export function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
+export default function makeFormatCodeOptions(fileName: string, options: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
     "use strict";
 
     return editorconfig

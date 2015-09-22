@@ -1,13 +1,13 @@
 require("es6-promise").polyfill();
 
-import fs = require("fs");
-import commandpost = require("commandpost");
-import path = require("path");
+import * as fs from "fs";
+import * as commandpost from "commandpost";
+import * as path from "path";
 
-import lib = require("./index");
-import utils = require("./utils");
+import * as lib from "./";
+import {getConfigFileName} from "./utils";
 
-var packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
+let packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 
 interface RootOptions {
     replace: boolean;
@@ -23,7 +23,7 @@ interface RootArguments {
     files: string[];
 }
 
-var root = commandpost
+let root = commandpost
     .create<RootOptions, RootArguments>("tsfmt [files...]")
     .version(packageJson.version, "-v, --version")
     .option("-r, --replace", "replace .ts file")
@@ -34,17 +34,17 @@ var root = commandpost
     .option("--no-tsfmt", "don't read a tsfmt.json")
     .option("--verbose", "makes output more verbose")
     .action((opts, args) => {
-        var replace = !!opts.replace;
-        var verify = !!opts.verify;
-        var stdin = !!opts.stdin;
-        var tslint = !!opts.tslint;
-        var editorconfig = !!opts.editorconfig;
-        var tsfmt = !!opts.tsfmt;
+        let replace = !!opts.replace;
+        let verify = !!opts.verify;
+        let stdin = !!opts.stdin;
+        let tslint = !!opts.tslint;
+        let editorconfig = !!opts.editorconfig;
+        let tsfmt = !!opts.tsfmt;
 
-        var files = args.files;
-        var useTsconfig = false;
+        let files = args.files;
+        let useTsconfig = false;
         if (files.length === 0) {
-            var configFileName = utils.getConfigFileName(process.cwd(), "tsconfig.json");
+            let configFileName = getConfigFileName(process.cwd(), "tsconfig.json");
             if (configFileName) {
                 files = readFilesFromTsconfig(configFileName);
                 useTsconfig = true;
@@ -80,7 +80,7 @@ var root = commandpost
                     tsfmt: tsfmt
                 })
                 .then(result => {
-                    var resultMap: lib.ResultMap = {};
+                    let resultMap: lib.ResultMap = {};
                     resultMap[result.fileName] = result;
                     return resultMap;
                 })
@@ -107,7 +107,7 @@ commandpost
 function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
     "use strict";
 
-    var hasError = Object.keys(resultMap).filter(fileName => resultMap[fileName].error).length !== 0;
+    let hasError = Object.keys(resultMap).filter(fileName => resultMap[fileName].error).length !== 0;
     if (hasError) {
         Object.keys(resultMap)
             .map(fileName => resultMap[fileName])
@@ -143,10 +143,10 @@ function errorHandler(err: any): Promise<any> {
 function readFilesFromTsconfig(configPath: string) {
     "use strict";
 
-    var tsconfigDir = path.dirname(configPath);
-    var tsconfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    let tsconfigDir = path.dirname(configPath);
+    let tsconfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
     if (tsconfig.files) {
-        var files: string[] = tsconfig.files;
+        let files: string[] = tsconfig.files;
         return files.map(filePath => path.resolve(tsconfigDir, filePath));
     } else {
         throw new Error(`No "files" section present in tsconfig.json`);

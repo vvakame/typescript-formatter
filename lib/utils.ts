@@ -1,9 +1,9 @@
 "use strict";
 
-import ts = require("typescript");
+import * as ts from "typescript";
 
-import fs = require("fs");
-import path = require("path");
+import * as fs from "fs";
+import * as path from "path";
 
 export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
     "use strict";
@@ -28,7 +28,7 @@ export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
 export function getConfigFileName(baseDir: string, configFileName: string): string {
     "use strict";
 
-    var configFilePath = path.resolve(baseDir, configFileName);
+    let configFilePath = path.resolve(baseDir, configFileName);
     if (fs.existsSync(configFilePath)) {
         return configFilePath;
     }
