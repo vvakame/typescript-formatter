@@ -10,6 +10,6 @@
     "author": "vvakame+dev@gmail.com",
     "license": "MIT",
     "dependencies": {
-        "typescript-formatter": "^0.1.2"
+        "typescript-formatter": "^1.0.0"
     }
 }
