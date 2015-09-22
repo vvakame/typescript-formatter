@@ -2,7 +2,7 @@
 
 import * as ts from "typescript";
 import formatter from "./formatter";
-import {createDefaultFormatCodeOptions} from "./utils";
+import {createDefaultFormatCodeOptions, createDefaultAdditionalFormatCodeOptions} from "./utils";
 
 import * as fs from "fs";
 
@@ -34,6 +34,11 @@ export interface Result {
     dest: string;
 }
 
+export interface AdditionalFormatOptions {
+    noConsecutiveBlankLines: boolean;
+    noTrailingWhitespace: boolean;
+}
+
 export function processFiles(files: string[], opts: Options): Promise<ResultMap> {
     "use strict";
 
@@ -43,7 +48,7 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
             let result: Result = {
                 fileName: fileName,
                 options: null,
-                message: `${fileName} is not exists. process abort.`,
+                message: `${fileName} does not exist. process abort.\n`,
                 error: true,
                 src: "",
                 dest: ""
@@ -84,6 +89,7 @@ export function processString(fileName: string, content: string, opts: Options):
     "use strict";
 
     let formatOptions = createDefaultFormatCodeOptions();
+    let additionalOptions = createDefaultAdditionalFormatCodeOptions();
     let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
     if (opts.tsfmt) {
         optGenPromises.push(base(fileName, opts, formatOptions));
@@ -92,7 +98,7 @@ export function processString(fileName: string, content: string, opts: Options):
         optGenPromises.push(editorconfig(fileName, opts, formatOptions));
     }
     if (opts.tslint) {
-        optGenPromises.push(tslintjson(fileName, opts, formatOptions));
+        optGenPromises.push(tslintjson(fileName, opts, formatOptions, additionalOptions));
     }
 
     return Promise
@@ -104,18 +110,26 @@ export function processString(fileName: string, content: string, opts: Options):
                 formattedCode += "\n";
             }
 
+            if (additionalOptions.noTrailingWhitespace) {
+                formattedCode = formattedCode.replace(/^\s+$/mg, "");
+            }
+
+            if (additionalOptions.noConsecutiveBlankLines) {
+                formattedCode = formattedCode.replace(/\n\n^$/mg, "");
+            }
+
             // TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
             let message: string;
             let error = false;
             if (opts && opts.verify) {
                 if (content !== formattedCode) {
-                    message = `${fileName} is not formatted`;
+                    message = `${fileName} is not formatted\n`;
                     error = true;
                 }
             } else if (opts && opts.replace) {
                 if (content !== formattedCode) {
                     fs.writeFileSync(fileName, formattedCode);
-                    message = `replaced ${fileName}`;
+                    message = `replaced ${fileName}\n`;
                 }
             } else if (opts && !opts.dryRun) {
                 message = formattedCode;

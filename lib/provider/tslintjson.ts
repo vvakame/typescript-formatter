@@ -5,15 +5,17 @@ import * as ts from "typescript";
 import * as path from "path";
 import * as fs from "fs";
 
-import {Options} from "../";
+import {Options, AdditionalFormatOptions} from "../";
 import {getConfigFileName} from "../utils";
 
 interface TslintSettings {
     rules: {
         indent: {
             0: boolean;
-            1: number;
+            1: string;
         };
+        "no-consecutive-blank-lines": boolean,
+        "no-trailing-whitespace": boolean,
         whitespace: {
             0: boolean;
             1: string;
@@ -26,7 +28,7 @@ interface TslintSettings {
     };
 }
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions, additionalOptions: AdditionalFormatOptions): ts.FormatCodeOptions {
     "use strict";
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
@@ -42,8 +44,8 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     if (!config.rules) {
         return formatOptions;
     }
-    if (config.rules.indent && config.rules.indent[0]) {
-        formatOptions.IndentSize = config.rules.indent[1];
+    if (config.rules.indent && config.rules.indent[0] && config.rules.indent[1] === "spaces") {
+        formatOptions.ConvertTabsToSpaces = true;
     }
     if (config.rules.whitespace && config.rules.whitespace[0]) {
         for (let p in config.rules.whitespace) {
@@ -61,6 +63,14 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
                 // none?
             }
         }
+    }
+
+    if (config.rules["no-consecutive-blank-lines"] === true) {
+        additionalOptions.noConsecutiveBlankLines = true;
+    }
+
+    if (config.rules["no-trailing-whitespace"] === true) {
+        additionalOptions.noTrailingWhitespace = true;
     }
 
     return formatOptions;

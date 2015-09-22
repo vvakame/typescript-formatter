@@ -5,6 +5,8 @@ import * as ts from "typescript";
 import * as fs from "fs";
 import * as path from "path";
 
+import {AdditionalFormatOptions} from "./";
+
 export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
     "use strict";
 
@@ -38,4 +40,13 @@ export function getConfigFileName(baseDir: string, configFileName: string): stri
     }
 
     return getConfigFileName(path.resolve(baseDir, "../"), configFileName);
+}
+
+export function createDefaultAdditionalFormatCodeOptions(): AdditionalFormatOptions {
+    "use strict";
+
+    return {
+        noConsecutiveBlankLines: false,
+        noTrailingWhitespace: false
+    };
 }
