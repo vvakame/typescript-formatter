@@ -12,8 +12,9 @@ interface TslintSettings {
     rules: {
         indent: {
             0: boolean;
-            1: number;
+            1: string;
         };
+        "no-consecutive-blank-lines": boolean,
         whitespace: {
             0: boolean;
             1: string;
@@ -24,6 +25,10 @@ interface TslintSettings {
             [key: string]: any;
         };
     };
+}
+
+export interface AdditionalFormatOptions {
+    noConsecutiveBlankLines: boolean;
 }
 
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
@@ -42,8 +47,8 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     if (!config.rules) {
         return formatOptions;
     }
-    if (config.rules.indent && config.rules.indent[0]) {
-        formatOptions.IndentSize = config.rules.indent[1];
+    if (config.rules.indent && config.rules.indent[0] && config.rules.indent[1] === "spaces") {
+        formatOptions.ConvertTabsToSpaces = true;
     }
     if (config.rules.whitespace && config.rules.whitespace[0]) {
         for (let p in config.rules.whitespace) {
@@ -64,4 +69,38 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     }
 
     return formatOptions;
+}
+
+export function postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string {
+    "use strict";
+
+    let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
+    let configFileName = getConfigFileName(baseDir, "tslint.json");
+    if (!configFileName) {
+        return formattedCode;
+    }
+
+    let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    if (!config.rules) {
+        return formattedCode;
+    }
+
+    let additionalOptions = createDefaultAdditionalFormatCodeOptions();
+    if (config.rules["no-consecutive-blank-lines"] === true) {
+        additionalOptions.noConsecutiveBlankLines = true;
+    }
+
+    if (additionalOptions.noConsecutiveBlankLines) {
+        formattedCode = formattedCode.replace(/\n+^$/mg, "\n");
+    }
+
+    return formattedCode;
+}
+
+function createDefaultAdditionalFormatCodeOptions(): AdditionalFormatOptions {
+    "use strict";
+
+    return {
+        noConsecutiveBlankLines: false
+    };
 }

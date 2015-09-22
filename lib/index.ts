@@ -8,7 +8,7 @@ import * as fs from "fs";
 
 import base from "./provider/base";
 import editorconfig from "./provider/editorconfig";
-import tslintjson from "./provider/tslintjson";
+import tslintjson, {postProcess as tslintPostProcess} from "./provider/tslintjson";
 
 export interface Options {
     dryRun?: boolean;
@@ -19,6 +19,10 @@ export interface Options {
     tslint: boolean;
     editorconfig: boolean;
     tsfmt: boolean;
+}
+
+export interface PostProcess {
+    (fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string;
 }
 
 export interface ResultMap {
@@ -43,7 +47,7 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
             let result: Result = {
                 fileName: fileName,
                 options: null,
-                message: `${fileName} is not exists. process abort.`,
+                message: `${fileName} does not exist. process abort.\n`,
                 error: true,
                 src: "",
                 dest: ""
@@ -85,6 +89,7 @@ export function processString(fileName: string, content: string, opts: Options):
 
     let formatOptions = createDefaultFormatCodeOptions();
     let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
+    let postProcesses: PostProcess[] = [];
     if (opts.tsfmt) {
         optGenPromises.push(base(fileName, opts, formatOptions));
     }
@@ -93,6 +98,7 @@ export function processString(fileName: string, content: string, opts: Options):
     }
     if (opts.tslint) {
         optGenPromises.push(tslintjson(fileName, opts, formatOptions));
+        postProcesses.push(tslintPostProcess);
     }
 
     return Promise
@@ -104,18 +110,22 @@ export function processString(fileName: string, content: string, opts: Options):
                 formattedCode += "\n";
             }
 
+            postProcesses.forEach(postProcess => {
+                formattedCode = postProcess(fileName, formattedCode, opts, formatOptions) || formattedCode;
+            });
+
             // TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
             let message: string;
             let error = false;
             if (opts && opts.verify) {
                 if (content !== formattedCode) {
-                    message = `${fileName} is not formatted`;
+                    message = `${fileName} is not formatted\n`;
                     error = true;
                 }
             } else if (opts && opts.replace) {
                 if (content !== formattedCode) {
                     fs.writeFileSync(fileName, formattedCode);
-                    message = `replaced ${fileName}`;
+                    message = `replaced ${fileName}\n`;
                 }
             } else if (opts && !opts.dryRun) {
                 message = formattedCode;

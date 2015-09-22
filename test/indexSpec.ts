@@ -173,7 +173,7 @@ describe("tsfmt test", () => {
                 })
                 .then(resultMap => {
                     assert(resultMap[fileName].error);
-                    assert(resultMap[fileName].message === "./test/fixture/tsfmt/a/main.ts is not formatted");
+                    assert(resultMap[fileName].message === "./test/fixture/tsfmt/a/main.ts is not formatted\n");
                 });
         });
     });

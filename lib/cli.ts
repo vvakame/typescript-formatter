@@ -124,14 +124,14 @@ function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
         Object.keys(resultMap)
             .map(fileName => resultMap[fileName])
             .filter(result => result.error)
-            .forEach(result => console.error(result.message));
+            .forEach(result => process.stderr.write(result.message));
         process.exit(1);
     } else {
         Object.keys(resultMap)
             .map(fileName => resultMap[fileName])
             .forEach(result => {
                 if (result.message) {
-                    console.log(result.message);
+                    process.stdout.write(result.message);
                 }
             });
     }
