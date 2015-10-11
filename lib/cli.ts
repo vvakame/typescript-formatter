@@ -1,4 +1,5 @@
 require("es6-promise").polyfill();
+var glob = require("glob");
 
 import * as fs from "fs";
 import * as commandpost from "commandpost";
@@ -160,7 +161,11 @@ function readFilesFromTsconfig(configPath: string) {
     if (tsconfig.files) {
         let files: string[] = tsconfig.files;
         return files.map(filePath => path.resolve(tsconfigDir, filePath));
+    } else if (tsconfig.filesGlob) {
+        let files: string[] = [];
+        tsconfig.filesGlob.map((g:any) => glob.sync(g).map((p:string) => files.push(path.resolve(p))));
+        return files;
     } else {
-        throw new Error(`No "files" section present in tsconfig.json`);
+        throw new Error(`No "files" or "filesGlob" section present in tsconfig.json`);
     }
 }
