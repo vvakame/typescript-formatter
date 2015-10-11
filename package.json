@@ -34,6 +34,7 @@
     "commandpost": "0.2.5",
     "editorconfig": "0.12.2",
     "es6-promise": "3.0.2",
+    "glob": "^5.0.15",
     "typescript": "^1.6.2"
   },
   "devDependencies": {
