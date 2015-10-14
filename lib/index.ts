@@ -107,14 +107,16 @@ export function processString(fileName: string, content: string, opts: Options):
             let formattedCode = formatter(fileName, content, formatOptions);
             if ((<any>formattedCode).trimRight) {
                 formattedCode = (<any>formattedCode).trimRight();
-                formattedCode += "\n";
+                formattedCode += formatOptions.NewLineCharacter;
             }
 
             postProcesses.forEach(postProcess => {
                 formattedCode = postProcess(fileName, formattedCode, opts, formatOptions) || formattedCode;
             });
 
-            // TODO replace newline code. NewLineCharacter params affect to only "new" newline. maybe.
+            // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
+            formattedCode = formattedCode.replace(/\r?\n/g, formatOptions.NewLineCharacter);
+
             let message: string;
             let error = false;
             if (opts && opts.verify) {

@@ -196,7 +196,7 @@ describe("tsfmt test", () => {
                 .then(result=> {
                     assert(result !== null);
                     assert(result.error === false);
-                    assert(result.dest === "class Sample { getString(): string { return \"hi!\"; } }\n");
+                    assert(result.dest === "class Sample { getString(): string { return \"hi!\"; } }\r\n");
                 });
         });
     });
@@ -211,7 +211,7 @@ class TestCLI {
 
     }
 }
-`.trim());
+`.trim().replace(/\n/g, "\r\n"));
             });
         });
     });
