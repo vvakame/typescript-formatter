@@ -1,9 +1,10 @@
 require("es6-promise").polyfill();
-var glob = require("glob");
 
 import * as fs from "fs";
 import * as commandpost from "commandpost";
 import * as path from "path";
+
+import * as expand from "glob-expand";
 
 import * as lib from "./";
 import {getConfigFileName} from "./utils";
@@ -168,9 +169,7 @@ function readFilesFromTsconfig(configPath: string) {
         let files: string[] = tsconfig.files;
         return files.map(filePath => path.resolve(tsconfigDir, filePath));
     } else if (tsconfig.filesGlob) {
-        let files: string[] = [];
-        tsconfig.filesGlob.map((g:any) => glob.sync(g).map((p:string) => files.push(path.resolve(p))));
-        return files;
+        return expand({ filter: "isFile", cwd: tsconfigDir }, tsconfig.filesGlob);
     } else {
         throw new Error(`No "files" or "filesGlob" section present in tsconfig.json`);
     }
