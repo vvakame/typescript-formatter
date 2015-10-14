@@ -1,3 +1,17 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/vvakame/typescript-formatter/compare/1.0.0...v1.1.0) (2015-10-14)
+
+
+### Bug Fixes
+
+* **tsfmt:** replace line delimiter to formatOptions.NewLineCharacter fixes #26 ([8d84ddb](https://github.com/vvakame/typescript-formatter/commit/8d84ddb)), closes [#26](https://github.com/vvakame/typescript-formatter/issues/26)
+
+### Features
+
+* **example:** update example, support typescript-formatter@1.0.0 ([dd283b3](https://github.com/vvakame/typescript-formatter/commit/dd283b3))
+* **tsfmt:** add support for filesGlob. thanks @ximenean #25 ([bf9f704](https://github.com/vvakame/typescript-formatter/commit/bf9f704))
+* **tsfmt:** support newline char settings from tsconfig.json ([d618ee8](https://github.com/vvakame/typescript-formatter/commit/d618ee8))
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/vvakame/typescript-formatter/compare/0.4.3...v1.0.0) (2015-09-22)
 
