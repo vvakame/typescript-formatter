@@ -4,6 +4,8 @@ import * as fs from "fs";
 import * as commandpost from "commandpost";
 import * as path from "path";
 
+import * as expand from "glob-expand";
+
 import * as lib from "./";
 import {getConfigFileName} from "./utils";
 
@@ -166,7 +168,9 @@ function readFilesFromTsconfig(configPath: string) {
     if (tsconfig.files) {
         let files: string[] = tsconfig.files;
         return files.map(filePath => path.resolve(tsconfigDir, filePath));
+    } else if (tsconfig.filesGlob) {
+        return expand({ filter: "isFile", cwd: tsconfigDir }, tsconfig.filesGlob);
     } else {
-        throw new Error(`No "files" section present in tsconfig.json`);
+        throw new Error(`No "files" or "filesGlob" section present in tsconfig.json`);
     }
 }
