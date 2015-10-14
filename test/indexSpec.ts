@@ -115,6 +115,7 @@ describe("tsfmt test", () => {
                             dryRun: true,
                             replace: false,
                             verify: false,
+                            tsconfig: true,
                             tslint: true,
                             editorconfig: true,
                             tsfmt: true
@@ -167,6 +168,7 @@ describe("tsfmt test", () => {
                     dryRun: true,
                     replace: false,
                     verify: true,
+                    tsconfig: true,
                     tslint: true,
                     editorconfig: true,
                     tsfmt: true
@@ -189,6 +191,7 @@ describe("tsfmt test", () => {
                     dryRun: true,
                     replace: false,
                     verify: false,
+                    tsconfig: true,
                     tslint: true,
                     editorconfig: true,
                     tsfmt: true

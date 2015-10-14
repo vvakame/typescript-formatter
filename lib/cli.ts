@@ -14,6 +14,7 @@ interface RootOptions {
     verify: boolean;
     baseDir: string[];
     stdin: boolean;
+    tsconfig: boolean;
     tslint: boolean;
     editorconfig: boolean;
     tsfmt: boolean;
@@ -31,6 +32,7 @@ let root = commandpost
     .option("--verify", "checking file format")
     .option("--baseDir <path>", "config file lookup from <path>")
     .option("--stdin", "get formatting content from stdin")
+    .option("--no-tsconfig", "don't read a tsconfig.json")
     .option("--no-tslint", "don't read a tslint.json")
     .option("--no-editorconfig", "don't read a .editorconfig")
     .option("--no-tsfmt", "don't read a tsfmt.json")
@@ -40,6 +42,7 @@ let root = commandpost
         let verify = !!opts.verify;
         let baseDir = opts.baseDir ? opts.baseDir[0] : null;
         let stdin = !!opts.stdin;
+        let tsconfig = !!opts.tsconfig;
         let tslint = !!opts.tslint;
         let editorconfig = !!opts.editorconfig;
         let tsfmt = !!opts.tsfmt;
@@ -68,7 +71,8 @@ let root = commandpost
             console.log("verify:	   " + (verify ? "ON" : "OFF"));
             console.log("baseDir:	   " + (baseDir ? baseDir : process.cwd()));
             console.log("stdin:		" + (stdin ? "ON" : "OFF"));
-            console.log("tsconfig:	 " + (useTsconfig ? "ON" : "OFF"));
+            console.log("files from tsconfig:	 " + (useTsconfig ? "ON" : "OFF"));
+            console.log("tsconfig:	 " + (tsconfig ? "ON" : "OFF"));
             console.log("tslint:	   " + (tslint ? "ON" : "OFF"));
             console.log("editorconfig: " + (editorconfig ? "ON" : "OFF"));
             console.log("tsfmt:		" + (tsfmt ? "ON" : "OFF"));
@@ -84,6 +88,7 @@ let root = commandpost
                     replace: replace,
                     verify: verify,
                     baseDir: baseDir,
+                    tsconfig: tsconfig,
                     tslint: tslint,
                     editorconfig: editorconfig,
                     tsfmt: tsfmt,
@@ -102,6 +107,7 @@ let root = commandpost
                     replace: replace,
                     verify: verify,
                     baseDir: baseDir,
+                    tsconfig: tsconfig,
                     tslint: tslint,
                     editorconfig: editorconfig,
                     tsfmt: tsfmt,

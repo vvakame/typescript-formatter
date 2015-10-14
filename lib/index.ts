@@ -7,6 +7,7 @@ import {createDefaultFormatCodeOptions} from "./utils";
 import * as fs from "fs";
 
 import base from "./provider/base";
+import tsconfigjson from "./provider/tsconfigjson";
 import editorconfig from "./provider/editorconfig";
 import tslintjson, {postProcess as tslintPostProcess} from "./provider/tslintjson";
 
@@ -16,6 +17,7 @@ export interface Options {
     baseDir?: string;
     replace: boolean;
     verify: boolean;
+    tsconfig: boolean;
     tslint: boolean;
     editorconfig: boolean;
     tsfmt: boolean;
@@ -92,6 +94,9 @@ export function processString(fileName: string, content: string, opts: Options):
     let postProcesses: PostProcess[] = [];
     if (opts.tsfmt) {
         optGenPromises.push(base(fileName, opts, formatOptions));
+    }
+    if (opts.tsconfig) {
+        optGenPromises.push(tsconfigjson(fileName, opts, formatOptions));
     }
     if (opts.editorconfig) {
         optGenPromises.push(editorconfig(fileName, opts, formatOptions));
