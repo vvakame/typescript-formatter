@@ -24,12 +24,14 @@
         "!./node_modules/**/*",
         "./node_modules/typescript/lib/lib.es6.d.ts"
     ],
+    "exclude": [],
     "files": [
         "./lib/cli.ts",
         "./lib/formatter.ts",
         "./lib/index.ts",
         "./lib/provider/base.ts",
         "./lib/provider/editorconfig.ts",
+        "./lib/provider/tsconfigjson.ts",
         "./lib/provider/tslintjson.ts",
         "./lib/utils.ts",
         "./test/cli/main.ts",
