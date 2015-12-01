@@ -1,3 +1,13 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/vvakame/typescript-formatter/compare/1.1.0...v1.2.0) (2015-12-01)
+
+
+### Features
+
+* **tsfmt:** update dependencies. support TypeScript 1.7.3 ([abd22cf](https://github.com/vvakame/typescript-formatter/commit/abd22cf))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/vvakame/typescript-formatter/compare/1.0.0...v1.1.0) (2015-10-14)
 
