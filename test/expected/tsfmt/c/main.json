@@ -1,8 +1,8 @@
 {
-  "IndentSize": 8,
-  "TabSize": 8,
-  "IndentStyle": 2,
-  "NewLineCharacter": "/* \n */",
+  "IndentSize": 4,
+  "TabSize": 4,
+  "IndentStyle": 0,
+  "NewLineCharacter": "\n",
   "ConvertTabsToSpaces": false,
   "InsertSpaceAfterCommaDelimiter": false,
   "InsertSpaceAfterSemicolonInForStatements": false,

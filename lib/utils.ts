@@ -11,6 +11,7 @@ export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
     return {
         IndentSize: 4,
         TabSize: 4,
+        IndentStyle: ts.IndentStyle.Smart,
         NewLineCharacter: '\r\n',
         ConvertTabsToSpaces: true,
         InsertSpaceAfterCommaDelimiter: true,

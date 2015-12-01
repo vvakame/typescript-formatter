@@ -29,6 +29,8 @@ interface TsfmtSettings {
     placeOpenBraceOnNewLineForControlBlocks?: boolean;
     // from EditorOptions
     indentSize?: number;
+    // 0, 1, 2 or None, Block, Smart
+    indentStyle?: number | string;
     tabSize?: number;
     newLineCharacter?: string;
     convertTabsToSpaces?: boolean;
@@ -77,6 +79,11 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     }
     if (typeof config.indentSize === "number") {
         formatOptions.IndentSize = config.indentSize;
+    }
+    if (typeof config.indentStyle === "number") {
+        formatOptions.IndentStyle = config.indentStyle as number;
+    } else if (typeof config.indentStyle === "string") {
+        formatOptions.IndentStyle = (ts.IndentStyle as any)[config.indentStyle] as number;
     }
     if (typeof config.tabSize === "number") {
         formatOptions.TabSize = config.tabSize;

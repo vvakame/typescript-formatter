@@ -1,6 +1,7 @@
 {
   "IndentSize": 4,
   "TabSize": 4,
+  "IndentStyle": 2,
   "NewLineCharacter": "\r\n",
   "ConvertTabsToSpaces": true,
   "InsertSpaceAfterCommaDelimiter": false,
