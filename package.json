@@ -24,7 +24,7 @@
     "url": "https://github.com/vvakame/typescript-formatter/issues"
   },
   "engines": {
-    "node": ">= 0.12.0"
+    "node": ">= 4.2.0"
   },
   "directories": {
     "example": "example",
@@ -33,7 +33,6 @@
   "dependencies": {
     "commandpost": "1.0.0",
     "editorconfig": "0.13.2",
-    "es6-promise": "3.0.2",
     "glob-expand": "0.1.0"
   },
   "peerDependencies": {

@@ -386,11 +386,6 @@
       "from": "csproj2ts@0.0.6",
       "resolved": "https://registry.npmjs.org/csproj2ts/-/csproj2ts-0.0.6.tgz",
       "dependencies": {
-        "es6-promise": {
-          "version": "2.3.0",
-          "from": "es6-promise@>=2.0.1 <3.0.0",
-          "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-2.3.0.tgz"
-        },
         "lodash": {
           "version": "3.10.1",
           "from": "lodash@>=3.3.1 <4.0.0",
@@ -528,9 +523,9 @@
       "resolved": "https://registry.npmjs.org/error-ex/-/error-ex-1.3.0.tgz"
     },
     "es6-promise": {
-      "version": "3.0.2",
-      "from": "es6-promise@3.0.2",
-      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.0.2.tgz"
+      "version": "2.3.0",
+      "from": "es6-promise@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-2.3.0.tgz"
     },
     "escallmatch": {
       "version": "1.4.2",
@@ -893,14 +888,7 @@
     "grunt-dtsm": {
       "version": "0.2.9",
       "from": "grunt-dtsm@0.2.9",
-      "resolved": "https://registry.npmjs.org/grunt-dtsm/-/grunt-dtsm-0.2.9.tgz",
-      "dependencies": {
-        "es6-promise": {
-          "version": "2.3.0",
-          "from": "es6-promise@>=2.0.0 <3.0.0",
-          "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-2.3.0.tgz"
-        }
-      }
+      "resolved": "https://registry.npmjs.org/grunt-dtsm/-/grunt-dtsm-0.2.9.tgz"
     },
     "grunt-exec": {
       "version": "0.4.6",

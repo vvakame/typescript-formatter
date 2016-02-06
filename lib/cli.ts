@@ -1,4 +1,8 @@
-require("es6-promise").polyfill();
+try {
+    // cackward compatibility for node v0.12
+    require("es6-promise").polyfill();
+} catch (e) {
+}
 try {
     require("typescript");
 } catch (e) {

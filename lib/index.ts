@@ -60,7 +60,7 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
         let content = fs.readFileSync(fileName).toString();
         return processString(fileName, content, opts);
     });
-    return Promise.all(promises).then(resultList=> {
+    return Promise.all(promises).then(resultList => {
         resultList.forEach(result => {
             resultMap[result.fileName] = result;
         });

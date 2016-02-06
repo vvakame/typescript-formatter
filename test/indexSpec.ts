@@ -96,8 +96,8 @@ describe("tsfmt test", () => {
     describe("processFiles function", () => {
         var fileNames = collectFileName(fixtureDir);
         fileNames
-            .filter(fileName=> /\.ts$/.test(fileName))
-            .forEach(fileName=> {
+            .filter(fileName => /\.ts$/.test(fileName))
+            .forEach(fileName => {
                 var ignoreList = [
                     "./test/fixture/editorconfig/space/main.ts", // TypeScript ignore indentSize: 8
                     "./test/fixture/tsfmt/a/main.ts", // TypeScript ignore indentSize: 1
@@ -196,7 +196,7 @@ describe("tsfmt test", () => {
                     editorconfig: true,
                     tsfmt: true
                 })
-                .then(result=> {
+                .then(result => {
                     assert(result !== null);
                     assert(result.error === false);
                     assert(result.dest === "class Sample { getString(): string { return \"hi!\"; } }\r\n");
