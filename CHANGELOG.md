@@ -1,3 +1,15 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/vvakame/typescript-formatter/compare/1.2.0...v2.0.0) (2016-02-06)
+
+
+### Features
+
+* **tsfmt:** remove es6-promise from dependencies. tsfmt supports after latest LTS of node.js ([19a7f44](https://github.com/vvakame/typescript-formatter/commit/19a7f44))
+* **tsfmt:** remove typescript from dependencies and add to peerDependencies refs #30 ([b8a58c6](https://github.com/vvakame/typescript-formatter/commit/b8a58c6))
+* **tsfmt:** update dependencies. support TypeScript 1.7.5 ([bb9cd81](https://github.com/vvakame/typescript-formatter/commit/bb9cd81))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/vvakame/typescript-formatter/compare/1.1.0...v1.2.0) (2015-12-01)
 
