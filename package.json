@@ -50,8 +50,8 @@
     "grunt-ts": "5.3.2",
     "grunt-tsconfig-update": "0.0.1",
     "grunt-tslint": "3.0.1",
-    "load-grunt-tasks": "3.3.0",
-    "mocha": "2.3.4",
+    "load-grunt-tasks": "3.4.0",
+    "mocha": "2.4.5",
     "power-assert": "1.2.0",
     "tslint": "3.3.0",
     "typescript": "1.7.5"
