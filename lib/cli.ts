@@ -1,4 +1,9 @@
 require("es6-promise").polyfill();
+try {
+    require("typescript");
+} catch (e) {
+    console.error("typescript is required. please try 'npm install -g typescript'\n");
+}
 
 import * as fs from "fs";
 import * as commandpost from "commandpost";

@@ -34,8 +34,10 @@
     "commandpost": "1.0.0",
     "editorconfig": "0.13.2",
     "es6-promise": "3.0.2",
-    "glob-expand": "0.1.0",
-    "typescript": "^1.7.5"
+    "glob-expand": "0.1.0"
+  },
+  "peerDependencies": {
+    "typescript": "^1.0.0 || >=1.8.0-dev || >=1.9.0-dev"
   },
   "devDependencies": {
     "espower-loader": "1.0.0",
@@ -51,6 +53,7 @@
     "load-grunt-tasks": "3.3.0",
     "mocha": "2.3.4",
     "power-assert": "1.2.0",
-    "tslint": "3.3.0"
+    "tslint": "3.3.0",
+    "typescript": "1.7.5"
   }
 }
