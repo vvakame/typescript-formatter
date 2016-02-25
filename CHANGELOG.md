@@ -1,3 +1,17 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/vvakame/typescript-formatter/compare/2.0.0...v2.1.0) (2016-02-25)
+
+
+### Bug Fixes
+
+* **ci:** fix Travis CI failed ([68a9c7c](https://github.com/vvakame/typescript-formatter/commit/68a9c7c))
+
+### Features
+
+* **tsfmt:** support typescript@1.8.2. add `insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces`. ([611fee0](https://github.com/vvakame/typescript-formatter/commit/611fee0))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/vvakame/typescript-formatter/compare/1.2.0...v2.0.0) (2016-02-06)
 
