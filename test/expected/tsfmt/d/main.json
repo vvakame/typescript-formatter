@@ -2,7 +2,7 @@
   "IndentSize": 4,
   "TabSize": 4,
   "IndentStyle": 2,
-  "NewLineCharacter": "\r",
+  "NewLineCharacter": "\r\n",
   "ConvertTabsToSpaces": true,
   "InsertSpaceAfterCommaDelimiter": true,
   "InsertSpaceAfterSemicolonInForStatements": true,
@@ -11,7 +11,7 @@
   "InsertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
   "InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
-  "InsertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
+  "InsertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
   "PlaceOpenBraceOnNewLineForFunctions": false,
   "PlaceOpenBraceOnNewLineForControlBlocks": false
 }

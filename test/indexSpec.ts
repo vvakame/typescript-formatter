@@ -3,7 +3,7 @@
 
 require("es6-promise").polyfill();
 
-import assert from "power-assert";
+import * as assert from "power-assert";
 
 import fs = require("fs");
 import path = require("path");

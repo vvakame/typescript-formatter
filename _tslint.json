@@ -36,7 +36,10 @@
     "no-empty": true,
     "no-eval": true,
     "no-string-literal": false,
-    "no-trailing-comma": true,
+    "trailing-comma": [true, {
+      "singleline": "never",
+      "multiline": "always"
+    }],
     "no-trailing-whitespace": true,
     "no-unreachable": true,
     "no-unused-expression": false,

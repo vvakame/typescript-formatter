@@ -52,7 +52,7 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
                 message: `${fileName} does not exist. process abort.\n`,
                 error: true,
                 src: "",
-                dest: ""
+                dest: "",
             };
             return Promise.resolve(result);
         }
@@ -144,7 +144,7 @@ export function processString(fileName: string, content: string, opts: Options):
                 message: message,
                 error: error,
                 src: content,
-                dest: formattedCode
+                dest: formattedCode,
             };
             return Promise.resolve(result);
         });

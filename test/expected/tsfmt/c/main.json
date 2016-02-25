@@ -11,6 +11,7 @@
   "InsertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
   "InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
   "InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+  "InsertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
   "PlaceOpenBraceOnNewLineForFunctions": true,
   "PlaceOpenBraceOnNewLineForControlBlocks": true
 }
