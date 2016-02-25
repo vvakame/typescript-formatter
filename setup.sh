@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ISERROR=0
 
 which npm > /dev/null 2>&1
