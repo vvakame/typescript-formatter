@@ -105,7 +105,7 @@ let root = commandpost
                     tslint: tslint,
                     editorconfig: editorconfig,
                     tsfmt: tsfmt,
-                    verbose: verbose
+                    verbose: verbose,
                 })
                 .then(result => {
                     let resultMap: lib.ResultMap = {};
@@ -124,7 +124,7 @@ let root = commandpost
                     tslint: tslint,
                     editorconfig: editorconfig,
                     tsfmt: tsfmt,
-                    verbose: verbose
+                    verbose: verbose,
                 })
                 .then(showResultHandler)
                 .catch(errorHandler);

@@ -23,6 +23,8 @@ interface TsfmtSettings {
     // かっこ内が空でない場合に始め括弧の後ろと終わりカッコの前にスペースを挿入する
     insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets?: boolean;
+    // template string literalsの括弧内にスペースを挿入する
+    insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces?: boolean;
     // 新しい行に関数の始め中括弧を配置する
     placeOpenBraceOnNewLineForFunctions?: boolean;
     // 新しい行にコントロールブロックの始め中括弧を配置する
@@ -70,6 +72,9 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets === "boolean") {
         formatOptions.InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets;
+    }
+    if (typeof config.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces === "boolean") {
+        formatOptions.InsertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = config.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces;
     }
     if (typeof config.placeOpenBraceOnNewLineForFunctions === "boolean") {
         formatOptions.PlaceOpenBraceOnNewLineForFunctions = config.placeOpenBraceOnNewLineForFunctions;

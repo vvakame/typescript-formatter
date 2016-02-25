@@ -101,6 +101,6 @@ function createDefaultAdditionalFormatCodeOptions(): AdditionalFormatOptions {
     "use strict";
 
     return {
-        noConsecutiveBlankLines: false
+        noConsecutiveBlankLines: false,
     };
 }
