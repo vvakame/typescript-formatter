@@ -95,6 +95,7 @@ now `indentSize` parameter is ignored. it is TypeScript compiler matters.
   "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+  "insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
   "placeOpenBraceOnNewLineForFunctions": false,
   "placeOpenBraceOnNewLineForControlBlocks": false
 }
