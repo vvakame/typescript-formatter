@@ -125,7 +125,7 @@ insert_final_newline = true
 ```json
 {
   "rules": {
-    "indent": [true, 4]
+    "indent": [true, 4],
     "whitespace": [true,
       "check-branch",
       "check-operator",
