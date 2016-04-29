@@ -154,7 +154,7 @@ $ tree -a
 ```
 
 1. exec `$ tsfmt -r foo/bar/buzz.ts foo/fuga/piyo.ts`
-2. for foo/bar/buzz.ts, read foo/tsfmt.json and foo/bar/.editorcondig and ./tslint.json
+2. for foo/bar/buzz.ts, read foo/tsfmt.json and foo/bar/.editorconfig and ./tslint.json
 3. for foo/fuga/piyo.ts, read foo/fuga/tsfmt.json and ./tslint.json
 
 ## Change log
