@@ -1,3 +1,13 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/vvakame/typescript-formatter/compare/2.1.0...v2.2.0) (2016-05-14)
+
+
+### Bug Fixes
+
+* **tsfmt:** check rules.indent[1] is "tabs" fromt tslint fixes [#42](https://github.com/vvakame/typescript-formatter/issues/42) ([450c467](https://github.com/vvakame/typescript-formatter/commit/450c467)), closes [#42](https://github.com/vvakame/typescript-formatter/issues/42)
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/vvakame/typescript-formatter/compare/2.0.0...v2.1.0) (2016-02-25)
 
