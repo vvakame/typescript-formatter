@@ -47,8 +47,12 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     if (!config.rules) {
         return formatOptions;
     }
-    if (config.rules.indent && config.rules.indent[0] && config.rules.indent[1] === "spaces") {
-        formatOptions.ConvertTabsToSpaces = true;
+    if (config.rules.indent && config.rules.indent[0]) {
+        if (config.rules.indent[1] === "spaces") {
+            formatOptions.ConvertTabsToSpaces = true;
+        } else if (config.rules.indent[1] === "tabs") {
+            formatOptions.ConvertTabsToSpaces = false;
+        }
     }
     if (config.rules.whitespace && config.rules.whitespace[0]) {
         for (let p in config.rules.whitespace) {
