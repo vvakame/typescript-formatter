@@ -1,3 +1,12 @@
+<a name="2.2.1"></a>
+## [2.2.1](https://github.com/vvakame/typescript-formatter/compare/2.2.0...v2.2.1) (2016-06-30)
+
+### Features
+
+* **tsfmt:** Add 'next' support for TypeScript 2.0.0-dev. ([35a371c](https://github.com/vvakame/typescript-formatter/commit/35a371c))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/vvakame/typescript-formatter/compare/2.1.0...v2.2.0) (2016-05-14)
 
