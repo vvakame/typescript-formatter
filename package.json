@@ -37,7 +37,7 @@
     "glob-expand": "^0.1.0"
   },
   "peerDependencies": {
-    "typescript": "^1.0.0 || >=1.8.0-dev || >=1.9.0-dev"
+    "typescript": "^1.0.0 || >=1.8.0-dev || >=1.9.0-dev || >=2.0.0-dev"
   },
   "devDependencies": {
     "dtsm": "^1.1.0",
