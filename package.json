@@ -34,7 +34,7 @@
   "dependencies": {
     "commandpost": "^1.0.0",
     "editorconfig": "^0.13.2",
-    "glob-expand": "^0.1.0"
+    "glob-expand": "^0.2.0"
   },
   "peerDependencies": {
     "typescript": "^1.0.0 || >=1.8.0-dev || >=1.9.0-dev || >=2.0.0-dev"
@@ -47,15 +47,15 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-conventional-changelog": "^6.1.0",
     "grunt-dtsm": "^1.0.0",
-    "grunt-exec": "^0.4.7",
+    "grunt-exec": "^1.0.0",
     "grunt-mocha-test": "^0.12.7",
-    "grunt-ts": "^5.5.0-beta.2",
+    "grunt-ts": "^5.5.1",
     "grunt-tsconfig-update": "^0.0.1",
-    "grunt-tslint": "^3.1.0",
+    "grunt-tslint": "^3.1.1",
     "load-grunt-tasks": "^3.5.0",
-    "mocha": "^2.4.5",
+    "mocha": "^2.5.3",
     "power-assert": "^1.2.0",
-    "tslint": "^3.5.0",
+    "tslint": "^3.12.1",
     "typescript": "^1.8.10"
   }
 }
