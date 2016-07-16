@@ -1,3 +1,13 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/vvakame/typescript-formatter/compare/2.2.1...v2.3.0) (2016-07-16)
+
+
+### Features
+
+* **tsfmt:** support TypeScript 2.0.0 and next ([38dc72e](https://github.com/vvakame/typescript-formatter/commit/38dc72e))
+
+
+
 <a name="2.2.1"></a>
 ## [2.2.1](https://github.com/vvakame/typescript-formatter/compare/2.2.0...v2.2.1) (2016-06-30)
 
