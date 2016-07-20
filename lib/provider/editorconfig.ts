@@ -1,12 +1,10 @@
-/// <reference path="../typings/editorconfig.d.ts" />
-
 "use strict";
 
 import * as ts from "typescript";
 
 import * as editorconfig from "editorconfig";
 
-import {Options} from "../";
+import { Options } from "../";
 
 let emitBaseDirWarning = false;
 

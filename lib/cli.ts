@@ -18,7 +18,7 @@ import * as path from "path";
 import * as expand from "glob-expand";
 
 import * as lib from "./";
-import {getConfigFileName} from "./utils";
+import { getConfigFileName } from "./utils";
 
 let packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 
@@ -53,7 +53,7 @@ let root = commandpost
     .action((opts, args) => {
         let replace = !!opts.replace;
         let verify = !!opts.verify;
-        let baseDir = opts.baseDir ? opts.baseDir[0] : null;
+        let baseDir = opts.baseDir ? opts.baseDir[0] : void 0;
         let stdin = !!opts.stdin;
         let tsconfig = !!opts.tsconfig;
         let tslint = !!opts.tslint;
@@ -75,7 +75,7 @@ let root = commandpost
         }
 
         if (files.length === 0 && !opts.stdin) {
-            process.stdout.write(root.helpText() + '\n');
+            process.stdout.write(root.helpText() + "\n");
             return;
         }
 
@@ -154,7 +154,7 @@ function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
                 }
             });
     }
-    return null;
+    return Promise.resolve(null);
 }
 
 function errorHandler(err: any): Promise<any> {

@@ -12,7 +12,7 @@ export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
         IndentSize: 4,
         TabSize: 4,
         IndentStyle: ts.IndentStyle.Smart,
-        NewLineCharacter: '\r\n',
+        NewLineCharacter: "\r\n",
         ConvertTabsToSpaces: true,
         InsertSpaceAfterCommaDelimiter: true,
         InsertSpaceAfterSemicolonInForStatements: true,
@@ -27,7 +27,7 @@ export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
     };
 }
 
-export function getConfigFileName(baseDir: string, configFileName: string): string {
+export function getConfigFileName(baseDir: string, configFileName: string): string | null {
     "use strict";
 
     let configFilePath = path.resolve(baseDir, configFileName);

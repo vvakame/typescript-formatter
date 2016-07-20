@@ -5,8 +5,8 @@ import * as ts from "typescript";
 import * as path from "path";
 import * as fs from "fs";
 
-import {Options} from "../";
-import {getConfigFileName} from "../utils";
+import { Options } from "../";
+import { getConfigFileName } from "../utils";
 
 interface TslintSettings {
     rules: {
@@ -75,7 +75,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     return formatOptions;
 }
 
-export function postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string {
+export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatOptions: ts.FormatCodeOptions): string {
     "use strict";
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));

@@ -1,7 +1,7 @@
 "use strict";
 
 import * as ts from "typescript";
-import {createDefaultFormatCodeOptions} from "./utils";
+import { createDefaultFormatCodeOptions } from "./utils";
 
 // from https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter
 
