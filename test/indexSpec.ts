@@ -202,13 +202,25 @@ describe("tsfmt test", () => {
     });
 
     describe("CLI test", () => {
-        it("should reformat files specified in tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli') }).then(result => {
+        it("should reformat files specified at files in tsconfig.json", () => {
+            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli/files') }).then(result => {
                 assert.equal(result.status, 0);
                 assert.equal(result.stdout.trim(), `
 class TestCLI {
     method() {
 
+    }
+}
+`.trim().replace(/\n/g, "\r\n"));
+            });
+        });
+
+        it("should reformat files specified at include, exclude in tsconfig.json", () => {
+            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli/includeExclude') }).then(result => {
+                assert.equal(result.status, 0);
+                assert.equal(result.stdout.trim(), `
+export class TestCLI {
+    method() {
     }
 }
 `.trim().replace(/\n/g, "\r\n"));

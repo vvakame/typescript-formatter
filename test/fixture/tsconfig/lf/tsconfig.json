@@ -1,5 +1,8 @@
 {
 	"compilerOptions": {
 		"newLine": "LF"
-	}
+	},
+	"files": [
+		"main.ts"
+	]
 }

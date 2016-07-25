@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": true,
+        "removeComments": false,
+        "noLib": false
+    },
+    "include": [
+        "./*.ts"
+    ],
+    "exclude": [
+        "./exclude.ts",
+        "./*.d.ts"
+    ]
+}

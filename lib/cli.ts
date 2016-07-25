@@ -13,12 +13,9 @@ try {
 
 import * as fs from "fs";
 import * as commandpost from "commandpost";
-import * as path from "path";
-
-import * as expand from "glob-expand";
 
 import * as lib from "./";
-import { getConfigFileName } from "./utils";
+import { getConfigFileName, readFilesFromTsconfig } from "./utils";
 
 let packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 
@@ -169,19 +166,4 @@ function errorHandler(err: any): Promise<any> {
         process.exit(1);
         return null;
     });
-}
-
-function readFilesFromTsconfig(configPath: string) {
-    "use strict";
-
-    let tsconfigDir = path.dirname(configPath);
-    let tsconfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
-    if (tsconfig.files) {
-        let files: string[] = tsconfig.files;
-        return files.map(filePath => path.resolve(tsconfigDir, filePath));
-    } else if (tsconfig.filesGlob) {
-        return expand({ filter: "isFile", cwd: tsconfigDir }, tsconfig.filesGlob);
-    } else {
-        throw new Error(`No "files" or "filesGlob" section present in tsconfig.json`);
-    }
 }
