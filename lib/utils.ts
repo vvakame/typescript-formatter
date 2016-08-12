@@ -55,7 +55,7 @@ export function readFilesFromTsconfig(configPath: string): string[] {
     }
 
     let tsconfigDir = path.dirname(configPath);
-    let tsconfig: TsConfigJSON = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    let tsconfig: TsConfigJSON = parseJSON(fs.readFileSync(configPath, "utf-8"));
     if (tsconfig.files) {
         let files: string[] = tsconfig.files;
         return files.map(filePath => path.resolve(tsconfigDir, filePath));
@@ -98,4 +98,13 @@ export function readFilesFromTsconfig(configPath: string): string[] {
             return { files: [], directories: [] };
         });
     }
+}
+
+export function parseJSON(jsonText: string): any {
+    let result = ts.parseConfigFileTextToJson("tmp.json", jsonText);
+    if (result.error) {
+        throw new Error("JSON parse error");
+    }
+
+    return result.config;
 }

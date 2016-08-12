@@ -6,7 +6,7 @@ import * as path from "path";
 import * as fs from "fs";
 
 import { Options } from "../";
-import { getConfigFileName } from "../utils";
+import { getConfigFileName, parseJSON } from "../utils";
 
 interface TslintSettings {
     rules: {
@@ -43,7 +43,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
         console.log(`read ${configFileName} for ${fileName}`);
     }
 
-    let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    let config: TslintSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
         return formatOptions;
     }
@@ -84,7 +84,7 @@ export function postProcess(fileName: string, formattedCode: string, opts: Optio
         return formattedCode;
     }
 
-    let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    let config: TslintSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
         return formattedCode;
     }

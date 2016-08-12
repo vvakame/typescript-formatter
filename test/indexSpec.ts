@@ -7,7 +7,7 @@ import path = require("path");
 import childProcess = require("child_process");
 import stream = require("stream");
 
-import lib = require("../lib/index");
+import lib = require("../lib/");
 
 function collectFileName(dirName: string): string[] {
     let fileName: string[] = [];
@@ -138,7 +138,7 @@ describe("tsfmt test", () => {
                                 fs.writeFileSync(expectedOptionsFileName, JSON.stringify(result.options, null, 2));
                             }
 
-                            let expectedOptions = JSON.parse(fs.readFileSync(expectedOptionsFileName, "utf-8"));
+                            let expectedOptions = lib.parseJSON(fs.readFileSync(expectedOptionsFileName, "utf-8"));
                             assert.deepEqual(expectedOptions, result.options);
 
                             let tslintConfigName = path.dirname(fileName) + "/tslint.json";

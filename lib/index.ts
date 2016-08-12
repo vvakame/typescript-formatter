@@ -2,7 +2,9 @@
 
 import * as ts from "typescript";
 import formatter from "./formatter";
-import { createDefaultFormatCodeOptions } from "./utils";
+import { createDefaultFormatCodeOptions, parseJSON } from "./utils";
+
+export { parseJSON };
 
 import * as fs from "fs";
 
