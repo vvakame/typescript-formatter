@@ -36,7 +36,7 @@
     "glob-expand": "^0.2.0"
   },
   "peerDependencies": {
-    "typescript": "^1.0.0 || ^2.0.0 || >=2.1.0-dev"
+    "typescript": "^2.0.0 || >=2.1.0-dev"
   },
   "devDependencies": {
     "@types/glob-expand": "^0.0.29",
