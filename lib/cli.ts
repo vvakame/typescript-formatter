@@ -133,7 +133,6 @@ commandpost
     .catch(errorHandler);
 
 function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
-    "use strict";
 
     let hasError = Object.keys(resultMap).filter(fileName => resultMap[fileName].error).length !== 0;
     if (hasError) {
@@ -155,7 +154,6 @@ function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
 }
 
 function errorHandler(err: any): Promise<any> {
-    "use strict";
 
     if (err instanceof Error) {
         console.error(err.stack);

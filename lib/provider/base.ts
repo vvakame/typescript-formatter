@@ -1,5 +1,3 @@
-"use strict";
-
 import * as ts from "typescript";
 
 import * as path from "path";
@@ -39,8 +37,6 @@ interface TsfmtSettings {
 }
 
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
-    "use strict";
-
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tsfmt.json");
     if (!configFileName) {

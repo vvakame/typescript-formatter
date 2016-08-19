@@ -1,5 +1,3 @@
-"use strict";
-
 import * as ts from "typescript";
 import formatter from "./formatter";
 import { createDefaultFormatCodeOptions, parseJSON } from "./utils";
@@ -43,7 +41,6 @@ export interface Result {
 }
 
 export function processFiles(files: string[], opts: Options): Promise<ResultMap> {
-    "use strict";
 
     let resultMap: ResultMap = {};
     let promises = files.map(fileName => {
@@ -71,7 +68,6 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
 }
 
 export function processStream(fileName: string, input: NodeJS.ReadableStream, opts: Options): Promise<Result> {
-    "use strict";
 
     input.setEncoding("utf8");
 
@@ -89,7 +85,6 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 }
 
 export function processString(fileName: string, content: string, opts: Options): Promise<Result> {
-    "use strict";
 
     let formatOptions = createDefaultFormatCodeOptions();
     let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];

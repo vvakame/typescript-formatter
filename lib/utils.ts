@@ -1,5 +1,3 @@
-"use strict";
-
 import * as ts from "typescript";
 
 import * as expand from "glob-expand";
@@ -8,7 +6,6 @@ import * as fs from "fs";
 import * as path from "path";
 
 export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
-    "use strict";
 
     return {
         IndentSize: 4,
@@ -30,7 +27,6 @@ export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
 }
 
 export function getConfigFileName(baseDir: string, configFileName: string): string | null {
-    "use strict";
 
     let configFilePath = path.resolve(baseDir, configFileName);
     if (fs.existsSync(configFilePath)) {
@@ -45,7 +41,6 @@ export function getConfigFileName(baseDir: string, configFileName: string): stri
 }
 
 export function readFilesFromTsconfig(configPath: string): string[] {
-    "use strict";
 
     interface TsConfigJSON {
         files?: string[];
