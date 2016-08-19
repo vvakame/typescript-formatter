@@ -2,8 +2,16 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
+        "lib": [
+            "es2015"
+        ],
         "noImplicitAny": true,
-        "rootDir": ".",
+        "strictNullChecks": true,
+        "noEmitOnError": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "sourceMap": false,
         "listFiles": true
     },

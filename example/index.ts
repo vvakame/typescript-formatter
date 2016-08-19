@@ -5,6 +5,7 @@ tsfmt
 	dryRun: true,
 replace: false,
 verify: false,
+  tsconfig: true,
 	tslint: true,
 editorconfig: true,
 	tsfmt: true
