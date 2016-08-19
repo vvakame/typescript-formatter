@@ -12,9 +12,9 @@
   "author": "vvakame+dev@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "typescript-formatter": "^3.0.0"
+    "typescript-formatter": "^3.0.0",
+    "typescript": "^2.0.0"
   },
   "devDependencies": {
-    "typescript": "^2.0.0"
   }
 }
