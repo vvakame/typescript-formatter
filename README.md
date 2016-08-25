@@ -1,6 +1,6 @@
 # TypeScript Formatter (tsfmt) [![Build Status](https://travis-ci.org/vvakame/typescript-formatter.svg)](https://travis-ci.org/vvakame/typescript-formatter) [![Dependency Status](https://david-dm.org/vvakame/typescript-formatter.svg?theme=shields.io)](https://david-dm.org/vvakame/typescript-formatter)
 
-A TypeScript code formatter powered by TypeScript Compiler Service.
+A TypeScript code formatter powered by [TypeScript Compiler Service](https://github.com/Microsoft/TypeScript/tree/master/src/services/formatting)).
 
 ```bash
 $ tsfmt --help
