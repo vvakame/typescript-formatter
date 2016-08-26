@@ -1,6 +1,6 @@
 # TypeScript Formatter (tsfmt) [![Build Status](https://travis-ci.org/vvakame/typescript-formatter.svg)](https://travis-ci.org/vvakame/typescript-formatter) [![Dependency Status](https://david-dm.org/vvakame/typescript-formatter.svg?theme=shields.io)](https://david-dm.org/vvakame/typescript-formatter)
 
-A TypeScript code formatter powered by [TypeScript Compiler Service](https://github.com/Microsoft/TypeScript/tree/master/src/services/formatting)).
+A TypeScript code formatter powered by [TypeScript Compiler Service](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter)).
 
 ```bash
 $ tsfmt --help
@@ -80,7 +80,7 @@ now `indentSize` parameter is ignored. it is TypeScript compiler matters.
 
 ## Read Settings From Files
 
-1st. Read settings from tsfmt.json. Bellow are the example with [default values](https://github.com/vvakame/typescript-formatter/blob/master/lib/utils.ts#L11-L27):
+1st. Read settings from tsfmt.json. Bellow are the example with [default values](https://github.com/vvakame/typescript-formatter/blob/master/lib/utils.ts):
 
 ```json
 {
