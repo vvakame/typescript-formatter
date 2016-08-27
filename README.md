@@ -80,7 +80,7 @@ now `indentSize` parameter is ignored. it is TypeScript compiler matters.
 
 ## Read Settings From Files
 
-1st. Read settings from tsfmt.json. Bellow are the example with [default values](https://github.com/vvakame/typescript-formatter/blob/master/lib/utils.ts):
+1st. Read settings from tsfmt.json. Bellow is the example with [default values](https://github.com/vvakame/typescript-formatter/blob/master/lib/utils.ts):
 
 ```json
 {
