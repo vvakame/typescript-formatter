@@ -102,7 +102,17 @@ now `indentSize` parameter is ignored. it is TypeScript compiler matters.
 
 ```
 
-2nd. Read settings from .editorconfig ([editorconfig](http://editorconfig.org/))
+2nd. Read settings from tsconfig.json ([tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html))
+
+```text
+{
+  "compilerOptions": {
+    "newLine": "LF"
+  }
+}
+```
+
+3rd. Read settings from .editorconfig ([editorconfig](http://editorconfig.org/))
 
 ```text
 # EditorConfig is awesome: http://EditorConfig.org
@@ -120,7 +130,7 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 ```
 
-3rd. Read settings from tslint.json ([tslint](https://www.npmjs.org/package/tslint))
+4th. Read settings from tslint.json ([tslint](https://www.npmjs.org/package/tslint))
 
 ```json
 {
