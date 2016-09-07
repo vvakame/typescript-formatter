@@ -51,7 +51,9 @@ export function readFilesFromTsconfig(configPath: string): string[] {
 
     let tsconfigDir = path.dirname(configPath);
     let tsconfig: TsConfigJSON = parseJSON(fs.readFileSync(configPath, "utf-8"));
-    if (tsconfig.files) {
+    if (tsconfig.files && (tsconfig.include || tsconfig.exclude)) {
+        return tsconfig.files.concat(tsMatchFiles(tsconfig.exclude || [], tsconfig.include || []));
+    } else if (tsconfig.files) {
         let files: string[] = tsconfig.files;
         return files.map(filePath => path.resolve(tsconfigDir, filePath));
     } else if (tsconfig.filesGlob) {
