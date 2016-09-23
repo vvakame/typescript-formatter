@@ -1,3 +1,14 @@
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/vvakame/typescript-formatter/compare/3.0.0...v3.0.1) (2016-09-23)
+
+[TypeScript 2.0.3 released](https://blogs.msdn.microsoft.com/typescript/2016/09/22/announcing-typescript-2-0/)! yay!
+
+### Features
+
+* **example:** update example code ([3b365be](https://github.com/vvakame/typescript-formatter/commit/3b365be))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/vvakame/typescript-formatter/compare/2.3.0...v3.0.0) (2016-08-19)
 
