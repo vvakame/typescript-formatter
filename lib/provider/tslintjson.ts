@@ -1,12 +1,10 @@
-"use strict";
-
 import * as ts from "typescript";
 
 import * as path from "path";
 import * as fs from "fs";
 
-import {Options} from "../";
-import {getConfigFileName} from "../utils";
+import { Options } from "../";
+import { getConfigFileName, parseJSON } from "../utils";
 
 interface TslintSettings {
     rules: {
@@ -32,7 +30,6 @@ export interface AdditionalFormatOptions {
 }
 
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
-    "use strict";
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tslint.json");
@@ -43,7 +40,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
         console.log(`read ${configFileName} for ${fileName}`);
     }
 
-    let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    let config: TslintSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
         return formatOptions;
     }
@@ -75,8 +72,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     return formatOptions;
 }
 
-export function postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string {
-    "use strict";
+export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatOptions: ts.FormatCodeOptions): string {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tslint.json");
@@ -84,7 +80,7 @@ export function postProcess(fileName: string, formattedCode: string, opts: Optio
         return formattedCode;
     }
 
-    let config: TslintSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    let config: TslintSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
         return formattedCode;
     }
@@ -102,7 +98,6 @@ export function postProcess(fileName: string, formattedCode: string, opts: Optio
 }
 
 function createDefaultAdditionalFormatCodeOptions(): AdditionalFormatOptions {
-    "use strict";
 
     return {
         noConsecutiveBlankLines: false,

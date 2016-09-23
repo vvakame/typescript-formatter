@@ -1,3 +1,15 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/vvakame/typescript-formatter/compare/2.3.0...v3.0.0) (2016-08-19)
+
+
+### Features
+
+* **tsfmt:** support comments in tsconfig.json & tsfmt.json & tslint.json ([5a4fdfd](https://github.com/vvakame/typescript-formatter/commit/5a4fdfd))
+* **tsfmt:** support include, exclude properties [@tsconfig](https://github.com/tsconfig).json when using --replace options [#48](https://github.com/vvakame/typescript-formatter/issues/48) ([d8e71f5](https://github.com/vvakame/typescript-formatter/commit/d8e71f5))
+* **tsfmt:** update peerDependencies, remove tsc ^1.0.0 ([35c1d62](https://github.com/vvakame/typescript-formatter/commit/35c1d62))
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/vvakame/typescript-formatter/compare/2.2.1...v2.3.0) (2016-07-16)
 

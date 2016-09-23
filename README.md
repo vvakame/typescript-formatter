@@ -35,14 +35,14 @@ new Sample().hello("TypeScript");
 ```bash
 # basic. read file, output to stdout.
 $ tsfmt sample.ts
-class Sample { hello(word= "world") { return "Hello, " + word; } }
+class Sample { hello(word = "world") { return "Hello, " + word; } }
 new Sample().hello("TypeScript");
 ```
 
 ```bash
 # from stdin. read from stdin, output to stdout.
 $ cat sample.ts | tsfmt --stdin
-class Sample { hello(word= "world") { return "Hello, " + word; } }
+class Sample { hello(word = "world") { return "Hello, " + word; } }
 new Sample().hello("TypeScript");
 ```
 
@@ -51,7 +51,7 @@ new Sample().hello("TypeScript");
 $ tsfmt -r sample.ts
 replaced sample.ts
 $ cat sample.ts
-class Sample { hello(word= "world") { return "Hello, " + word; } }
+class Sample { hello(word = "world") { return "Hello, " + word; } }
 new Sample().hello("TypeScript");
 ```
 
@@ -167,6 +167,6 @@ $ tree -a
 2. for foo/bar/buzz.ts, read foo/tsfmt.json and foo/bar/.editorconfig and ./tslint.json
 3. for foo/fuga/piyo.ts, read foo/fuga/tsfmt.json and ./tslint.json
 
-## Change log
+## Change Log
 
 See [CHANGELOG](https://github.com/vvakame/typescript-formatter/blob/master/CHANGELOG.md)

@@ -11,17 +11,8 @@ module.exports = function (grunt) {
 			}
 		},
 
-		ts: {
-			default: {
-				tsconfig: {
-					tsconfig: "./tsconfig.json",
-					updateFiles:false
-				}
-			}
-		},
-		tsconfig: {
-			main: {
-			}
+		exec: {
+			tsc: "tsc -p ./"
 		},
 		tslint: {
 			options: {
@@ -36,19 +27,7 @@ module.exports = function (grunt) {
 				]
 			}
 		},
-		dtsm: {
-			main: {
-				options: {
-					config: "dtsm.json"
-				}
-			}
-		},
 		clean: {
-			typings: {
-				src: [
-					"typings/"
-				]
-			},
 			clientScript: {
 				src: [
 					// client
@@ -108,12 +87,8 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask(
-		'setup',
-		['clean:typings', 'dtsm']);
-
-	grunt.registerTask(
 		'default',
-		['clean:clientScript', 'tsconfig', 'ts', 'tslint']);
+		['clean:clientScript', 'exec:tsc', 'tslint']);
 
 	grunt.registerTask(
 		'test',

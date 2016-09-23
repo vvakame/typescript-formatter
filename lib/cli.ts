@@ -13,12 +13,9 @@ try {
 
 import * as fs from "fs";
 import * as commandpost from "commandpost";
-import * as path from "path";
-
-import * as expand from "glob-expand";
 
 import * as lib from "./";
-import {getConfigFileName} from "./utils";
+import { getConfigFileName, readFilesFromTsconfig } from "./utils";
 
 let packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
 
@@ -53,7 +50,7 @@ let root = commandpost
     .action((opts, args) => {
         let replace = !!opts.replace;
         let verify = !!opts.verify;
-        let baseDir = opts.baseDir ? opts.baseDir[0] : null;
+        let baseDir = opts.baseDir ? opts.baseDir[0] : void 0;
         let stdin = !!opts.stdin;
         let tsconfig = !!opts.tsconfig;
         let tslint = !!opts.tslint;
@@ -75,7 +72,7 @@ let root = commandpost
         }
 
         if (files.length === 0 && !opts.stdin) {
-            process.stdout.write(root.helpText() + '\n');
+            process.stdout.write(root.helpText() + "\n");
             return;
         }
 
@@ -136,7 +133,6 @@ commandpost
     .catch(errorHandler);
 
 function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
-    "use strict";
 
     let hasError = Object.keys(resultMap).filter(fileName => resultMap[fileName].error).length !== 0;
     if (hasError) {
@@ -154,11 +150,10 @@ function showResultHandler(resultMap: lib.ResultMap): Promise<any> {
                 }
             });
     }
-    return null;
+    return Promise.resolve(null);
 }
 
 function errorHandler(err: any): Promise<any> {
-    "use strict";
 
     if (err instanceof Error) {
         console.error(err.stack);
@@ -169,19 +164,4 @@ function errorHandler(err: any): Promise<any> {
         process.exit(1);
         return null;
     });
-}
-
-function readFilesFromTsconfig(configPath: string) {
-    "use strict";
-
-    let tsconfigDir = path.dirname(configPath);
-    let tsconfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
-    if (tsconfig.files) {
-        let files: string[] = tsconfig.files;
-        return files.map(filePath => path.resolve(tsconfigDir, filePath));
-    } else if (tsconfig.filesGlob) {
-        return expand({ filter: "isFile", cwd: tsconfigDir }, tsconfig.filesGlob);
-    } else {
-        throw new Error(`No "files" or "filesGlob" section present in tsconfig.json`);
-    }
 }

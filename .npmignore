@@ -1,14 +1,10 @@
 .git/
 
-# for WebStorm
-.idea/
-
 # for npm
 node_modules/
 npm-shrinkwrap.json
 
 # for grunt
-typings/
 .tscache/
 
 # codes

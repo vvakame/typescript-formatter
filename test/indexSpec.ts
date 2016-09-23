@@ -1,6 +1,3 @@
-/// <reference path="../typings/mocha/mocha.d.ts" />
-/// <reference path="../typings/power-assert/power-assert.d.ts" />
-
 require("es6-promise").polyfill();
 
 import * as assert from "power-assert";
@@ -10,15 +7,15 @@ import path = require("path");
 import childProcess = require("child_process");
 import stream = require("stream");
 
-import lib = require("../lib/index");
+import lib = require("../lib/");
 
 function collectFileName(dirName: string): string[] {
-    var fileName: string[] = [];
+    let fileName: string[] = [];
     fs
         .readdirSync(dirName)
         .forEach((name: string) => {
-            var newName = dirName + "/" + name;
-            var stats = fs.statSync(newName);
+            let newName = dirName + "/" + name;
+            let stats = fs.statSync(newName);
             if (stats.isDirectory()) {
                 fileName = fileName.concat(collectFileName(newName));
             } else if (stats.isFile()) {
@@ -35,16 +32,16 @@ interface ExecResult {
 }
 
 function exec(cmd: string, args: string[], options: Object): Promise<ExecResult> {
-    var process = childProcess.spawn(cmd, args, options);
+    let process = childProcess.spawn(cmd, args, options);
 
-    var stdout = '';
-    var stderr = '';
+    let stdout = "";
+    let stderr = "";
 
-    process.stdout.on('data', (data: Buffer) => stdout += data.toString());
-    process.stderr.on('data', (data: Buffer) => stderr += data.toString());
+    process.stdout.on("data", (data: Buffer) => stdout += data.toString());
+    process.stderr.on("data", (data: Buffer) => stderr += data.toString());
 
-    return new Promise((resolve, reject) => {
-        process.on('exit', (status: number) => {
+    return new Promise((resolve, _reject) => {
+        process.on("exit", (status: number) => {
             resolve({
                 status: status,
                 stdout: stdout,
@@ -55,21 +52,21 @@ function exec(cmd: string, args: string[], options: Object): Promise<ExecResult>
 }
 
 function checkByTslint(configFileName: string, tsfileName: string, errorExpected: boolean): Promise<boolean> {
-    var process = childProcess.spawn("./node_modules/.bin/tslint", ["-c", configFileName, tsfileName]);
+    let process = childProcess.spawn("./node_modules/.bin/tslint", ["-c", configFileName, tsfileName]);
 
-    var stdout = '';
-    process.stdout.on('data', (data: any) => {
+    let stdout = "";
+    process.stdout.on("data", (data: any) => {
         stdout += data.toString();
     });
 
-    var stderr = '';
-    process.stderr.on('data', (data: any) => {
+    let stderr = "";
+    process.stderr.on("data", (data: any) => {
         stderr += data.toString();
     });
 
     return new Promise((resolve, reject) => {
         process.on("exit", (code: number) => {
-            var success = !code; // 0 - exit with success
+            let success = !code; // 0 - exit with success
             if (!errorExpected) {
                 // expected error
                 if (success) {
@@ -90,15 +87,15 @@ function checkByTslint(configFileName: string, tsfileName: string, errorExpected
 }
 
 describe("tsfmt test", () => {
-    var fixtureDir = "./test/fixture";
-    var expectedDir = "./test/expected";
+    let fixtureDir = "./test/fixture";
+    let expectedDir = "./test/expected";
 
     describe("processFiles function", () => {
-        var fileNames = collectFileName(fixtureDir);
+        let fileNames = collectFileName(fixtureDir);
         fileNames
             .filter(fileName => /\.ts$/.test(fileName))
             .forEach(fileName => {
-                var ignoreList = [
+                let ignoreList = [
                     "./test/fixture/editorconfig/space/main.ts", // TypeScript ignore indentSize: 8
                     "./test/fixture/tsfmt/a/main.ts", // TypeScript ignore indentSize: 1
                     "./test/fixture/tslint/indent/main.ts" // TypeScript ignore indentSize: 6
@@ -121,48 +118,48 @@ describe("tsfmt test", () => {
                             tsfmt: true
                         })
                         .then(resultMap => {
-                            var result = resultMap[fileName];
+                            let result = resultMap[fileName];
                             assert(result !== null);
                             assert(result.error === false);
 
-                            var expectedTsFileName = fileName.replace(fixtureDir, expectedDir);
+                            let expectedTsFileName = fileName.replace(fixtureDir, expectedDir);
                             // console.log(fileName, expectedFileName);
 
                             if (!fs.existsSync(expectedTsFileName)) {
                                 fs.writeFileSync(expectedTsFileName, result.dest);
                             }
 
-                            var expected = fs.readFileSync(expectedTsFileName, "utf-8");
+                            let expected = fs.readFileSync(expectedTsFileName, "utf-8");
                             assert(expected === result.dest);
 
-                            var expectedOptionsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
+                            let expectedOptionsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
 
                             if (!fs.existsSync(expectedOptionsFileName)) {
                                 fs.writeFileSync(expectedOptionsFileName, JSON.stringify(result.options, null, 2));
                             }
 
-                            var expectedOptions = JSON.parse(fs.readFileSync(expectedOptionsFileName, "utf-8"));
+                            let expectedOptions = lib.parseJSON(fs.readFileSync(expectedOptionsFileName, "utf-8"));
                             assert.deepEqual(expectedOptions, result.options);
 
-                            var tslintConfigName = path.dirname(fileName) + "/tslint.json";
+                            let tslintConfigName = path.dirname(fileName) + "/tslint.json";
                             if (!fs.existsSync(tslintConfigName)) {
-                                return;
+                                return null;
                             }
                             if (fileName === "./test/fixture/tslint/indent/main.ts") {
                                 // NOTE indent enforces consistent indentation levels (currently disabled).
-                                return;
+                                return null;
                             }
 
                             return Promise.all([
                                 checkByTslint(tslintConfigName, fileName, true),
                                 checkByTslint(tslintConfigName, expectedTsFileName, false)
-                            ]);
+                            ]).then(() => null);
                         });
                 });
             });
 
         it("verify unformatted file", () => {
-            var fileName = "./test/fixture/tsfmt/a/main.ts";
+            let fileName = "./test/fixture/tsfmt/a/main.ts";
             return lib
                 .processFiles([fileName], {
                     dryRun: true,
@@ -181,9 +178,9 @@ describe("tsfmt test", () => {
     });
 
     describe("processStream function", () => {
-        var fileName = "test/fixture/default/main.ts";
+        let fileName = "test/fixture/default/main.ts";
         it(fileName, () => {
-            var input = new stream.Readable();
+            let input = new stream.Readable();
             input.push(`class Sample{getString():string{return "hi!";}}`);
             input.push(null);
             return lib
@@ -205,13 +202,25 @@ describe("tsfmt test", () => {
     });
 
     describe("CLI test", () => {
-        it("should reformat files specified in tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli') }).then(result => {
+        it("should reformat files specified at files in tsconfig.json", () => {
+            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli/files') }).then(result => {
                 assert.equal(result.status, 0);
                 assert.equal(result.stdout.trim(), `
 class TestCLI {
     method() {
 
+    }
+}
+`.trim().replace(/\n/g, "\r\n"));
+            });
+        });
+
+        it("should reformat files specified at include, exclude in tsconfig.json", () => {
+            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli/includeExclude') }).then(result => {
+                assert.equal(result.status, 0);
+                assert.equal(result.stdout.trim(), `
+export class TestCLI {
+    method() {
     }
 }
 `.trim().replace(/\n/g, "\r\n"));

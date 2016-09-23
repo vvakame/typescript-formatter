@@ -1,12 +1,10 @@
-"use strict";
-
 import * as ts from "typescript";
 
 import * as path from "path";
 import * as fs from "fs";
 
-import {Options} from "../";
-import {getConfigFileName} from "../utils";
+import { Options } from "../";
+import { getConfigFileName, parseJSON } from "../utils";
 
 interface TsfmtSettings {
     // from FormatCodeOptions
@@ -39,8 +37,6 @@ interface TsfmtSettings {
 }
 
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
-    "use strict";
-
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tsfmt.json");
     if (!configFileName) {
@@ -51,7 +47,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
         console.log(`read ${configFileName} for ${fileName}`);
     }
 
-    var config: TsfmtSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    let config: TsfmtSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (typeof config.insertSpaceAfterCommaDelimiter === "boolean") {
         formatOptions.InsertSpaceAfterCommaDelimiter = config.insertSpaceAfterCommaDelimiter;
     }

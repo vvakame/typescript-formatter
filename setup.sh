@@ -21,5 +21,4 @@ fi
 
 rm -rf node_modules typings && \
 npm install && \
-grunt setup && \
 echo "OK!"

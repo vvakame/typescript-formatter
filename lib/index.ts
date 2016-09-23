@@ -1,15 +1,15 @@
-"use strict";
-
 import * as ts from "typescript";
 import formatter from "./formatter";
-import {createDefaultFormatCodeOptions} from "./utils";
+import { createDefaultFormatCodeOptions, parseJSON } from "./utils";
+
+export { parseJSON };
 
 import * as fs from "fs";
 
 import base from "./provider/base";
 import tsconfigjson from "./provider/tsconfigjson";
 import editorconfig from "./provider/editorconfig";
-import tslintjson, {postProcess as tslintPostProcess} from "./provider/tslintjson";
+import tslintjson, { postProcess as tslintPostProcess } from "./provider/tslintjson";
 
 export interface Options {
     dryRun?: boolean;
@@ -33,7 +33,7 @@ export interface ResultMap {
 
 export interface Result {
     fileName: string;
-    options: ts.FormatCodeOptions;
+    options: ts.FormatCodeOptions | null;
     message: string;
     error: boolean;
     src: string;
@@ -41,7 +41,6 @@ export interface Result {
 }
 
 export function processFiles(files: string[], opts: Options): Promise<ResultMap> {
-    "use strict";
 
     let resultMap: ResultMap = {};
     let promises = files.map(fileName => {
@@ -69,11 +68,10 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
 }
 
 export function processStream(fileName: string, input: NodeJS.ReadableStream, opts: Options): Promise<Result> {
-    "use strict";
 
     input.setEncoding("utf8");
 
-    let promise = new Promise<string>((resolve, reject) => {
+    let promise = new Promise<string>((resolve, _reject) => {
         let fragment = "";
         input.on("data", (chunk: string) => {
             fragment += chunk;
@@ -87,7 +85,6 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 }
 
 export function processString(fileName: string, content: string, opts: Options): Promise<Result> {
-    "use strict";
 
     let formatOptions = createDefaultFormatCodeOptions();
     let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
@@ -122,7 +119,7 @@ export function processString(fileName: string, content: string, opts: Options):
             // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
             formattedCode = formattedCode.replace(/\r?\n/g, formatOptions.NewLineCharacter);
 
-            let message: string;
+            let message = "";
             let error = false;
             if (opts && opts.verify) {
                 if (content !== formattedCode) {

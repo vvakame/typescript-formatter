@@ -1,13 +1,12 @@
 {
   "name": "typescript-formatter",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "Formatter of TypeScript code",
   "main": "./index",
   "bin": {
     "tsfmt": "./bin/tsfmt"
   },
   "scripts": {
-    "setup": "grunt setup",
     "build": "grunt default",
     "test": "grunt test"
   },
@@ -34,28 +33,28 @@
   "dependencies": {
     "commandpost": "^1.0.0",
     "editorconfig": "^0.13.2",
-    "glob-expand": "^0.2.0"
+    "glob-expand": "^0.2.1"
   },
   "peerDependencies": {
-    "typescript": "^1.0.0 || ^2.0.0 || >=2.1.0-dev"
+    "typescript": "^2.0.0 || >=2.1.0-dev"
   },
   "devDependencies": {
-    "dtsm": "^1.1.0",
-    "es6-promise": "^3.2.1",
+    "@types/glob-expand": "^0.0.30",
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.40",
+    "@types/power-assert": "^0.0.28",
+    "es6-promise": "^3.3.1",
     "espower-loader": "^1.0.0",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-conventional-changelog": "^6.1.0",
-    "grunt-dtsm": "^1.0.0",
-    "grunt-exec": "^1.0.0",
-    "grunt-mocha-test": "^0.12.7",
-    "grunt-ts": "^6.0.0-beta.2",
-    "grunt-tsconfig-update": "^0.0.1",
-    "grunt-tslint": "^3.1.1",
+    "grunt-exec": "^1.0.1",
+    "grunt-mocha-test": "^0.13.2",
+    "grunt-tslint": "^3.2.1",
     "load-grunt-tasks": "^3.5.0",
-    "mocha": "^2.5.3",
+    "mocha": "^3.0.2",
     "power-assert": "^1.2.0",
-    "tslint": "^3.13.0",
-    "typescript": "^1.8.10"
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.3"
   }
 }

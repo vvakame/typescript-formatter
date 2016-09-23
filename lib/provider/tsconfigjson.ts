@@ -1,12 +1,10 @@
-"use strict";
-
 import * as ts from "typescript";
 
 import * as path from "path";
 import * as fs from "fs";
 
-import {Options} from "../";
-import {getConfigFileName} from "../utils";
+import { Options } from "../";
+import { getConfigFileName, parseJSON } from "../utils";
 
 interface TsconfigSettings {
     compilerOptions: {
@@ -15,7 +13,6 @@ interface TsconfigSettings {
 }
 
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
-    "use strict";
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tsconfig.json");
@@ -26,7 +23,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
         console.log(`read ${configFileName} for ${fileName}`);
     }
 
-    let config: TsconfigSettings = JSON.parse(<any>fs.readFileSync(configFileName, "utf-8"));
+    let config: TsconfigSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (!config.compilerOptions || !config.compilerOptions.newLine) {
         return formatOptions;
     }
