@@ -34,8 +34,7 @@
     },
     "include": [
         "lib/**/*.ts",
-        "test/**/*.ts",
-        "node_modules/@types/mocha/index.d.ts"
+        "test/**/*.ts"
     ],
     "exclude": [
         "node_modules",

@@ -8,13 +8,6 @@ if [ $? -ne 0 ] ; then
 	ISERROR=1
 fi
 
-which grunt > /dev/null 2>&1
-if [ $? -ne 0 ] ; then
-	echo "command not found: grunt"
-	echo "please install grunt. e.g. npm install -g grunt-cli"
-	ISERROR=1
-fi
-
 if [ $ISERROR == 1 ] ; then
 	exit
 fi
