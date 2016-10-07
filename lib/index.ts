@@ -8,7 +8,7 @@ import * as fs from "fs";
 
 import base from "./provider/base";
 import tsconfigjson from "./provider/tsconfigjson";
-import editorconfig from "./provider/editorconfig";
+import editorconfig, { postProcess as editorconfigPostProcess } from "./provider/editorconfig";
 import tslintjson, { postProcess as tslintPostProcess } from "./provider/tslintjson";
 
 export interface Options {
@@ -24,7 +24,26 @@ export interface Options {
 }
 
 export interface PostProcess {
-    (fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string;
+    (fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> | string;
+}
+
+export class PostProcess {
+
+    static sequence(all: PostProcess[]): PostProcess {
+
+        let index = 0;
+
+        function next(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> | string {
+            if (index < all.length) {
+                return Promise.resolve(all[index++](fileName, formattedCode, opts, formatOptions)).then(newFormattedCode => {
+                    return next(fileName, newFormattedCode || formattedCode, opts, formatOptions);
+                });
+            }
+            return formattedCode;
+        };
+
+        return next;
+    }
 }
 
 export interface ResultMap {
@@ -97,6 +116,7 @@ export function processString(fileName: string, content: string, opts: Options):
     }
     if (opts.editorconfig) {
         optGenPromises.push(editorconfig(fileName, opts, formatOptions));
+        postProcesses.push(editorconfigPostProcess);
     }
     if (opts.tslint) {
         optGenPromises.push(tslintjson(fileName, opts, formatOptions));
@@ -107,15 +127,11 @@ export function processString(fileName: string, content: string, opts: Options):
         .all(optGenPromises)
         .then(() => {
             let formattedCode = formatter(fileName, content, formatOptions);
-            if ((<any>formattedCode).trimRight) {
-                formattedCode = (<any>formattedCode).trimRight();
-                formattedCode += formatOptions.NewLineCharacter;
-            }
 
-            postProcesses.forEach(postProcess => {
-                formattedCode = postProcess(fileName, formattedCode, opts, formatOptions) || formattedCode;
-            });
+            // apply post process logic
+            return PostProcess.sequence(postProcesses)(fileName, formattedCode, opts, formatOptions);
 
+        }).then(formattedCode => {
             // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
             formattedCode = formattedCode.replace(/\r?\n/g, formatOptions.NewLineCharacter);
 
