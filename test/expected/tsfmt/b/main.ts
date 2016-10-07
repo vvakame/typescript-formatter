@@ -378,5 +378,5 @@ class Vector/* /*
  */	return rayTracer.render( defaultScene(),ctx,256,256 );/* 
  */}/* 
  *//* 
- */exec();/* /* 
- */ */
+ */exec();/* 
+ */
