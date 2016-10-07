@@ -43,3 +43,21 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
             return formatOptions;
         });
 }
+
+
+export function postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> {
+
+    if (opts.verbose && opts.baseDir && !emitBaseDirWarning) {
+        console.log("editorconfig is not supported baseDir options");
+        emitBaseDirWarning = true;
+    }
+
+    return editorconfig
+        .parse(fileName)
+        .then(config => {
+            if (config.insert_final_newline) {
+                return formattedCode.replace(/\s+$/, formatOptions.NewLineCharacter);
+            }
+            return formattedCode;
+        });
+}
