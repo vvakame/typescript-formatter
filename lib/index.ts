@@ -23,26 +23,54 @@ export interface Options {
     tsfmt: boolean;
 }
 
-export interface PostProcess {
-    (fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> | string;
+export interface OptionModifier {
+    (fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>;
 }
 
-export class PostProcess {
+export interface PostProcessor {
+    (fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string | Promise<string>;
+}
 
-    static sequence(all: PostProcess[]): PostProcess {
+class Processor {
+    optionModifiers: OptionModifier[] = [];
+    postProcessors: PostProcessor[] = [];
 
-        let index = 0;
+    addOptionModify(modifier: OptionModifier) {
+        this.optionModifiers.push(modifier);
+    }
 
-        function next(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> | string {
-            if (index < all.length) {
-                return Promise.resolve(all[index++](fileName, formattedCode, opts, formatOptions)).then(newFormattedCode => {
-                    return next(fileName, newFormattedCode || formattedCode, opts, formatOptions);
-                });
+    processFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
+        let optionModifiers = ([] as OptionModifier[]).concat(this.optionModifiers);
+
+        let next = (formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> => {
+            if (optionModifiers.length === 0) {
+                return Promise.resolve(formatOptions);
             }
-            return formattedCode;
+            let modifier = optionModifiers.shift()!;
+            let ret = modifier(fileName, opts, formatOptions);
+            return Promise.resolve(ret).then(formatOptions => next(formatOptions));
         };
 
-        return next;
+        return next(formatOptions);
+    }
+
+    addPostProcess(postProcessor: PostProcessor) {
+        this.postProcessors.push(postProcessor);
+    }
+
+    postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> {
+        let postProcessors = ([] as PostProcessor[]).concat(this.postProcessors);
+
+        let next = (formattedCode: string): Promise<string> => {
+            if (postProcessors.length === 0) {
+                return Promise.resolve(formattedCode);
+            }
+            let processor = postProcessors.shift()!;
+            let ret = processor(fileName, formattedCode, opts, formatOptions);
+            return Promise.resolve(ret).then(formattedCode => next(formattedCode));
+        };
+
+        return next(formattedCode);
     }
 }
 
@@ -105,36 +133,36 @@ export function processStream(fileName: string, input: NodeJS.ReadableStream, op
 
 export function processString(fileName: string, content: string, opts: Options): Promise<Result> {
 
-    let formatOptions = createDefaultFormatCodeOptions();
-    let optGenPromises: (ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>)[] = [];
-    let postProcesses: PostProcess[] = [];
+    let processor = new Processor();
     if (opts.tsfmt) {
-        optGenPromises.push(base(fileName, opts, formatOptions));
+        processor.addOptionModify(base);
     }
     if (opts.tsconfig) {
-        optGenPromises.push(tsconfigjson(fileName, opts, formatOptions));
+        processor.addOptionModify(tsconfigjson);
     }
     if (opts.editorconfig) {
-        optGenPromises.push(editorconfig(fileName, opts, formatOptions));
-        postProcesses.push(editorconfigPostProcess);
+        processor.addOptionModify(editorconfig);
+        processor.addPostProcess(editorconfigPostProcess);
     }
     if (opts.tslint) {
-        optGenPromises.push(tslintjson(fileName, opts, formatOptions));
-        postProcesses.push(tslintPostProcess);
+        processor.addOptionModify(tslintjson);
+        processor.addPostProcess(tslintPostProcess);
     }
+    processor.addPostProcess((_fileName: string, formattedCode: string, _opts: Options, formatOptions: ts.FormatCodeOptions) => {
+        // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
+        formattedCode = formattedCode.replace(/\r?\n/g, formatOptions.NewLineCharacter);
+        return Promise.resolve(formattedCode);
+    });
 
-    return Promise
-        .all(optGenPromises)
-        .then(() => {
+    let formatOptions = createDefaultFormatCodeOptions();
+    return processor.processFormatCodeOptions(fileName, opts, formatOptions)
+        .then(formatOptions => {
             let formattedCode = formatter(fileName, content, formatOptions);
 
             // apply post process logic
-            return PostProcess.sequence(postProcesses)(fileName, formattedCode, opts, formatOptions);
+            return processor.postProcess(fileName, formattedCode, opts, formatOptions);
 
         }).then(formattedCode => {
-            // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
-            formattedCode = formattedCode.replace(/\r?\n/g, formatOptions.NewLineCharacter);
-
             let message = "";
             let error = false;
             if (opts && opts.verify) {
