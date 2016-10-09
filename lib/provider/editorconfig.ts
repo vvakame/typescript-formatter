@@ -45,7 +45,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
 }
 
 
-export function postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> {
+export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatOptions: ts.FormatCodeOptions): Promise<string> {
 
     if (opts.verbose && opts.baseDir && !emitBaseDirWarning) {
         console.log("editorconfig is not supported baseDir options");
@@ -55,8 +55,8 @@ export function postProcess(fileName: string, formattedCode: string, opts: Optio
     return editorconfig
         .parse(fileName)
         .then(config => {
-            if (config.insert_final_newline) {
-                return formattedCode.replace(/\s+$/, formatOptions.NewLineCharacter);
+            if (config.insert_final_newline && !/\n$/.test(formattedCode)) {
+                formattedCode += "\n";
             }
             return formattedCode;
         });
