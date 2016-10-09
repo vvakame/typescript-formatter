@@ -1,3 +1,13 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/vvakame/typescript-formatter/compare/3.0.1...v3.1.0) (2016-10-09)
+
+
+### Features
+
+* **tsfmt:** move final newline character logic to editorconfig part ([2df1f7a](https://github.com/vvakame/typescript-formatter/commit/2df1f7a))
+
+thanks @jrieken !
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/vvakame/typescript-formatter/compare/3.0.0...v3.0.1) (2016-09-23)
 
