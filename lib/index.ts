@@ -40,7 +40,7 @@ class Processor {
     }
 
     processFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
-        let optionModifiers = ([] as OptionModifier[]).concat(this.optionModifiers);
+        let optionModifiers = [...this.optionModifiers];
 
         let next = (formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> => {
             if (optionModifiers.length === 0) {
@@ -59,7 +59,7 @@ class Processor {
     }
 
     postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> {
-        let postProcessors = ([] as PostProcessor[]).concat(this.postProcessors);
+        let postProcessors = [...this.postProcessors];
 
         let next = (formattedCode: string): Promise<string> => {
             if (postProcessors.length === 0) {
