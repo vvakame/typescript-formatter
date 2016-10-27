@@ -1,3 +1,15 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/vvakame/typescript-formatter/compare/3.1.0...v4.0.0) (2016-10-27)
+
+Now, typescript-formatter supports `typescript@^2.0.6`.
+If you want to use with older version typescript, you can use `typescript-formatter@^3.0.0`.
+
+### Features
+
+* **tsfmt:** support TypeScript 2.0.6 ([26db3de](https://github.com/vvakame/typescript-formatter/commit/26db3de))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/vvakame/typescript-formatter/compare/3.0.1...v3.1.0) (2016-10-09)
 
