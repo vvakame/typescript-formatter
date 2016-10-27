@@ -36,11 +36,11 @@ interface TsfmtSettings {
     convertTabsToSpaces?: boolean;
 }
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tsfmt.json");
     if (!configFileName) {
-        return formatOptions;
+        return formatSettings;
     }
 
     if (opts.verbose) {
@@ -49,52 +49,52 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
 
     let config: TsfmtSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (typeof config.insertSpaceAfterCommaDelimiter === "boolean") {
-        formatOptions.InsertSpaceAfterCommaDelimiter = config.insertSpaceAfterCommaDelimiter;
+        formatSettings.insertSpaceAfterCommaDelimiter = config.insertSpaceAfterCommaDelimiter;
     }
     if (typeof config.insertSpaceAfterSemicolonInForStatements === "boolean") {
-        formatOptions.InsertSpaceAfterSemicolonInForStatements = config.insertSpaceAfterSemicolonInForStatements;
+        formatSettings.insertSpaceAfterSemicolonInForStatements = config.insertSpaceAfterSemicolonInForStatements;
     }
     if (typeof config.insertSpaceBeforeAndAfterBinaryOperators === "boolean") {
-        formatOptions.InsertSpaceBeforeAndAfterBinaryOperators = config.insertSpaceBeforeAndAfterBinaryOperators;
+        formatSettings.insertSpaceBeforeAndAfterBinaryOperators = config.insertSpaceBeforeAndAfterBinaryOperators;
     }
     if (typeof config.insertSpaceAfterKeywordsInControlFlowStatements === "boolean") {
-        formatOptions.InsertSpaceAfterKeywordsInControlFlowStatements = config.insertSpaceAfterKeywordsInControlFlowStatements;
+        formatSettings.insertSpaceAfterKeywordsInControlFlowStatements = config.insertSpaceAfterKeywordsInControlFlowStatements;
     }
     if (typeof config.insertSpaceAfterFunctionKeywordForAnonymousFunctions === "boolean") {
-        formatOptions.InsertSpaceAfterFunctionKeywordForAnonymousFunctions = config.insertSpaceAfterFunctionKeywordForAnonymousFunctions;
+        formatSettings.insertSpaceAfterFunctionKeywordForAnonymousFunctions = config.insertSpaceAfterFunctionKeywordForAnonymousFunctions;
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis === "boolean") {
-        formatOptions.InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis;
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis;
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets === "boolean") {
-        formatOptions.InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets;
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets;
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces === "boolean") {
-        formatOptions.InsertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = config.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces;
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = config.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces;
     }
     if (typeof config.placeOpenBraceOnNewLineForFunctions === "boolean") {
-        formatOptions.PlaceOpenBraceOnNewLineForFunctions = config.placeOpenBraceOnNewLineForFunctions;
+        formatSettings.placeOpenBraceOnNewLineForFunctions = config.placeOpenBraceOnNewLineForFunctions;
     }
     if (typeof config.placeOpenBraceOnNewLineForControlBlocks === "boolean") {
-        formatOptions.PlaceOpenBraceOnNewLineForControlBlocks = config.placeOpenBraceOnNewLineForControlBlocks;
+        formatSettings.placeOpenBraceOnNewLineForControlBlocks = config.placeOpenBraceOnNewLineForControlBlocks;
     }
     if (typeof config.indentSize === "number") {
-        formatOptions.IndentSize = config.indentSize;
+        formatSettings.indentSize = config.indentSize;
     }
     if (typeof config.indentStyle === "number") {
-        formatOptions.IndentStyle = config.indentStyle as number;
+        formatSettings.indentStyle = config.indentStyle as number;
     } else if (typeof config.indentStyle === "string") {
-        formatOptions.IndentStyle = (ts.IndentStyle as any)[config.indentStyle] as number;
+        formatSettings.indentStyle = (ts.IndentStyle as any)[config.indentStyle] as number;
     }
     if (typeof config.tabSize === "number") {
-        formatOptions.TabSize = config.tabSize;
+        formatSettings.tabSize = config.tabSize;
     }
     if (typeof config.newLineCharacter === "string") {
-        formatOptions.NewLineCharacter = config.newLineCharacter;
+        formatSettings.newLineCharacter = config.newLineCharacter;
     }
     if (typeof config.convertTabsToSpaces === "boolean") {
-        formatOptions.ConvertTabsToSpaces = config.convertTabsToSpaces;
+        formatSettings.convertTabsToSpaces = config.convertTabsToSpaces;
     }
 
-    return formatOptions;
+    return formatSettings;
 }
