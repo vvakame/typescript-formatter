@@ -6,7 +6,7 @@ import { Options } from "../";
 
 let emitBaseDirWarning = false;
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): Promise<ts.FormatCodeSettings> {
 
     if (opts.verbose && opts.baseDir && !emitBaseDirWarning) {
         console.log("editorconfig is not supported baseDir options");
@@ -17,35 +17,35 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
         .parse(fileName)
         .then(config => {
             if (Object.keys(config).length === 0) {
-                return formatOptions;
+                return formatSettings;
             }
             if (opts.verbose) {
                 console.log("editorconfig: \n" + "file: " + fileName + "\n" + JSON.stringify(config, null, 2));
             }
 
             if (config.indent_style === "tab") {
-                formatOptions.ConvertTabsToSpaces = false;
+                formatSettings.convertTabsToSpaces = false;
                 // if (typeof config.tab_width === "number") {
                 // 	options.TabSize = config.tab_width;
                 // }
             } else if (typeof config.indent_size === "number") {
-                formatOptions.ConvertTabsToSpaces = true;
-                formatOptions.IndentSize = config.indent_size;
+                formatSettings.convertTabsToSpaces = true;
+                formatSettings.indentSize = config.indent_size;
             }
             if (config.end_of_line === "lf") {
-                formatOptions.NewLineCharacter = "\n";
+                formatSettings.newLineCharacter = "\n";
             } else if (config.end_of_line === "cr") {
-                formatOptions.NewLineCharacter = "\r";
+                formatSettings.newLineCharacter = "\r";
             } else if (config.end_of_line === "crlf") {
-                formatOptions.NewLineCharacter = "\r\n";
+                formatSettings.newLineCharacter = "\r\n";
             }
 
-            return formatOptions;
+            return formatSettings;
         });
 }
 
 
-export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatOptions: ts.FormatCodeOptions): Promise<string> {
+export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatSettings: ts.FormatCodeSettings): Promise<string> {
 
     if (opts.verbose && opts.baseDir && !emitBaseDirWarning) {
         console.log("editorconfig is not supported baseDir options");

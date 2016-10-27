@@ -31,7 +31,7 @@ interface ExecResult {
     stderr: string;
 }
 
-function exec(cmd: string, args: string[], options: Object): Promise<ExecResult> {
+function exec(cmd: string, args: string[], options: childProcess.SpawnOptions): Promise<ExecResult> {
     let process = childProcess.spawn(cmd, args, options);
 
     let stdout = "";
@@ -132,14 +132,14 @@ describe("tsfmt test", () => {
                             let expected = fs.readFileSync(expectedTsFileName, "utf-8");
                             assert(expected === result.dest);
 
-                            let expectedOptionsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
+                            let expectedSettingsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
 
-                            if (!fs.existsSync(expectedOptionsFileName)) {
-                                fs.writeFileSync(expectedOptionsFileName, JSON.stringify(result.options, null, 2));
+                            if (!fs.existsSync(expectedSettingsFileName)) {
+                                fs.writeFileSync(expectedSettingsFileName, JSON.stringify(result.settings, null, 2));
                             }
 
-                            let expectedOptions = lib.parseJSON(fs.readFileSync(expectedOptionsFileName, "utf-8"));
-                            assert.deepEqual(expectedOptions, result.options);
+                            let expectedSettings = lib.parseJSON(fs.readFileSync(expectedSettingsFileName, "utf-8"));
+                            assert.deepEqual(expectedSettings, result.settings);
 
                             let tslintConfigName = path.dirname(fileName) + "/tslint.json";
                             if (!fs.existsSync(tslintConfigName)) {

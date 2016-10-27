@@ -12,12 +12,12 @@ interface TsconfigSettings {
     };
 }
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tsconfig.json");
     if (!configFileName) {
-        return formatOptions;
+        return formatSettings;
     }
     if (opts.verbose) {
         console.log(`read ${configFileName} for ${fileName}`);
@@ -25,14 +25,14 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
 
     let config: TsconfigSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (!config.compilerOptions || !config.compilerOptions.newLine) {
-        return formatOptions;
+        return formatSettings;
     }
 
     if (config.compilerOptions.newLine.toLowerCase() === "crlf") {
-        formatOptions.NewLineCharacter = "\r\n";
+        formatSettings.newLineCharacter = "\r\n";
     } else if (config.compilerOptions.newLine.toLowerCase() === "lf") {
-        formatOptions.NewLineCharacter = "\n";
+        formatSettings.newLineCharacter = "\n";
     }
 
-    return formatOptions;
+    return formatSettings;
 }

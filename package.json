@@ -36,7 +36,7 @@
     "glob-expand": "^0.2.1"
   },
   "peerDependencies": {
-    "typescript": "^2.0.0 || >=2.1.0-dev"
+    "typescript": "^2.0.6 || >=2.1.0-dev"
   },
   "devDependencies": {
     "@types/glob-expand": "^0.0.30",
@@ -55,6 +55,6 @@
     "mocha": "^3.0.2",
     "power-assert": "^1.2.0",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.3"
+    "typescript": "^2.0.6"
   }
 }

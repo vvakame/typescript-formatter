@@ -5,24 +5,24 @@ import * as expand from "glob-expand";
 import * as fs from "fs";
 import * as path from "path";
 
-export function createDefaultFormatCodeOptions(): ts.FormatCodeOptions {
+export function createDefaultFormatCodeSettings(): ts.FormatCodeSettings {
 
     return {
-        IndentSize: 4,
-        TabSize: 4,
-        IndentStyle: ts.IndentStyle.Smart,
-        NewLineCharacter: "\r\n",
-        ConvertTabsToSpaces: true,
-        InsertSpaceAfterCommaDelimiter: true,
-        InsertSpaceAfterSemicolonInForStatements: true,
-        InsertSpaceBeforeAndAfterBinaryOperators: true,
-        InsertSpaceAfterKeywordsInControlFlowStatements: true,
-        InsertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
-        InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
-        InsertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets: false,
-        InsertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces: false,
-        PlaceOpenBraceOnNewLineForFunctions: false,
-        PlaceOpenBraceOnNewLineForControlBlocks: false,
+        indentSize: 4,
+        tabSize: 4,
+        indentStyle: ts.IndentStyle.Smart,
+        newLineCharacter: "\r\n",
+        convertTabsToSpaces: true,
+        insertSpaceAfterCommaDelimiter: true,
+        insertSpaceAfterSemicolonInForStatements: true,
+        insertSpaceBeforeAndAfterBinaryOperators: true,
+        insertSpaceAfterKeywordsInControlFlowStatements: true,
+        insertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
+        insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
+        insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets: false,
+        insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces: false,
+        placeOpenBraceOnNewLineForFunctions: false,
+        placeOpenBraceOnNewLineForControlBlocks: false,
     };
 }
 

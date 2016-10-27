@@ -25,16 +25,16 @@ interface TslintSettings {
     };
 }
 
-export interface AdditionalFormatOptions {
-    noConsecutiveBlankLines: boolean;
+export interface AdditionalFormatSettings {
+    $noConsecutiveBlankLines: boolean;
 }
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions {
+export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tslint.json");
     if (!configFileName) {
-        return formatOptions;
+        return formatSettings;
     }
     if (opts.verbose) {
         console.log(`read ${configFileName} for ${fileName}`);
@@ -42,37 +42,37 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
 
     let config: TslintSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     if (!config.rules) {
-        return formatOptions;
+        return formatSettings;
     }
     if (config.rules.indent && config.rules.indent[0]) {
         if (config.rules.indent[1] === "spaces") {
-            formatOptions.ConvertTabsToSpaces = true;
+            formatSettings.convertTabsToSpaces = true;
         } else if (config.rules.indent[1] === "tabs") {
-            formatOptions.ConvertTabsToSpaces = false;
+            formatSettings.convertTabsToSpaces = false;
         }
     }
     if (config.rules.whitespace && config.rules.whitespace[0]) {
         for (let p in config.rules.whitespace) {
             let value = config.rules.whitespace[p];
             if (value === "check-branch") {
-                formatOptions.InsertSpaceAfterKeywordsInControlFlowStatements = true;
+                formatSettings.insertSpaceAfterKeywordsInControlFlowStatements = true;
             } else if (value === "check-decl") {
                 // none?
             } else if (value === "check-operator") {
-                formatOptions.InsertSpaceBeforeAndAfterBinaryOperators = true;
+                formatSettings.insertSpaceBeforeAndAfterBinaryOperators = true;
             } else if (value === "check-separator") {
-                formatOptions.InsertSpaceAfterCommaDelimiter = true;
-                formatOptions.InsertSpaceAfterSemicolonInForStatements = true;
+                formatSettings.insertSpaceAfterCommaDelimiter = true;
+                formatSettings.insertSpaceAfterSemicolonInForStatements = true;
             } else if (value === "check-type") {
                 // none?
             }
         }
     }
 
-    return formatOptions;
+    return formatSettings;
 }
 
-export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatOptions: ts.FormatCodeOptions): string {
+export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatSettings: ts.FormatCodeSettings): string {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName = getConfigFileName(baseDir, "tslint.json");
@@ -85,21 +85,21 @@ export function postProcess(fileName: string, formattedCode: string, opts: Optio
         return formattedCode;
     }
 
-    let additionalOptions = createDefaultAdditionalFormatCodeOptions();
+    let additionalOptions = createDefaultAdditionalFormatCodeSettings();
     if (config.rules["no-consecutive-blank-lines"] === true) {
-        additionalOptions.noConsecutiveBlankLines = true;
+        additionalOptions.$noConsecutiveBlankLines = true;
     }
 
-    if (additionalOptions.noConsecutiveBlankLines) {
+    if (additionalOptions.$noConsecutiveBlankLines) {
         formattedCode = formattedCode.replace(/\n+^$/mg, "\n");
     }
 
     return formattedCode;
 }
 
-function createDefaultAdditionalFormatCodeOptions(): AdditionalFormatOptions {
+function createDefaultAdditionalFormatCodeSettings(): AdditionalFormatSettings {
 
     return {
-        noConsecutiveBlankLines: false,
+        $noConsecutiveBlankLines: false,
     };
 }

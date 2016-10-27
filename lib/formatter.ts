@@ -1,11 +1,11 @@
 import * as ts from "typescript";
-import { createDefaultFormatCodeOptions } from "./utils";
+import { createDefaultFormatCodeSettings } from "./utils";
 
 // from https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter
 
 // Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
 //       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
-export default function format(fileName: string, text: string, options = createDefaultFormatCodeOptions()) {
+export default function format(fileName: string, text: string, options = createDefaultFormatCodeSettings()) {
 
     // Parse the source text
     let sourceFile = ts.createSourceFile(fileName, text, ts.ScriptTarget.Latest, true);
@@ -16,11 +16,11 @@ export default function format(fileName: string, text: string, options = createD
     // Apply the edits on the input code
     return applyEdits(text, edits);
 
-    function getRuleProvider(options: ts.FormatCodeOptions) {
+    function getRuleProvider(settings: ts.FormatCodeSettings) {
         // Share this between multiple formatters using the same options.
         // This represents the bulk of the space the formatter uses.
         let ruleProvider = new (ts as any).formatting.RulesProvider();
-        ruleProvider.ensureUpToDate(options);
+        ruleProvider.ensureUpToDate(settings);
         return ruleProvider;
     }
 

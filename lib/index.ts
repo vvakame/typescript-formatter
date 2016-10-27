@@ -1,6 +1,6 @@
 import * as ts from "typescript";
 import formatter from "./formatter";
-import { createDefaultFormatCodeOptions, parseJSON } from "./utils";
+import { createDefaultFormatCodeSettings, parseJSON } from "./utils";
 
 export { parseJSON };
 
@@ -24,11 +24,11 @@ export interface Options {
 }
 
 export interface OptionModifier {
-    (fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): ts.FormatCodeOptions | Promise<ts.FormatCodeOptions>;
+    (fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings | Promise<ts.FormatCodeSettings>;
 }
 
 export interface PostProcessor {
-    (fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): string | Promise<string>;
+    (fileName: string, formattedCode: string, opts: Options, formatSettings: ts.FormatCodeSettings): string | Promise<string>;
 }
 
 class Processor {
@@ -39,34 +39,34 @@ class Processor {
         this.optionModifiers.push(modifier);
     }
 
-    processFormatCodeOptions(fileName: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> {
+    processFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): Promise<ts.FormatCodeSettings> {
         let optionModifiers = [...this.optionModifiers];
 
-        let next = (formatOptions: ts.FormatCodeOptions): Promise<ts.FormatCodeOptions> => {
+        let next = (formatSettings: ts.FormatCodeSettings): Promise<ts.FormatCodeSettings> => {
             if (optionModifiers.length === 0) {
-                return Promise.resolve(formatOptions);
+                return Promise.resolve(formatSettings);
             }
-            let modifier = optionModifiers.shift()!;
-            let ret = modifier(fileName, opts, formatOptions);
-            return Promise.resolve(ret).then(formatOptions => next(formatOptions));
+            let modifier = optionModifiers.shift() !;
+            let ret = modifier(fileName, opts, formatSettings);
+            return Promise.resolve(ret).then(formatSettings => next(formatSettings));
         };
 
-        return next(formatOptions);
+        return next(formatSettings);
     }
 
     addPostProcess(postProcessor: PostProcessor) {
         this.postProcessors.push(postProcessor);
     }
 
-    postProcess(fileName: string, formattedCode: string, opts: Options, formatOptions: ts.FormatCodeOptions): Promise<string> {
+    postProcess(fileName: string, formattedCode: string, opts: Options, formatSettings: ts.FormatCodeSettings): Promise<string> {
         let postProcessors = [...this.postProcessors];
 
         let next = (formattedCode: string): Promise<string> => {
             if (postProcessors.length === 0) {
                 return Promise.resolve(formattedCode);
             }
-            let processor = postProcessors.shift()!;
-            let ret = processor(fileName, formattedCode, opts, formatOptions);
+            let processor = postProcessors.shift() !;
+            let ret = processor(fileName, formattedCode, opts, formatSettings);
             return Promise.resolve(ret).then(formattedCode => next(formattedCode));
         };
 
@@ -80,7 +80,7 @@ export interface ResultMap {
 
 export interface Result {
     fileName: string;
-    options: ts.FormatCodeOptions | null;
+    settings: ts.FormatCodeSettings | null;
     message: string;
     error: boolean;
     src: string;
@@ -94,7 +94,7 @@ export function processFiles(files: string[], opts: Options): Promise<ResultMap>
         if (!fs.existsSync(fileName)) {
             let result: Result = {
                 fileName: fileName,
-                options: null,
+                settings: null,
                 message: `${fileName} does not exist. process abort.\n`,
                 error: true,
                 src: "",
@@ -148,19 +148,19 @@ export function processString(fileName: string, content: string, opts: Options):
         processor.addOptionModify(tslintjson);
         processor.addPostProcess(tslintPostProcess);
     }
-    processor.addPostProcess((_fileName: string, formattedCode: string, _opts: Options, formatOptions: ts.FormatCodeOptions) => {
+    processor.addPostProcess((_fileName: string, formattedCode: string, _opts: Options, formatSettings: ts.FormatCodeSettings) => {
         // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
-        formattedCode = formattedCode.replace(/\r?\n/g, formatOptions.NewLineCharacter);
+        formattedCode = formattedCode.replace(/\r?\n/g, formatSettings.newLineCharacter || "\n");
         return Promise.resolve(formattedCode);
     });
 
-    let formatOptions = createDefaultFormatCodeOptions();
-    return processor.processFormatCodeOptions(fileName, opts, formatOptions)
-        .then(formatOptions => {
-            let formattedCode = formatter(fileName, content, formatOptions);
+    let formatSettings = createDefaultFormatCodeSettings();
+    return processor.processFormatCodeOptions(fileName, opts, formatSettings)
+        .then(formatSettings => {
+            let formattedCode = formatter(fileName, content, formatSettings);
 
             // apply post process logic
-            return processor.postProcess(fileName, formattedCode, opts, formatOptions);
+            return processor.postProcess(fileName, formattedCode, opts, formatSettings);
 
         }).then(formattedCode => {
             let message = "";
@@ -181,7 +181,7 @@ export function processString(fileName: string, content: string, opts: Options):
 
             let result: Result = {
                 fileName: fileName,
-                options: formatOptions,
+                settings: formatSettings,
                 message: message,
                 error: error,
                 src: content,
