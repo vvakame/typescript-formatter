@@ -1,6 +1,6 @@
 # TypeScript Formatter (tsfmt) [![Build Status](https://travis-ci.org/vvakame/typescript-formatter.svg)](https://travis-ci.org/vvakame/typescript-formatter) [![Dependency Status](https://david-dm.org/vvakame/typescript-formatter.svg?theme=shields.io)](https://david-dm.org/vvakame/typescript-formatter)
 
-A TypeScript code formatter powered by [TypeScript Compiler Service](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter)).
+A TypeScript code formatter powered by [TypeScript Compiler Service](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter).
 
 ```bash
 $ tsfmt --help
@@ -12,6 +12,7 @@ $ tsfmt --help
     --verify           checking file format
     --baseDir <path>   config file lookup from <path>
     --stdin            get formatting content from stdin
+    --no-tsconfig      don't read a tsconfig.json
     --no-tslint        don't read a tslint.json
     --no-editorconfig  don't read a .editorconfig
     --no-tsfmt         don't read a tsfmt.json
