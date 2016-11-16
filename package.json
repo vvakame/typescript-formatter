@@ -40,11 +40,11 @@
   },
   "devDependencies": {
     "@types/glob-expand": "^0.0.30",
-    "@types/mocha": "^2.2.32",
-    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.33",
+    "@types/node": "^6.0.48",
     "@types/power-assert": "^1.4.29",
     "es6-promise": "^4.0.5",
-    "espower-loader": "^1.0.0",
+    "espower-loader": "^1.2.0",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-conventional-changelog": "^6.1.0",
@@ -53,8 +53,8 @@
     "grunt-tslint": "^3.2.1",
     "load-grunt-tasks": "^3.5.0",
     "mocha": "^3.0.2",
-    "power-assert": "^1.2.0",
+    "power-assert": "^1.4.2",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.6"
+    "typescript": "^2.0.10"
   }
 }
