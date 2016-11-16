@@ -1,3 +1,8 @@
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/vvakame/typescript-formatter/compare/4.0.0...v4.0.1) (2016-11-16)
+
+* **tsfmt:** add typescript `>=2.2.0-dev` to peerDependencies ([#68](https://github.com/vvakame/typescript-formatter/pull/68)) thanks @myitcv !
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/vvakame/typescript-formatter/compare/3.1.0...v4.0.0) (2016-10-27)
 
