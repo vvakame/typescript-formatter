@@ -55,6 +55,6 @@
     "mocha": "^3.0.2",
     "power-assert": "^1.4.2",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.10"
+    "typescript": "^2.1.5"
   }
 }
