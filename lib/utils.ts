@@ -61,7 +61,7 @@ export function readFilesFromTsconfig(configPath: string): string[] {
     } else if (tsconfig.include || tsconfig.exclude) {
         return tsMatchFiles(tsconfig.exclude || [], tsconfig.include || []);
     } else {
-        throw new Error(`No "files" or "filesGlob" section present in tsconfig.json`);
+        return tsMatchFiles([], []);
     }
 
     function tsMatchFiles(excludes: string[], includes: string[]) {
