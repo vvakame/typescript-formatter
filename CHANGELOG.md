@@ -1,3 +1,13 @@
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/vvakame/typescript-formatter/compare/4.0.1...v4.1.0) (2017-02-05)
+
+
+### Features
+
+* **tsfmt:** support empty tsconfig.json that does not have files, include and exclude field ([c741d83](https://github.com/vvakame/typescript-formatter/commit/c741d83))
+
+
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://github.com/vvakame/typescript-formatter/compare/4.0.0...v4.0.1) (2016-11-16)
 
