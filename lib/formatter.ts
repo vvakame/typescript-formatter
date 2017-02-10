@@ -27,6 +27,15 @@ export default function format(fileName: string, text: string, options = createD
     function applyEdits(text: string, edits: ts.TextChange[]): string {
         // Apply edits in reverse on the existing text
         let result = text;
+
+        // An issue with `ts.formatting.formatDocument` is that it does
+        // not always give the edits array in ascending order of change start
+        // point. This can result that we add or remove some character in
+        // the begining of the document, making the all the other edits
+        // offsets invalid. 
+
+        // We resolve this by sorting edits by ascending start point
+        edits.sort((a, b) => a.span.start - b.span.start);
         for (let i = edits.length - 1; i >= 0; i--) {
             let change = edits[i];
             let head = result.slice(0, change.span.start);
