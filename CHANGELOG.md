@@ -1,3 +1,17 @@
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/vvakame/typescript-formatter/compare/4.1.0...v4.1.1) (2017-02-10)
+
+
+### Features
+
+* **tsfmt:** Use latest release of TypeScript 2.1.5 ([#72](https://github.com/vvakame/typescript-formatter/pull/72)) thanks @xiamx !
+
+### Bug Fixes
+
+* **tsfmt:** Fix an issue with applying edits ([#75](https://github.com/vvakame/typescript-formatter/pull/75)) thanks @xiamx !
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/vvakame/typescript-formatter/compare/4.0.1...v4.1.0) (2017-02-05)
 
