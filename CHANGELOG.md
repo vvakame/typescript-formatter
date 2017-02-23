@@ -1,3 +1,13 @@
+<a name="4.1.2"></a>
+## [4.1.2](https://github.com/vvakame/typescript-formatter/compare/4.1.1...v4.1.2) (2017-02-23)
+
+
+### Features
+
+* **tsfmt:** run tests with typescript[@2](https://github.com/2).2.1 and add typescript@>=2.3.0-dev support ([7291732](https://github.com/vvakame/typescript-formatter/commit/7291732))
+
+
+
 <a name="4.1.1"></a>
 ## [4.1.1](https://github.com/vvakame/typescript-formatter/compare/4.1.0...v4.1.1) (2017-02-10)
 
