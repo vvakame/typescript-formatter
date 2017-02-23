@@ -50,11 +50,11 @@
     "grunt-conventional-changelog": "^6.1.0",
     "grunt-exec": "^1.0.1",
     "grunt-mocha-test": "^0.13.2",
-    "grunt-tslint": "^3.2.1",
+    "grunt-tslint": "^4.0.1",
     "load-grunt-tasks": "^3.5.0",
     "mocha": "^3.0.2",
     "power-assert": "^1.4.2",
-    "tslint": "^3.15.1",
+    "tslint": "^4.4.2",
     "typescript": "^2.2.1"
   }
 }
