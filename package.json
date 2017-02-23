@@ -36,12 +36,12 @@
     "glob-expand": "^0.2.1"
   },
   "peerDependencies": {
-    "typescript": "^2.0.6 || >=2.1.0-dev || >=2.2.0-dev"
+    "typescript": "^2.0.6 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev"
   },
   "devDependencies": {
     "@types/glob-expand": "^0.0.30",
     "@types/mocha": "^2.2.33",
-    "@types/node": "^6.0.48",
+    "@types/node": "^7.0.5",
     "@types/power-assert": "^1.4.29",
     "es6-promise": "^4.0.5",
     "espower-loader": "^1.2.0",
@@ -55,6 +55,6 @@
     "mocha": "^3.0.2",
     "power-assert": "^1.4.2",
     "tslint": "^3.15.1",
-    "typescript": "^2.1.5"
+    "typescript": "^2.2.1"
   }
 }
