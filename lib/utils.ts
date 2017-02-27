@@ -1,7 +1,5 @@
 import * as ts from "typescript";
 
-import * as expand from "glob-expand";
-
 import * as fs from "fs";
 import * as path from "path";
 
@@ -44,7 +42,6 @@ export function readFilesFromTsconfig(configPath: string): string[] {
 
     interface TsConfigJSON {
         files?: string[];
-        filesGlob?: string[];
         include?: string[];
         exclude?: string[];
     }
@@ -56,8 +53,6 @@ export function readFilesFromTsconfig(configPath: string): string[] {
     } else if (tsconfig.files) {
         let files: string[] = tsconfig.files;
         return files.map(filePath => path.resolve(tsconfigDir, filePath));
-    } else if (tsconfig.filesGlob) {
-        return expand({ filter: "isFile", cwd: tsconfigDir }, tsconfig.filesGlob);
     } else if (tsconfig.include || tsconfig.exclude) {
         return tsMatchFiles(tsconfig.exclude || [], tsconfig.include || []);
     } else {

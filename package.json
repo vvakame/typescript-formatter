@@ -32,14 +32,12 @@
   },
   "dependencies": {
     "commandpost": "^1.0.0",
-    "editorconfig": "^0.13.2",
-    "glob-expand": "^0.2.1"
+    "editorconfig": "^0.13.2"
   },
   "peerDependencies": {
     "typescript": "^2.0.6 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev"
   },
   "devDependencies": {
-    "@types/glob-expand": "^0.0.30",
     "@types/mkdirp": "^0.3.29",
     "@types/mocha": "^2.2.33",
     "@types/node": "^7.0.5",
