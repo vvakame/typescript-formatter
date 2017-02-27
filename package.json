@@ -44,7 +44,6 @@
     "@types/mocha": "^2.2.33",
     "@types/node": "^7.0.5",
     "@types/power-assert": "^1.4.29",
-    "es6-promise": "^4.0.5",
     "espower-loader": "^1.2.0",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.0.0",

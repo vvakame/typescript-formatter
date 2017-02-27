@@ -1,10 +1,3 @@
-/* tslint:disable:no-empty */
-try {
-    // cackward compatibility for node v0.12
-    require("es6-promise").polyfill();
-} catch (e) {
-}
-/* tslint:enable:no-empty */
 try {
     require("typescript");
 } catch (e) {
