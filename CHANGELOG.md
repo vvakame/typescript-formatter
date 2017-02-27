@@ -1,3 +1,14 @@
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/vvakame/typescript-formatter/compare/4.1.2...v4.2.0) (2017-02-27)
+
+
+### Features
+
+* **tsfmt:** add .vscode/settings.json support [#70](https://github.com/vvakame/typescript-formatter/issues/70) ([2d9fbed](https://github.com/vvakame/typescript-formatter/commit/2d9fbed))
+* **tsfmt:** add `extends` of tsconfig.json support [#77](https://github.com/vvakame/typescript-formatter/issues/77) ([8b31561](https://github.com/vvakame/typescript-formatter/commit/8b31561))
+
+
+
 <a name="4.1.2"></a>
 ## [4.1.2](https://github.com/vvakame/typescript-formatter/compare/4.1.1...v4.1.2) (2017-02-23)
 
