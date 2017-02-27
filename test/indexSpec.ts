@@ -1,5 +1,3 @@
-require("es6-promise").polyfill();
-
 import * as assert from "power-assert";
 
 import fs = require("fs");
