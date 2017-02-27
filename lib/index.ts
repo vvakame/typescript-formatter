@@ -10,6 +10,7 @@ import base from "./provider/base";
 import tsconfigjson from "./provider/tsconfigjson";
 import editorconfig, { postProcess as editorconfigPostProcess } from "./provider/editorconfig";
 import tslintjson, { postProcess as tslintPostProcess } from "./provider/tslintjson";
+import vscodesettings from "./provider/vscodesettings";
 
 export interface Options {
     dryRun?: boolean;
@@ -20,6 +21,7 @@ export interface Options {
     tsconfig: boolean;
     tslint: boolean;
     editorconfig: boolean;
+    vscode: boolean;
     tsfmt: boolean;
 }
 
@@ -46,7 +48,7 @@ class Processor {
             if (optionModifiers.length === 0) {
                 return Promise.resolve(formatSettings);
             }
-            let modifier = optionModifiers.shift() !;
+            let modifier = optionModifiers.shift()!;
             let ret = modifier(fileName, opts, formatSettings);
             return Promise.resolve(ret).then(formatSettings => next(formatSettings));
         };
@@ -65,7 +67,7 @@ class Processor {
             if (postProcessors.length === 0) {
                 return Promise.resolve(formattedCode);
             }
-            let processor = postProcessors.shift() !;
+            let processor = postProcessors.shift()!;
             let ret = processor(fileName, formattedCode, opts, formatSettings);
             return Promise.resolve(ret).then(formattedCode => next(formattedCode));
         };
@@ -147,6 +149,9 @@ export function processString(fileName: string, content: string, opts: Options):
     if (opts.tslint) {
         processor.addOptionModify(tslintjson);
         processor.addPostProcess(tslintPostProcess);
+    }
+    if (opts.vscode) {
+        processor.addOptionModify(vscodesettings);
     }
     processor.addPostProcess((_fileName: string, formattedCode: string, _opts: Options, formatSettings: ts.FormatCodeSettings) => {
         // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.

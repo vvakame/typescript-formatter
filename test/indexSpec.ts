@@ -115,6 +115,7 @@ describe("tsfmt test", () => {
                             tsconfig: true,
                             tslint: true,
                             editorconfig: true,
+                            vscode: true,
                             tsfmt: true
                         })
                         .then(resultMap => {
@@ -168,6 +169,7 @@ describe("tsfmt test", () => {
                     tsconfig: true,
                     tslint: true,
                     editorconfig: true,
+                    vscode: true,
                     tsfmt: true
                 })
                 .then(resultMap => {
@@ -191,6 +193,7 @@ describe("tsfmt test", () => {
                     tsconfig: true,
                     tslint: true,
                     editorconfig: true,
+                    vscode: true,
                     tsfmt: true
                 })
                 .then(result => {
