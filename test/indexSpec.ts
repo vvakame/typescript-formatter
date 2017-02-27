@@ -99,7 +99,7 @@ describe("tsfmt test", () => {
                 let ignoreList = [
                     "./test/fixture/editorconfig/space/main.ts", // TypeScript ignore indentSize: 8
                     "./test/fixture/tsfmt/a/main.ts", // TypeScript ignore indentSize: 1
-                    "./test/fixture/tslint/indent/main.ts" // TypeScript ignore indentSize: 6
+                    "./test/fixture/tslint/indent/main.ts", // TypeScript ignore indentSize: 6
                 ];
                 if (ignoreList.indexOf(fileName) !== -1) {
                     it.skip(fileName, () => {
@@ -107,6 +107,11 @@ describe("tsfmt test", () => {
                     });
                     return;
                 }
+                if (fileName.indexOf("./test/fixture/specified-config/") === 0) {
+                    // uses later.
+                    return;
+                }
+
                 it(fileName, () => {
                     return lib
                         .processFiles([fileName], {
@@ -114,10 +119,13 @@ describe("tsfmt test", () => {
                             replace: false,
                             verify: false,
                             tsconfig: true,
+                            tsconfigFile: null,
                             tslint: true,
+                            tslintFile: null,
                             editorconfig: true,
                             vscode: true,
-                            tsfmt: true
+                            tsfmt: true,
+                            tsfmtFile: null,
                         })
                         .then(resultMap => {
                             let result = resultMap[fileName];
@@ -169,10 +177,13 @@ describe("tsfmt test", () => {
                     replace: false,
                     verify: true,
                     tsconfig: true,
+                    tsconfigFile: null,
                     tslint: true,
+                    tslintFile: null,
                     editorconfig: true,
                     vscode: true,
-                    tsfmt: true
+                    tsfmt: true,
+                    tsfmtFile: null,
                 })
                 .then(resultMap => {
                     assert(resultMap[fileName].error);
@@ -193,16 +204,93 @@ describe("tsfmt test", () => {
                     replace: false,
                     verify: false,
                     tsconfig: true,
+                    tsconfigFile: null,
                     tslint: true,
+                    tslintFile: null,
                     editorconfig: true,
                     vscode: true,
-                    tsfmt: true
+                    tsfmt: true,
+                    tsfmtFile: null,
                 })
                 .then(result => {
                     assert(result !== null);
                     assert(result.error === false);
                     assert(result.dest === "class Sample { getString(): string { return \"hi!\"; } }");
                 });
+        });
+    });
+
+    describe("use specified config", () => {
+        interface Matrix {
+            name: string;
+            settings: Partial<lib.Options>;
+            targetFile: string;
+        }
+        const list: Matrix[] = [
+            {
+                name: "tsconfig.json",
+                settings: {
+                    tsconfigFile: "alt-tsconfig.json",
+                },
+                targetFile: "./test/fixture/specified-config/tsconfig/main.ts",
+            },
+            {
+                name: "tslint.json",
+                settings: {
+                    tslintFile: "alt-tslint.json",
+                },
+                targetFile: "./test/fixture/specified-config/tslint/main.ts",
+            },
+            {
+                name: "tsfmt.json",
+                settings: {
+                    tsfmtFile: "alt-tsfmt.json",
+                },
+                targetFile: "./test/fixture/specified-config/tsfmt/main.ts",
+            },
+        ];
+
+        list.forEach(matrix => {
+            it(`uses specified ${matrix.name} file`, () => {
+                return lib
+                    .processFiles([matrix.targetFile], Object.assign({}, {
+                        dryRun: true,
+                        replace: false,
+                        verify: false,
+                        tsconfig: true,
+                        tsconfigFile: null,
+                        tslint: true,
+                        tslintFile: null,
+                        editorconfig: true,
+                        vscode: true,
+                        tsfmt: true,
+                        tsfmtFile: null,
+                    }, matrix.settings))
+                    .then(resultMap => {
+                        let result = resultMap[matrix.targetFile];
+                        assert(result !== null);
+                        assert(result.error === false);
+
+                        let expectedTsFileName = matrix.targetFile.replace(fixtureDir, expectedDir);
+
+                        if (!fs.existsSync(expectedTsFileName)) {
+                            mkdirp.sync(path.dirname(expectedTsFileName));
+                            fs.writeFileSync(expectedTsFileName, result.dest);
+                        }
+
+                        let expected = fs.readFileSync(expectedTsFileName, "utf-8");
+                        assert(expected === result.dest);
+
+                        let expectedSettingsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
+
+                        if (!fs.existsSync(expectedSettingsFileName)) {
+                            fs.writeFileSync(expectedSettingsFileName, JSON.stringify(result.settings, null, 2));
+                        }
+
+                        let expectedSettings = lib.parseJSON(fs.readFileSync(expectedSettingsFileName, "utf-8"));
+                        assert.deepEqual(expectedSettings, result.settings);
+                    });
+            });
         });
     });
 

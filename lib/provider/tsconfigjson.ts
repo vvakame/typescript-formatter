@@ -9,7 +9,12 @@ import { getConfigFileName, parseJSON } from "../utils";
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName = getConfigFileName(baseDir, "tsconfig.json");
+    let configFileName: string | null;
+    if (opts.tsconfigFile && path.isAbsolute(opts.tsconfigFile)) {
+        configFileName = opts.tsconfigFile;
+    } else {
+        configFileName = getConfigFileName(baseDir, opts.tsconfigFile || "tsconfig.json");
+    }
     if (!configFileName) {
         return formatSettings;
     }

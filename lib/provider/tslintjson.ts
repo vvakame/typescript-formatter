@@ -32,10 +32,16 @@ export interface AdditionalFormatSettings {
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName = getConfigFileName(baseDir, "tslint.json");
+    let configFileName: string | null;
+    if (opts.tslintFile && path.isAbsolute(opts.tslintFile)) {
+        configFileName = opts.tslintFile;
+    } else {
+        configFileName = getConfigFileName(baseDir, opts.tslintFile || "tslint.json");
+    }
     if (!configFileName) {
         return formatSettings;
     }
+
     if (opts.verbose) {
         console.log(`read ${configFileName} for ${fileName}`);
     }
@@ -75,7 +81,12 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
 export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatSettings: ts.FormatCodeSettings): string {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName = getConfigFileName(baseDir, "tslint.json");
+    let configFileName: string | null;
+    if (opts.tslintFile && path.isAbsolute(opts.tslintFile)) {
+        configFileName = opts.tslintFile;
+    } else {
+        configFileName = getConfigFileName(baseDir, opts.tslintFile || "tslint.json");
+    }
     if (!configFileName) {
         return formattedCode;
     }

@@ -38,7 +38,12 @@ interface TsfmtSettings {
 
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName = getConfigFileName(baseDir, "tsfmt.json");
+    let configFileName: string | null;
+    if (opts.tsfmtFile && path.isAbsolute(opts.tsfmtFile)) {
+        configFileName = opts.tsfmtFile;
+    } else {
+        configFileName = getConfigFileName(baseDir, opts.tsfmtFile || "tsfmt.json");
+    }
     if (!configFileName) {
         return formatSettings;
     }

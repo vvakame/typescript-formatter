@@ -8,16 +8,19 @@ $ tsfmt --help
 
   Options:
 
-    -r, --replace      replace .ts file
-    --verify           checking file format
-    --baseDir <path>   config file lookup from <path>
-    --stdin            get formatting content from stdin
-    --no-tsconfig      don't read a tsconfig.json
-    --no-tslint        don't read a tslint.json
-    --no-editorconfig  don't read a .editorconfig
-    --no-vscode        don't read a .vscode/settings.json
-    --no-tsfmt         don't read a tsfmt.json
-    --verbose          makes output more verbose
+    -r, --replace         replace .ts file
+    --verify              checking file format
+    --baseDir <path>      config file lookup from <path>
+    --stdin               get formatting content from stdin
+    --no-tsconfig         don't read a tsconfig.json
+    --no-tslint           don't read a tslint.json
+    --no-editorconfig     don't read a .editorconfig
+    --no-vscode           don't read a .vscode/settings.json
+    --no-tsfmt            don't read a tsfmt.json
+    --useTsconfig <path>  using specified config file insteaf of tsconfig.json
+    --useTslint <path>    using specified config file insteaf of tslint.json
+    --useTsfmt <path>     using specified config file insteaf of tsfmt.json
+    --verbose             makes output more verbose
 ```
 
 ## Installation
