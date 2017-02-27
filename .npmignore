@@ -3,6 +3,7 @@
 # for npm
 node_modules/
 npm-shrinkwrap.json
+yarn.lock
 
 # for grunt
 .tscache/
