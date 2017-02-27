@@ -12,6 +12,7 @@ try {
 }
 
 import * as fs from "fs";
+import * as path from "path";
 import * as commandpost from "commandpost";
 
 import * as lib from "./";
@@ -29,6 +30,9 @@ interface RootOptions {
     editorconfig: boolean;
     vscode: boolean;
     tsfmt: boolean;
+    useTsconfig: string[];
+    useTslint: string[];
+    useTsfmt: string[];
     verbose: boolean;
 }
 
@@ -48,6 +52,9 @@ let root = commandpost
     .option("--no-editorconfig", "don't read a .editorconfig")
     .option("--no-vscode", "don't read a .vscode/settings.json")
     .option("--no-tsfmt", "don't read a tsfmt.json")
+    .option("--useTsconfig <path>", "using specified config file insteaf of tsconfig.json")
+    .option("--useTslint <path>", "using specified config file insteaf of tslint.json")
+    .option("--useTsfmt <path>", "using specified config file insteaf of tsfmt.json")
     .option("--verbose", "makes output more verbose")
     .action((opts, args) => {
         let replace = !!opts.replace;
@@ -59,6 +66,9 @@ let root = commandpost
         let editorconfig = !!opts.editorconfig;
         let vscode = !!opts.vscode;
         let tsfmt = !!opts.tsfmt;
+        let tsconfigFile = opts.useTsconfig[0] ? path.join(process.cwd(), opts.useTsconfig[0]) : null;
+        let tslintFile = opts.useTslint[0] ? path.join(process.cwd(), opts.useTslint[0]) : null;
+        let tsfmtFile = opts.useTsfmt[0] ? path.join(process.cwd(), opts.useTsfmt[0]) : null;
         let verbose = !!opts.verbose;
 
         let files = args.files;
@@ -86,10 +96,19 @@ let root = commandpost
             console.log("stdin:		" + (stdin ? "ON" : "OFF"));
             console.log("files from tsconfig:	 " + (useTsconfig ? "ON" : "OFF"));
             console.log("tsconfig:	 " + (tsconfig ? "ON" : "OFF"));
+            if (tsconfigFile) {
+                console.log("specified tsconfig.json:	 " + tsconfigFile);
+            }
             console.log("tslint:	   " + (tslint ? "ON" : "OFF"));
+            if (tslintFile) {
+                console.log("specified tslint.json:	 " + tslintFile);
+            }
             console.log("editorconfig: " + (editorconfig ? "ON" : "OFF"));
             console.log("vscode:    " + (vscode ? "ON" : "OFF"));
             console.log("tsfmt:		" + (tsfmt ? "ON" : "OFF"));
+            if (tsfmtFile) {
+                console.log("specified tsfmt.json:	 " + tsfmtFile);
+            }
         }
 
         if (stdin) {
@@ -103,10 +122,13 @@ let root = commandpost
                     verify: verify,
                     baseDir: baseDir,
                     tsconfig: tsconfig,
+                    tsconfigFile: tsconfigFile,
                     tslint: tslint,
+                    tslintFile: tslintFile,
                     editorconfig: editorconfig,
                     vscode: vscode,
                     tsfmt: tsfmt,
+                    tsfmtFile: tsfmtFile,
                     verbose: verbose,
                 })
                 .then(result => {
@@ -123,10 +145,13 @@ let root = commandpost
                     verify: verify,
                     baseDir: baseDir,
                     tsconfig: tsconfig,
+                    tsconfigFile: tsconfigFile,
                     tslint: tslint,
+                    tslintFile: tslintFile,
                     editorconfig: editorconfig,
                     vscode: vscode,
                     tsfmt: tsfmt,
+                    tsfmtFile: tsfmtFile,
                     verbose: verbose,
                 })
                 .then(showResultHandler)

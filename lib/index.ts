@@ -19,10 +19,13 @@ export interface Options {
     replace: boolean;
     verify: boolean;
     tsconfig: boolean;
+    tsconfigFile: string | null;
     tslint: boolean;
+    tslintFile: string | null;
     editorconfig: boolean;
     vscode: boolean;
     tsfmt: boolean;
+    tsfmtFile: string | null;
 }
 
 export interface OptionModifier {
