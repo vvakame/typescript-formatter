@@ -5,9 +5,6 @@ node_modules/
 npm-shrinkwrap.json
 yarn.lock
 
-# for grunt
-.tscache/
-
 # codes
 test/
 
@@ -16,11 +13,11 @@ lib/**/*.ts
 !lib/**/*.d.ts
 
 # misc
+.vscode/
 .gitignore
 .editorconfig
 .travis.yml
 circle.yml
-setup.sh
 Gruntfile.js
 _tslint.json
 
