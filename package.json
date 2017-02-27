@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@types/glob-expand": "^0.0.30",
+    "@types/mkdirp": "^0.3.29",
     "@types/mocha": "^2.2.33",
     "@types/node": "^7.0.5",
     "@types/power-assert": "^1.4.29",
@@ -52,6 +53,7 @@
     "grunt-mocha-test": "^0.13.2",
     "grunt-tslint": "^4.0.1",
     "load-grunt-tasks": "^3.5.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
     "power-assert": "^1.4.2",
     "tslint": "^4.4.2",

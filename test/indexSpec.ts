@@ -6,6 +6,7 @@ import fs = require("fs");
 import path = require("path");
 import childProcess = require("child_process");
 import stream = require("stream");
+import mkdirp = require("mkdirp");
 
 import lib = require("../lib/");
 
@@ -127,6 +128,7 @@ describe("tsfmt test", () => {
                             // console.log(fileName, expectedFileName);
 
                             if (!fs.existsSync(expectedTsFileName)) {
+                                mkdirp.sync(path.dirname(expectedTsFileName));
                                 fs.writeFileSync(expectedTsFileName, result.dest);
                             }
 
