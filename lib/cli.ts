@@ -27,6 +27,7 @@ interface RootOptions {
     tsconfig: boolean;
     tslint: boolean;
     editorconfig: boolean;
+    vscode: boolean;
     tsfmt: boolean;
     verbose: boolean;
 }
@@ -45,6 +46,7 @@ let root = commandpost
     .option("--no-tsconfig", "don't read a tsconfig.json")
     .option("--no-tslint", "don't read a tslint.json")
     .option("--no-editorconfig", "don't read a .editorconfig")
+    .option("--no-vscode", "don't read a .vscode/settings.json")
     .option("--no-tsfmt", "don't read a tsfmt.json")
     .option("--verbose", "makes output more verbose")
     .action((opts, args) => {
@@ -55,6 +57,7 @@ let root = commandpost
         let tsconfig = !!opts.tsconfig;
         let tslint = !!opts.tslint;
         let editorconfig = !!opts.editorconfig;
+        let vscode = !!opts.vscode;
         let tsfmt = !!opts.tsfmt;
         let verbose = !!opts.verbose;
 
@@ -85,6 +88,7 @@ let root = commandpost
             console.log("tsconfig:	 " + (tsconfig ? "ON" : "OFF"));
             console.log("tslint:	   " + (tslint ? "ON" : "OFF"));
             console.log("editorconfig: " + (editorconfig ? "ON" : "OFF"));
+            console.log("vscode:    " + (vscode ? "ON" : "OFF"));
             console.log("tsfmt:		" + (tsfmt ? "ON" : "OFF"));
         }
 
@@ -101,6 +105,7 @@ let root = commandpost
                     tsconfig: tsconfig,
                     tslint: tslint,
                     editorconfig: editorconfig,
+                    vscode: vscode,
                     tsfmt: tsfmt,
                     verbose: verbose,
                 })
@@ -120,6 +125,7 @@ let root = commandpost
                     tsconfig: tsconfig,
                     tslint: tslint,
                     editorconfig: editorconfig,
+                    vscode: vscode,
                     tsfmt: tsfmt,
                     verbose: verbose,
                 })

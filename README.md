@@ -15,6 +15,7 @@ $ tsfmt --help
     --no-tsconfig      don't read a tsconfig.json
     --no-tslint        don't read a tslint.json
     --no-editorconfig  don't read a .editorconfig
+    --no-vscode        don't read a .vscode/settings.json
     --no-tsfmt         don't read a tsfmt.json
     --verbose          makes output more verbose
 ```
@@ -146,11 +147,33 @@ insert_final_newline = true
 }
 ```
 
+5th. Read settings from .vscode/settings.json ([VisualStudio Code](https://code.visualstudio.com/Docs/customization/userandworkspace))
+
+```json
+{
+  // Place your settings in this file to overwrite default and user settings.
+  "typescript.format.enable": true,
+  "typescript.format.insertSpaceAfterCommaDelimiter": true,
+  "typescript.format.insertSpaceAfterSemicolonInForStatements": true,
+  "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+  "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+  "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
+  "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false
+}
+```
+
 ### Read Settings Rules
 
 ```
 $ tree -a
 .
+├── .vscode
+│   └── settings.json
 ├── foo
 │   ├── bar
 │   │   ├── .editorconfig
@@ -161,12 +184,12 @@ $ tree -a
 │   └── tsfmt.json
 └── tslint.json
 
-3 directories, 6 files
+4 directories, 7 files
 ```
 
 1. exec `$ tsfmt -r foo/bar/buzz.ts foo/fuga/piyo.ts`
-2. for foo/bar/buzz.ts, read foo/tsfmt.json and foo/bar/.editorconfig and ./tslint.json
-3. for foo/fuga/piyo.ts, read foo/fuga/tsfmt.json and ./tslint.json
+2. for foo/bar/buzz.ts, read foo/tsfmt.json and foo/bar/.editorconfig and ./tslint.json and .vscode/settings.json
+3. for foo/fuga/piyo.ts, read foo/fuga/tsfmt.json and ./tslint.json and .vscode/settings.json
 
 ## Change Log
 
