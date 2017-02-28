@@ -39,57 +39,25 @@ export function getConfigFileName(baseDir: string, configFileName: string): stri
 }
 
 export function readFilesFromTsconfig(configPath: string): string[] {
+    return readTsconfig(configPath).fileNames;
+}
 
-    interface TsConfigJSON {
-        files?: string[];
-        include?: string[];
-        exclude?: string[];
+export function readTsconfig(configPath: string): ts.ParsedCommandLine {
+    // for `extends` support. It supported from TypeScript 2.1.1.
+    // `& { readFile(path: string): string; }` is backword compat for TypeScript compiler 2.0.3 support.
+    const host: ts.ParseConfigHost & { readFile(path: string): string; } = {
+        useCaseSensitiveFileNames: ts.sys.useCaseSensitiveFileNames,
+        readDirectory: ts.sys.readDirectory,
+        fileExists: path => fs.existsSync(path),
+        readFile: (path: string) => fs.readFileSync(path, "utf-8"),
+    };
+    let rootConfig = parseJSON(fs.readFileSync(configPath, "utf-8"));
+    let parsed = ts.parseJsonConfigFileContent(rootConfig, host, path.dirname(configPath));
+    if (parsed.errors && parsed.errors.length !== 0) {
+        throw new Error(parsed.errors.map(e => e.messageText).join("\n"));
     }
 
-    let tsconfigDir = path.dirname(configPath);
-    let tsconfig: TsConfigJSON = parseJSON(fs.readFileSync(configPath, "utf-8"));
-    if (tsconfig.files && (tsconfig.include || tsconfig.exclude)) {
-        return tsconfig.files.concat(tsMatchFiles(tsconfig.exclude || [], tsconfig.include || []));
-    } else if (tsconfig.files) {
-        let files: string[] = tsconfig.files;
-        return files.map(filePath => path.resolve(tsconfigDir, filePath));
-    } else if (tsconfig.include || tsconfig.exclude) {
-        return tsMatchFiles(tsconfig.exclude || [], tsconfig.include || []);
-    } else {
-        return tsMatchFiles([], []);
-    }
-
-    function tsMatchFiles(excludes: string[], includes: string[]) {
-        interface TsMatchFiles {
-            (path: string, extensions: string[], excludes: string[], includes: string[], useCaseSensitiveFileNames: boolean, currentDirectory: string, getFileSystemEntries: (path: string) => TsFileSystemEntries): string[];
-        }
-        interface TsFileSystemEntries {
-            files: string[];
-            directories: string[];
-        }
-
-        let f: TsMatchFiles = (ts as any).matchFiles;
-        if (!f) {
-            throw new Error("ts.matchFiles is not exists. typescript@^2.0.0 required");
-        }
-        return f(tsconfigDir, [".ts", ".tsx"], excludes, includes, true, tsconfigDir, dirPath => {
-            let stat = fs.statSync(dirPath);
-            if (stat.isDirectory()) {
-                let result: TsFileSystemEntries = { files: [], directories: [] };
-                let dirEntries = fs.readdirSync(dirPath);
-                dirEntries.forEach(entry => {
-                    let stat = fs.statSync(path.join(dirPath, entry));
-                    if (stat.isDirectory()) {
-                        result.directories.push(entry);
-                    } else if (stat.isFile()) {
-                        result.files.push(entry);
-                    }
-                });
-                return result;
-            }
-            return { files: [], directories: [] };
-        });
-    }
+    return parsed;
 }
 
 export function parseJSON(jsonText: string): any {
