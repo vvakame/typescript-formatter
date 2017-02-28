@@ -35,7 +35,7 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     let rootConfig = parseJSON(fs.readFileSync(configFileName, "utf-8"));
     let parsed = ts.parseJsonConfigFileContent(rootConfig, host, baseDir);
     if (parsed.errors && parsed.errors.length !== 0) {
-        throw new Error(parsed.errors.join("\n"));
+        throw new Error(parsed.errors.map(e => e.messageText).join("\n"));
     }
 
     if (parsed.options.newLine === ts.NewLineKind.CarriageReturnLineFeed) {
