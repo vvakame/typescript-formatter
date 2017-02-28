@@ -1,3 +1,13 @@
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/vvakame/typescript-formatter/compare/4.2.0...v4.2.1) (2017-02-28)
+
+
+### Bug Fixes
+
+* **tsfmt:** fix procedd of error message generation ([5bab796](https://github.com/vvakame/typescript-formatter/commit/5bab796))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/vvakame/typescript-formatter/compare/4.2.0...v5.0.0) (2017-02-27)
 
