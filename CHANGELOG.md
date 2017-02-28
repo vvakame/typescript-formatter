@@ -1,3 +1,25 @@
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/vvakame/typescript-formatter/compare/4.2.1...v5.0.1) (2017-02-28)
+
+
+### Bug Fixes
+
+* **tsfmt:** use ts.sys.readDirectory and ts.parseJsonConfigFileContent completely [#77](https://github.com/vvakame/typescript-formatter/issues/77) [#84](https://github.com/vvakame/typescript-formatter/issues/84) ([4dd3f55](https://github.com/vvakame/typescript-formatter/commit/4dd3f55))
+
+
+
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/vvakame/typescript-formatter/compare/4.2.0...5.0.0) (2017-02-27)
+
+
+### Features
+
+* **tsfmt:** add --useTsconfig, --useTsfmt, --useTslint options to CLI closes [#67](https://github.com/vvakame/typescript-formatter/issues/67) ([025c543](https://github.com/vvakame/typescript-formatter/commit/025c543))
+* **tsfmt:** drop tsconfig.json's filesGlob support, it is unofficial field. ([3b0d38f](https://github.com/vvakame/typescript-formatter/commit/3b0d38f))
+* **tsfmt:** remove es6-promise devDependencies ([03ce823](https://github.com/vvakame/typescript-formatter/commit/03ce823))
+
+
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/vvakame/typescript-formatter/compare/4.2.0...v4.2.1) (2017-02-28)
 
