@@ -4,6 +4,8 @@ node_modules/
 typings/
 .tscache/
 
+npm-debug.log
+
 lib/**/*.js
 lib/**/*.js.map
 lib/**/*.d.ts
