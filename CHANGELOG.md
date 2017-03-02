@@ -1,3 +1,15 @@
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/vvakame/typescript-formatter/compare/5.0.1...v5.1.0) (2017-03-02)
+
+
+### Features
+
+* **api:** print tsc version when exec --version ([17a16ac](https://github.com/vvakame/typescript-formatter/commit/17a16ac))
+* **tsfmt:** clean up verbose printing ([64ac10f](https://github.com/vvakame/typescript-formatter/commit/64ac10f))
+* **tsfmt:** support new 6 settings ([4f21283](https://github.com/vvakame/typescript-formatter/commit/4f21283)) 
+  * see [default settings](https://github.com/vvakame/typescript-formatter#read-settings-from-files).
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/vvakame/typescript-formatter/compare/4.2.1...v5.0.1) (2017-02-28)
 
