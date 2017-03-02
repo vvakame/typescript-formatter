@@ -13,7 +13,7 @@ import * as commandpost from "commandpost";
 import * as lib from "./";
 import { getConfigFileName, readFilesFromTsconfig } from "./utils";
 
-const packageJson = JSON.parse(fs.readFileSync(path.join( __dirname, "../package.json")).toString());
+const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json")).toString());
 
 interface RootOptions {
     replace: boolean;

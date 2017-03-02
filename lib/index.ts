@@ -13,7 +13,7 @@ import editorconfig, { postProcess as editorconfigPostProcess } from "./provider
 import tslintjson, { postProcess as tslintPostProcess } from "./provider/tslintjson";
 import vscodesettings from "./provider/vscodesettings";
 
-const packageJson = JSON.parse(fs.readFileSync(path.join( __dirname, "../package.json")).toString());
+const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json")).toString());
 export const version = packageJson.version;
 
 export interface Options {

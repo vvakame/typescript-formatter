@@ -7,27 +7,22 @@ import { Options } from "../";
 import { getConfigFileName, parseJSON } from "../utils";
 
 interface TsfmtSettings {
-    // from FormatCodeOptions
-    // コンマ区切り記号の後にスペースを追加する
     insertSpaceAfterCommaDelimiter?: boolean;
-    // 'for' ステートメントでセミコロンの後にスペースを挿入する
     insertSpaceAfterSemicolonInForStatements?: boolean;
-    // 二項演算子の前後にスペースを挿入する
     insertSpaceBeforeAndAfterBinaryOperators?: boolean;
-    // 制御フローステートメント内のキーワードの後にスペースを追加する
+    insertSpaceAfterConstructor?: boolean;
     insertSpaceAfterKeywordsInControlFlowStatements?: boolean;
-    // 匿名関数に対する関数キーワードの後にスペースを追加する
     insertSpaceAfterFunctionKeywordForAnonymousFunctions?: boolean;
-    // かっこ内が空でない場合に始め括弧の後ろと終わりカッコの前にスペースを挿入する
     insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets?: boolean;
-    // template string literalsの括弧内にスペースを挿入する
+    insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces?: boolean;
-    // 新しい行に関数の始め中括弧を配置する
+    insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces?: boolean;
+    insertSpaceAfterTypeAssertion?: boolean;
+    insertSpaceBeforeFunctionParenthesis?: boolean;
     placeOpenBraceOnNewLineForFunctions?: boolean;
-    // 新しい行にコントロールブロックの始め中括弧を配置する
     placeOpenBraceOnNewLineForControlBlocks?: boolean;
-    // from EditorOptions
+    baseIndentSize?: number;
     indentSize?: number;
     // 0, 1, 2 or None, Block, Smart
     indentStyle?: number | string;
@@ -62,6 +57,9 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     if (typeof config.insertSpaceBeforeAndAfterBinaryOperators === "boolean") {
         formatSettings.insertSpaceBeforeAndAfterBinaryOperators = config.insertSpaceBeforeAndAfterBinaryOperators;
     }
+    if (typeof config.insertSpaceAfterConstructor === "boolean") {
+        formatSettings.insertSpaceAfterConstructor = config.insertSpaceAfterConstructor;
+    }
     if (typeof config.insertSpaceAfterKeywordsInControlFlowStatements === "boolean") {
         formatSettings.insertSpaceAfterKeywordsInControlFlowStatements = config.insertSpaceAfterKeywordsInControlFlowStatements;
     }
@@ -71,17 +69,32 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis === "boolean") {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis;
     }
+    if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces === "boolean") {
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces;
+    }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets === "boolean") {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets;
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces === "boolean") {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = config.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces;
     }
+    if (typeof config.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces === "boolean") {
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = config.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces;
+    }
+    if (typeof config.insertSpaceAfterTypeAssertion === "boolean") {
+        formatSettings.insertSpaceAfterTypeAssertion = config.insertSpaceAfterTypeAssertion;
+    }
+    if (typeof config.insertSpaceBeforeFunctionParenthesis === "boolean") {
+        formatSettings.insertSpaceBeforeFunctionParenthesis = config.insertSpaceBeforeFunctionParenthesis;
+    }
     if (typeof config.placeOpenBraceOnNewLineForFunctions === "boolean") {
         formatSettings.placeOpenBraceOnNewLineForFunctions = config.placeOpenBraceOnNewLineForFunctions;
     }
     if (typeof config.placeOpenBraceOnNewLineForControlBlocks === "boolean") {
         formatSettings.placeOpenBraceOnNewLineForControlBlocks = config.placeOpenBraceOnNewLineForControlBlocks;
+    }
+    if (typeof config.baseIndentSize === "number") {
+        formatSettings.baseIndentSize = config.baseIndentSize;
     }
     if (typeof config.indentSize === "number") {
         formatSettings.indentSize = config.indentSize;

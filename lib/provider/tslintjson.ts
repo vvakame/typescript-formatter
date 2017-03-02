@@ -71,6 +71,8 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
                 formatSettings.insertSpaceAfterSemicolonInForStatements = true;
             } else if (value === "check-type") {
                 // none?
+            } else if (value === "check-typecast") {
+                formatSettings.insertSpaceAfterTypeAssertion = true;
             }
         }
     }
