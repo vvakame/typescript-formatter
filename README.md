@@ -89,22 +89,28 @@ now `indentSize` parameter is ignored. it is TypeScript compiler matters.
 
 ```json
 {
+  "baseIndentSize": 0,
   "indentSize": 4,
   "tabSize": 4,
+  "indentStyle": 2,
   "newLineCharacter": "\r\n",
   "convertTabsToSpaces": true,
   "insertSpaceAfterCommaDelimiter": true,
   "insertSpaceAfterSemicolonInForStatements": true,
   "insertSpaceBeforeAndAfterBinaryOperators": true,
+  "insertSpaceAfterConstructor": false,
   "insertSpaceAfterKeywordsInControlFlowStatements": true,
   "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+  "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
+  "insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+  "insertSpaceAfterTypeAssertion": false,
+  "insertSpaceBeforeFunctionParenthesis": false,
   "placeOpenBraceOnNewLineForFunctions": false,
   "placeOpenBraceOnNewLineForControlBlocks": false
 }
-
 ```
 
 2nd. Read settings from tsconfig.json ([tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html))
@@ -144,7 +150,8 @@ insert_final_newline = true
     "whitespace": [true,
       "check-branch",
       "check-operator",
-      "check-separator"
+      "check-separator",
+      "check-typecast"
     ]
   }
 }
