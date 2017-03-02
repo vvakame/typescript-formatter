@@ -5,12 +5,16 @@ import { createDefaultFormatCodeSettings, parseJSON } from "./utils";
 export { parseJSON };
 
 import * as fs from "fs";
+import * as path from "path";
 
 import base from "./provider/base";
 import tsconfigjson from "./provider/tsconfigjson";
 import editorconfig, { postProcess as editorconfigPostProcess } from "./provider/editorconfig";
 import tslintjson, { postProcess as tslintPostProcess } from "./provider/tslintjson";
 import vscodesettings from "./provider/vscodesettings";
+
+const packageJson = JSON.parse(fs.readFileSync(path.join( __dirname, "../package.json")).toString());
+export const version = packageJson.version;
 
 export interface Options {
     dryRun?: boolean;

@@ -4,6 +4,8 @@ try {
     console.error("typescript is required. please try 'npm install -g typescript'\n");
 }
 
+import * as ts from "typescript";
+
 import * as fs from "fs";
 import * as path from "path";
 import * as commandpost from "commandpost";
@@ -11,7 +13,7 @@ import * as commandpost from "commandpost";
 import * as lib from "./";
 import { getConfigFileName, readFilesFromTsconfig } from "./utils";
 
-let packageJson = JSON.parse(fs.readFileSync(__dirname + "/../package.json").toString());
+const packageJson = JSON.parse(fs.readFileSync(path.join( __dirname, "../package.json")).toString());
 
 interface RootOptions {
     replace: boolean;
@@ -27,6 +29,7 @@ interface RootOptions {
     useTslint: string[];
     useTsfmt: string[];
     verbose: boolean;
+    version: boolean;
 }
 
 interface RootArguments {
@@ -35,7 +38,6 @@ interface RootArguments {
 
 let root = commandpost
     .create<RootOptions, RootArguments>("tsfmt [files...]")
-    .version(packageJson.version, "-v, --version")
     .option("-r, --replace", "replace .ts file")
     .option("--verify", "checking file format")
     .option("--baseDir <path>", "config file lookup from <path>")
@@ -49,6 +51,7 @@ let root = commandpost
     .option("--useTslint <path>", "using specified config file insteaf of tslint.json")
     .option("--useTsfmt <path>", "using specified config file insteaf of tsfmt.json")
     .option("--verbose", "makes output more verbose")
+    .option("-v, --version", "output the version number")
     .action((opts, args) => {
         let replace = !!opts.replace;
         let verify = !!opts.verify;
@@ -63,6 +66,13 @@ let root = commandpost
         let tslintFile = opts.useTslint[0] ? path.join(process.cwd(), opts.useTslint[0]) : null;
         let tsfmtFile = opts.useTsfmt[0] ? path.join(process.cwd(), opts.useTsfmt[0]) : null;
         let verbose = !!opts.verbose;
+        let version = !!opts.version;
+
+        if (version) {
+            console.log(`tsfmt : ${packageJson.version}`);
+            console.log(`tsc   : ${ts.version}`);
+            return;
+        }
 
         let files = args.files;
         let useTsconfig = false;
