@@ -83,25 +83,51 @@ let root = commandpost
         }
 
         if (verbose) {
-            console.log("replace:	  " + (replace ? "ON" : "OFF"));
-            console.log("verify:	   " + (verify ? "ON" : "OFF"));
-            console.log("baseDir:	   " + (baseDir ? baseDir : process.cwd()));
-            console.log("stdin:		" + (stdin ? "ON" : "OFF"));
-            console.log("files from tsconfig:	 " + (useTsconfig ? "ON" : "OFF"));
-            console.log("tsconfig:	 " + (tsconfig ? "ON" : "OFF"));
+            const printPool: { [name: string]: string; } = {};
+            const printSetting = (name: string, value: string | boolean) => {
+                if (typeof value === "boolean") {
+                    printPool[name] = value ? "ON" : "OFF";
+                } else {
+                    printPool[name] = value;
+                }
+            };
+            const doPrint = () => {
+                const maxLength = Object.keys(printPool).reduce((p, c) => Math.max(p, c.length), 0);
+                Object.keys(printPool).forEach(key => {
+                    const value = printPool[key];
+                    console.log(`${padSpaces(key, maxLength + 1)}: ${value}`);
+                });
+
+                function padSpaces(str: string, len: number) {
+                    let result = str;
+                    while (result.length < len) {
+                        result += " ";
+                    }
+                    return result;
+                }
+            };
+
+            printSetting("replace", replace);
+            printSetting("verify", verify);
+            printSetting("baseDir", baseDir ? baseDir : process.cwd());
+            printSetting("stdin", stdin);
+            printSetting("files from tsconfig", useTsconfig);
+            printSetting("tsconfig", tsconfig);
             if (tsconfigFile) {
-                console.log("specified tsconfig.json:	 " + tsconfigFile);
+                printSetting("specified tsconfig.json", tsconfigFile);
             }
-            console.log("tslint:	   " + (tslint ? "ON" : "OFF"));
+            printSetting("tslint", tslint);
             if (tslintFile) {
-                console.log("specified tslint.json:	 " + tslintFile);
+                printSetting("specified tslint.json", tslintFile);
             }
-            console.log("editorconfig: " + (editorconfig ? "ON" : "OFF"));
-            console.log("vscode:    " + (vscode ? "ON" : "OFF"));
-            console.log("tsfmt:		" + (tsfmt ? "ON" : "OFF"));
+            printSetting("editorconfig", editorconfig);
+            printSetting("vscode", vscode);
+            printSetting("tsfmt", tsfmt);
             if (tsfmtFile) {
-                console.log("specified tsfmt.json:	 " + tsfmtFile);
+                printSetting("specified tsfmt.json", tsfmtFile);
             }
+
+            doPrint();
         }
 
         if (stdin) {
