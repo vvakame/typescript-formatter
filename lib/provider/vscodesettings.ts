@@ -19,6 +19,10 @@ interface VSCodeSettings {
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": boolean;
     "typescript.format.placeOpenBraceOnNewLineForFunctions": boolean;
     "typescript.format.placeOpenBraceOnNewLineForControlBlocks": boolean;
+
+    // NOTE https://github.com/Microsoft/vscode/issues/10296
+    // baseIndentSize, insertSpaceAfterConstructor, insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces
+    // insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces, insertSpaceAfterTypeAssertion, insertSpaceBeforeFunctionParenthesis
 }
 
 export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {

@@ -92,7 +92,7 @@ describe("tsfmt test", () => {
     describe("processFiles function", () => {
         let fileNames = collectFileName(fixtureDir);
         fileNames
-            .filter(fileName => /\.ts$/.test(fileName))
+            .filter(fileName => /\.tsx?$/.test(fileName))
             .forEach(fileName => {
                 let ignoreList = [
                     "./test/fixture/editorconfig/space/main.ts", // TypeScript ignore indentSize: 8
@@ -141,7 +141,7 @@ describe("tsfmt test", () => {
                             let expected = fs.readFileSync(expectedTsFileName, "utf-8");
                             assert(expected === result.dest);
 
-                            let expectedSettingsFileName = expectedTsFileName.replace(/\.ts$/, ".json");
+                            let expectedSettingsFileName = expectedTsFileName.replace(/\.tsx?$/, ".json");
 
                             if (!fs.existsSync(expectedSettingsFileName)) {
                                 fs.writeFileSync(expectedSettingsFileName, JSON.stringify(result.settings, null, 2));

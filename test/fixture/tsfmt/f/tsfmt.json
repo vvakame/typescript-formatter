@@ -1,0 +1,6 @@
+{
+    "insertSpaceAfterConstructor": true,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+    "insertSpaceAfterTypeAssertion": true,
+    "insertSpaceBeforeFunctionParenthesis": true
+}

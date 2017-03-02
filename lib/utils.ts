@@ -6,6 +6,7 @@ import * as path from "path";
 export function createDefaultFormatCodeSettings(): ts.FormatCodeSettings {
 
     return {
+        baseIndentSize: 0,
         indentSize: 4,
         tabSize: 4,
         indentStyle: ts.IndentStyle.Smart,
@@ -14,11 +15,16 @@ export function createDefaultFormatCodeSettings(): ts.FormatCodeSettings {
         insertSpaceAfterCommaDelimiter: true,
         insertSpaceAfterSemicolonInForStatements: true,
         insertSpaceBeforeAndAfterBinaryOperators: true,
+        insertSpaceAfterConstructor: false,
         insertSpaceAfterKeywordsInControlFlowStatements: true,
         insertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
         insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
         insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets: false,
+        insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces: true,
         insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces: false,
+        insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces: false,
+        insertSpaceAfterTypeAssertion: false,
+        insertSpaceBeforeFunctionParenthesis: false,
         placeOpenBraceOnNewLineForFunctions: false,
         placeOpenBraceOnNewLineForControlBlocks: false,
     };
