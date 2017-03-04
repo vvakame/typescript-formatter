@@ -27,7 +27,7 @@ export interface Options {
     tslint: boolean;
     tslintFile: string | null;
     editorconfig: boolean;
-    vscode: boolean;
+    vscode?: boolean;
     tsfmt: boolean;
     tsfmtFile: string | null;
 }
