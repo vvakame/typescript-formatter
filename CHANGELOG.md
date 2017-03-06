@@ -4,7 +4,7 @@
 
 ### Bug Fixes
 
-* **tsfmt:** changed vscode to be an optional param [#88](https://github.com/vvakame/typescript-formatter/pull/88) ([5779438] ([5779438](https://github.com/vvakame/typescript-formatter/commit/5779438))
+* **tsfmt:** changed vscode to be an optional param [#88](https://github.com/vvakame/typescript-formatter/pull/88) ([5779438](https://github.com/vvakame/typescript-formatter/commit/5779438))
 
 
 
