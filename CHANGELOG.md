@@ -1,3 +1,13 @@
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/vvakame/typescript-formatter/compare/4.2.1...v4.2.2) (2017-03-06)
+
+
+### Bug Fixes
+
+* **tsfmt:** changed vscode to be an optional param [#88](https://github.com/vvakame/typescript-formatter/pull/88) ([5779438] ([5779438](https://github.com/vvakame/typescript-formatter/commit/5779438))
+
+
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/vvakame/typescript-formatter/compare/4.2.0...v4.2.1) (2017-02-28)
 
