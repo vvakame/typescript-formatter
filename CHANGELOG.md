@@ -1,3 +1,13 @@
+<a name="5.1.2"></a>
+## [5.1.2](https://github.com/vvakame/typescript-formatter/compare/5.1.1...v5.1.2) (2017-03-16)
+
+
+### Bug Fixes
+
+* **tsfmt:** use --useTsconfig value to use when creating target files list fixes [#90](https://github.com/vvakame/typescript-formatter/issues/90) ([1ad2590](https://github.com/vvakame/typescript-formatter/commit/1ad2590))
+
+
+
 <a name="5.1.1"></a>
 ## [5.1.1](https://github.com/vvakame/typescript-formatter/compare/4.2.2...v5.1.1) (2017-03-06)
 
