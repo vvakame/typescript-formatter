@@ -77,7 +77,7 @@ let root = commandpost
         let files = args.files;
         let useTsconfig = false;
         if (files.length === 0) {
-            let configFileName = getConfigFileName(baseDir || process.cwd(), "tsconfig.json");
+            let configFileName = tsconfigFile || getConfigFileName(baseDir || process.cwd(), "tsconfig.json");
             if (configFileName) {
                 files = readFilesFromTsconfig(configFileName);
                 if (verbose) {

@@ -317,5 +317,15 @@ export class TestCLI {
 `.trim().replace(/\n/g, "\r\n"));
             });
         });
+
+        it("should pickup files from --useTsconfig specified tsconfig.json", () => {
+            return exec(path.resolve("./bin/tsfmt"), ["--verify", "--useTsconfig", "./tsconfig.main.json"], { cwd: path.resolve('./test/cli/useTsconfig') }).then(result => {
+                assert.equal(result.status, 1);
+                assert.equal(result.stdout.trim(), "");
+                assert.equal(result.stderr.replace(process.cwd(), "**").trim(), `
+**/test/cli/useTsconfig/include.ts is not formatted
+`.trim().replace(/\n/g, "\r\n"));
+            });
+        });
     });
 });
