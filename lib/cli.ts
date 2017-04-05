@@ -47,9 +47,9 @@ let root = commandpost
     .option("--no-editorconfig", "don't read a .editorconfig")
     .option("--no-vscode", "don't read a .vscode/settings.json")
     .option("--no-tsfmt", "don't read a tsfmt.json")
-    .option("--useTsconfig <path>", "using specified config file insteaf of tsconfig.json")
-    .option("--useTslint <path>", "using specified config file insteaf of tslint.json")
-    .option("--useTsfmt <path>", "using specified config file insteaf of tsfmt.json")
+    .option("--useTsconfig <path>", "using specified config file instead of tsconfig.json")
+    .option("--useTslint <path>", "using specified config file instead of tslint.json")
+    .option("--useTsfmt <path>", "using specified config file instead of tsfmt.json")
     .option("--verbose", "makes output more verbose")
     .option("-v, --version", "output the version number")
     .action((opts, args) => {
