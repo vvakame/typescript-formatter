@@ -17,9 +17,9 @@ $ tsfmt --help
     --no-editorconfig     don't read a .editorconfig
     --no-vscode           don't read a .vscode/settings.json
     --no-tsfmt            don't read a tsfmt.json
-    --useTsconfig <path>  using specified config file insteaf of tsconfig.json
-    --useTslint <path>    using specified config file insteaf of tslint.json
-    --useTsfmt <path>     using specified config file insteaf of tsfmt.json
+    --useTsconfig <path>  using specified config file instead of tsconfig.json
+    --useTslint <path>    using specified config file instead of tslint.json
+    --useTsfmt <path>     using specified config file instead of tsfmt.json
     --verbose             makes output more verbose
 ```
 
