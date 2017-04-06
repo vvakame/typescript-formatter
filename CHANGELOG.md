@@ -1,3 +1,13 @@
+<a name="5.1.3"></a>
+## [5.1.3](https://github.com/vvakame/typescript-formatter/compare/5.1.2...v5.1.3) (2017-04-06)
+
+
+### Bug Fixes
+
+* **tsfmt:** fix typo in cli option description [#93](https://github.com/vvakame/typescript-formatter/pull/93) ([aedf34a](https://github.com/vvakame/typescript-formatter/commit/aedf34a))
+
+
+
 <a name="5.1.2"></a>
 ## [5.1.2](https://github.com/vvakame/typescript-formatter/compare/5.1.1...v5.1.2) (2017-03-16)
 
