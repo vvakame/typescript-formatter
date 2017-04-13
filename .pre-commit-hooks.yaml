@@ -1,0 +1,16 @@
+# pre-commit hook definition
+# See http://pre-commit.com/ for more info
+#
+# To use, add the following to .pre-commit-config.yaml in your repo:
+# -   repo: git@github.com:vvakame/typescript-formatter.git
+#     sha: e3200b7873d03e7b13b7f8d0bd5cb760ed400585
+#     hooks:
+#     -   id: tsfmt
+
+-   id: tsfmt
+    name: TypeScript Formatter (tsfmt)
+    description: TypeScript code auto-formatter.
+    entry: tsfmt
+		args: ['--verify']
+    language: node
+    files: \.tsx?$
