@@ -3,7 +3,7 @@
 #
 # To use, add the following to .pre-commit-config.yaml in your repo:
 # -   repo: git@github.com:vvakame/typescript-formatter.git
-#     sha: e3200b7873d03e7b13b7f8d0bd5cb760ed400585
+#     sha: 5f046cad31fca7cb496ce7add1937ed3a5427569
 #     hooks:
 #     -   id: tsfmt
 
