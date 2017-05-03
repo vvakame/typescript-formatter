@@ -44,7 +44,7 @@ function exec(cmd: string, args: string[], options: childProcess.SpawnOptions): 
             resolve({
                 status: status,
                 stdout: stdout,
-                stderr: stderr
+                stderr: stderr,
             });
         });
     });
@@ -161,7 +161,7 @@ describe("tsfmt test", () => {
 
                             return Promise.all([
                                 checkByTslint(tslintConfigName, fileName, true),
-                                checkByTslint(tslintConfigName, expectedTsFileName, false)
+                                checkByTslint(tslintConfigName, expectedTsFileName, false),
                             ]).then(() => null);
                         });
                 });
@@ -294,7 +294,7 @@ describe("tsfmt test", () => {
 
     describe("CLI test", () => {
         it("should reformat files specified at files in tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli/files') }).then(result => {
+            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve("./test/cli/files") }).then(result => {
                 assert.equal(result.status, 0);
                 assert.equal(result.stdout.trim(), `
 class TestCLI {
@@ -307,7 +307,7 @@ class TestCLI {
         });
 
         it("should reformat files specified at include, exclude in tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve('./test/cli/includeExclude') }).then(result => {
+            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve("./test/cli/includeExclude") }).then(result => {
                 assert.equal(result.status, 0);
                 assert.equal(result.stdout.trim(), `
 export class TestCLI {
@@ -319,7 +319,7 @@ export class TestCLI {
         });
 
         it("should pickup files from --useTsconfig specified tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), ["--verify", "--useTsconfig", "./tsconfig.main.json"], { cwd: path.resolve('./test/cli/useTsconfig') }).then(result => {
+            return exec(path.resolve("./bin/tsfmt"), ["--verify", "--useTsconfig", "./tsconfig.main.json"], { cwd: path.resolve("./test/cli/useTsconfig") }).then(result => {
                 assert.equal(result.status, 1);
                 assert.equal(result.stdout.trim(), "");
                 assert.equal(result.stderr.replace(process.cwd(), "**").trim(), `

@@ -41,6 +41,7 @@
         "node_modules",
         "lib/*.d.ts",
         "lib/provider/*.d.ts",
+        "test/cli",
         "test/expected",
         "test/fixture",
         "example"

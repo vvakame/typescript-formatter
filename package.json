@@ -7,8 +7,8 @@
     "tsfmt": "./bin/tsfmt"
   },
   "scripts": {
-    "build": "grunt default",
-    "test": "grunt test"
+    "build": "tslint --fix --type-check -c _tslint.json -p tsconfig.json && tsfmt -r && tsc",
+    "test": "npm run build && mocha --reporter spec --timeout 20000 --require intelli-espower-loader"
   },
   "keywords": [
     "TypeScript"
@@ -42,18 +42,14 @@
     "@types/mocha": "^2.2.33",
     "@types/node": "^7.0.5",
     "@types/power-assert": "^1.4.29",
-    "espower-loader": "^1.2.0",
     "grunt": "^1.0.1",
-    "grunt-contrib-clean": "^1.0.0",
     "grunt-conventional-changelog": "^6.1.0",
-    "grunt-exec": "^1.0.1",
-    "grunt-mocha-test": "^0.13.2",
-    "grunt-tslint": "^4.0.1",
+    "intelli-espower-loader": "^1.0.1",
     "load-grunt-tasks": "^3.5.0",
     "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
     "power-assert": "^1.4.2",
-    "tslint": "^4.4.2",
-    "typescript": "^2.2.1"
+    "tslint": "^5.1.0",
+    "typescript": "^2.3.2"
   }
 }
