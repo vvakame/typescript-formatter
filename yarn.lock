@@ -1658,6 +1658,13 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+typescript-formatter@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/typescript-formatter/-/typescript-formatter-5.1.3.tgz#97cc9dc397ec20ba96effec24fb8b5676262e62b"
+  dependencies:
+    commandpost "^1.0.0"
+    editorconfig "^0.13.2"
+
 typescript@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.3.2.tgz#f0f045e196f69a72f06b25fd3bd39d01c3ce9984"
