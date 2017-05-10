@@ -1,3 +1,14 @@
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/vvakame/typescript-formatter/compare/5.1.3...5.2.0) (2017-05-10)
+
+
+### Features
+
+* **tsfmt:** update dependencies, use npm-scripts for building ([890836f](https://github.com/vvakame/typescript-formatter/commit/890836f))
+* **tsfmt:** add missing rules recently added by vscode ([#99](https://github.com/vvakame/typescript-formatter/pull/99)) thanks @clebert !
+
+
+
 <a name="5.1.3"></a>
 ## [5.1.3](https://github.com/vvakame/typescript-formatter/compare/5.1.2...v5.1.3) (2017-04-06)
 
