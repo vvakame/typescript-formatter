@@ -15,8 +15,10 @@ interface VSCodeSettings {
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": boolean;
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": boolean;
+    "typescript.format.insertSpaceBeforeFunctionParenthesis": boolean;
     "typescript.format.placeOpenBraceOnNewLineForFunctions": boolean;
     "typescript.format.placeOpenBraceOnNewLineForControlBlocks": boolean;
 
@@ -58,11 +60,17 @@ export default function makeFormatCodeOptions(fileName: string, opts: Options, f
     if (config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets"] != null) {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets"];
     }
+    if (config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces"] != null) {
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces"];
+    }
     if (config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces"] != null) {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces"];
     }
     if (config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces"] != null) {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces"];
+    }
+    if (config["typescript.format.insertSpaceBeforeFunctionParenthesis"] != null) {
+        formatSettings.insertSpaceBeforeFunctionParenthesis = config["typescript.format.insertSpaceBeforeFunctionParenthesis"];
     }
     if (config["typescript.format.placeOpenBraceOnNewLineForFunctions"] != null) {
         formatSettings.placeOpenBraceOnNewLineForFunctions = config["typescript.format.placeOpenBraceOnNewLineForFunctions"];
