@@ -14,9 +14,9 @@
   version "2.2.41"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.41.tgz#e27cf0817153eb9f2713b2d3f6c68f1e1c3ca608"
 
-"@types/node@^7.0.5":
-  version "7.0.32"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.32.tgz#6afe6c66520a4c316623a14aef123908d01b4bba"
+"@types/node@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.4.tgz#d0ca03fa4a3d7ab66c1f4e78a0fd06e30e46a7a9"
 
 "@types/power-assert-formatter@*":
   version "1.4.28"
