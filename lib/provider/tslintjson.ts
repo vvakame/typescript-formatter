@@ -29,7 +29,7 @@ export interface AdditionalFormatSettings {
     $noConsecutiveBlankLines: boolean;
 }
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
+export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName: string | null;

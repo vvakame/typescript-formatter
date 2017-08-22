@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import formatter from "./formatter";
+import { format } from "./formatter";
 import { createDefaultFormatCodeSettings, parseJSON } from "./utils";
 
 export { parseJSON };
@@ -7,11 +7,11 @@ export { parseJSON };
 import * as fs from "fs";
 import * as path from "path";
 
-import base from "./provider/base";
-import tsconfigjson from "./provider/tsconfigjson";
-import editorconfig, { postProcess as editorconfigPostProcess } from "./provider/editorconfig";
-import tslintjson, { postProcess as tslintPostProcess } from "./provider/tslintjson";
-import vscodesettings from "./provider/vscodesettings";
+import * as base from "./provider/base";
+import * as tsconfigjson from "./provider/tsconfigjson";
+import * as editorconfig from "./provider/editorconfig";
+import * as tslintjson from "./provider/tslintjson";
+import * as vscodesettings from "./provider/vscodesettings";
 
 const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json")).toString());
 export const version = packageJson.version;
@@ -144,21 +144,21 @@ export function processString(fileName: string, content: string, opts: Options):
 
     let processor = new Processor();
     if (opts.tsfmt) {
-        processor.addOptionModify(base);
+        processor.addOptionModify(base.makeFormatCodeOptions);
     }
     if (opts.tsconfig) {
-        processor.addOptionModify(tsconfigjson);
+        processor.addOptionModify(tsconfigjson.makeFormatCodeOptions);
     }
     if (opts.editorconfig) {
-        processor.addOptionModify(editorconfig);
-        processor.addPostProcess(editorconfigPostProcess);
+        processor.addOptionModify(editorconfig.makeFormatCodeOptions);
+        processor.addPostProcess(editorconfig.postProcess);
     }
     if (opts.tslint) {
-        processor.addOptionModify(tslintjson);
-        processor.addPostProcess(tslintPostProcess);
+        processor.addOptionModify(tslintjson.makeFormatCodeOptions);
+        processor.addPostProcess(tslintjson.postProcess);
     }
     if (opts.vscode) {
-        processor.addOptionModify(vscodesettings);
+        processor.addOptionModify(vscodesettings.makeFormatCodeOptions);
     }
     processor.addPostProcess((_fileName: string, formattedCode: string, _opts: Options, formatSettings: ts.FormatCodeSettings) => {
         // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
@@ -169,7 +169,7 @@ export function processString(fileName: string, content: string, opts: Options):
     let formatSettings = createDefaultFormatCodeSettings();
     return processor.processFormatCodeOptions(fileName, opts, formatSettings)
         .then(formatSettings => {
-            let formattedCode = formatter(fileName, content, formatSettings);
+            let formattedCode = format(fileName, content, formatSettings);
 
             // apply post process logic
             return processor.postProcess(fileName, formattedCode, opts, formatSettings);

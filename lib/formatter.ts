@@ -18,7 +18,7 @@ class LanguageServiceHost implements ts.LanguageServiceHost {
     getDefaultLibFileName = (_options: ts.CompilerOptions) => "lib";
 }
 
-export default function format(fileName: string, text: string, options = createDefaultFormatCodeSettings()) {
+export function format(fileName: string, text: string, options = createDefaultFormatCodeSettings()) {
     const host = new LanguageServiceHost();
     host.addFile(fileName, text);
 

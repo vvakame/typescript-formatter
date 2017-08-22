@@ -6,7 +6,7 @@ import { Options } from "../";
 
 let emitBaseDirWarning = false;
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): Promise<ts.FormatCodeSettings> {
+export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): Promise<ts.FormatCodeSettings> {
 
     if (opts.verbose && opts.baseDir && !emitBaseDirWarning) {
         console.log("editorconfig is not supported baseDir options");

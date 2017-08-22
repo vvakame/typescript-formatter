@@ -5,7 +5,7 @@ import * as path from "path";
 import { Options } from "../";
 import { getConfigFileName, readTsconfig } from "../utils";
 
-export default function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
+export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName: string | null;
