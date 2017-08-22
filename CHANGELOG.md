@@ -1,3 +1,15 @@
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/vvakame/typescript-formatter/compare/5.2.0...6.0.0) (2017-08-22)
+
+
+### Features
+
+* **tsfmt:** don't use `default` export in our code ([6d04913](https://github.com/vvakame/typescript-formatter/commit/6d04913))
+* **tsfmt:** update peerDependencies, required typescript@^2.1.6 ([d43c3cc](https://github.com/vvakame/typescript-formatter/commit/d43c3cc))
+* **tsfmt:** using Language Service API instead of Old Compiler API ([1520cf8](https://github.com/vvakame/typescript-formatter/commit/1520cf8))
+
+
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/vvakame/typescript-formatter/compare/5.1.3...5.2.0) (2017-05-10)
 
