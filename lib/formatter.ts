@@ -1,47 +1,37 @@
 import * as ts from "typescript";
+
 import { createDefaultFormatCodeSettings } from "./utils";
 
-// from https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter
+class LanguageServiceHost implements ts.LanguageServiceHost {
+    files: { [fileName: string]: ts.IScriptSnapshot; } = {};
+    addFile(fileName: string, text: string) {
+        this.files[fileName] = ts.ScriptSnapshot.fromString(text);
+    }
 
-// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
-//       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
+    // for ts.LanguageServiceHost
+
+    getCompilationSettings = () => ts.getDefaultCompilerOptions();
+    getScriptFileNames = () => Object.keys(this.files);
+    getScriptVersion = (_fileName: string) => "1";
+    getScriptSnapshot = (fileName: string) => this.files[fileName];
+    getCurrentDirectory = () => process.cwd();
+    getDefaultLibFileName = (_options: ts.CompilerOptions) => "lib";
+}
+
 export default function format(fileName: string, text: string, options = createDefaultFormatCodeSettings()) {
+    const host = new LanguageServiceHost();
+    host.addFile(fileName, text);
 
-    // Parse the source text
-    let sourceFile = ts.createSourceFile(fileName, text, ts.ScriptTarget.Latest, true);
+    const languageService = ts.createLanguageService(host, ts.createDocumentRegistry());
+    const edits = languageService.getFormattingEditsForDocument(fileName, options);
+    edits
+        .sort((a, b) => a.span.start - b.span.start)
+        .reverse()
+        .forEach(edit => {
+            const head = text.slice(0, edit.span.start);
+            const tail = text.slice(edit.span.start + edit.span.length);
+            text = `${head}${edit.newText}${tail}`;
+        });
 
-    // Get the formatting edits on the input sources
-    let edits = (ts as any).formatting.formatDocument(sourceFile, getRuleProvider(options), options);
-
-    // Apply the edits on the input code
-    return applyEdits(text, edits);
-
-    function getRuleProvider(settings: ts.FormatCodeSettings) {
-        // Share this between multiple formatters using the same options.
-        // This represents the bulk of the space the formatter uses.
-        let ruleProvider = new (ts as any).formatting.RulesProvider();
-        ruleProvider.ensureUpToDate(settings);
-        return ruleProvider;
-    }
-
-    function applyEdits(text: string, edits: ts.TextChange[]): string {
-        // Apply edits in reverse on the existing text
-        let result = text;
-
-        // An issue with `ts.formatting.formatDocument` is that it does
-        // not always give the edits array in ascending order of change start
-        // point. This can result that we add or remove some character in
-        // the begining of the document, making the all the other edits
-        // offsets invalid. 
-
-        // We resolve this by sorting edits by ascending start point
-        edits.sort((a, b) => a.span.start - b.span.start);
-        for (let i = edits.length - 1; i >= 0; i--) {
-            let change = edits[i];
-            let head = result.slice(0, change.span.start);
-            let tail = result.slice(change.span.start + change.span.length);
-            result = head + change.newText + tail;
-        }
-        return result;
-    }
+    return text;
 }
