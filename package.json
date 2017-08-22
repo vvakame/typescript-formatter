@@ -7,7 +7,7 @@
     "tsfmt": "./bin/tsfmt"
   },
   "scripts": {
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",    
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "build": "tslint --fix --type-check -c _tslint.json -p tsconfig.json && tsfmt -r && tsc",
     "test": "npm run build && mocha --reporter spec --timeout 20000 --require intelli-espower-loader"
   },
@@ -36,7 +36,7 @@
     "editorconfig": "^0.13.2"
   },
   "peerDependencies": {
-    "typescript": "^2.0.6 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev"
+    "typescript": "^2.1.6 || >=2.5.0-dev || >=2.6.0-dev"
   },
   "devDependencies": {
     "@types/mkdirp": "^0.3.29",
