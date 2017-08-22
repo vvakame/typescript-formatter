@@ -22,7 +22,7 @@ export function format(fileName: string, text: string, options = createDefaultFo
     const host = new LanguageServiceHost();
     host.addFile(fileName, text);
 
-    const languageService = ts.createLanguageService(host, ts.createDocumentRegistry());
+    const languageService = ts.createLanguageService(host);
     const edits = languageService.getFormattingEditsForDocument(fileName, options);
     edits
         .sort((a, b) => a.span.start - b.span.start)
