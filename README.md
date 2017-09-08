@@ -1,4 +1,10 @@
-# TypeScript Formatter (tsfmt) [![Build Status](https://travis-ci.org/vvakame/typescript-formatter.svg)](https://travis-ci.org/vvakame/typescript-formatter) [![Dependency Status](https://david-dm.org/vvakame/typescript-formatter.svg?theme=shields.io)](https://david-dm.org/vvakame/typescript-formatter)
+# TypeScript Formatter (tsfmt)
+
+[![npm](https://img.shields.io/npm/v/typescript-formatter.svg)](https://www.npmjs.com/package/typescript-formatter)
+[![Build Status](https://travis-ci.org/vvakame/typescript-formatter.svg)](https://travis-ci.org/vvakame/typescript-formatter)
+[![Dependency Status](https://david-dm.org/vvakame/typescript-formatter.svg?theme=shields.io)](https://david-dm.org/vvakame/typescript-formatter)
+[![npm](https://img.shields.io/npm/dm/typescript-formatter.svg)](https://www.npmjs.com/package/typescript-formatter)
+[![GitHub stars](https://img.shields.io/github/stars/vvakame/typescript-formatter.svg?style=social&label=Star)](https://github.com/vvakame/typescript-formatter/stargazers)
 
 A TypeScript code formatter powered by [TypeScript Compiler Service](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#pretty-printer-using-the-ls-formatter).
 
