@@ -28,6 +28,7 @@ interface RootOptions {
     useTsconfig: string[];
     useTslint: string[];
     useTsfmt: string[];
+    useVscode: string[];
     verbose: boolean;
     version: boolean;
 }
@@ -50,6 +51,7 @@ let root = commandpost
     .option("--useTsconfig <path>", "using specified config file instead of tsconfig.json")
     .option("--useTslint <path>", "using specified config file instead of tslint.json")
     .option("--useTsfmt <path>", "using specified config file instead of tsfmt.json")
+    .option("--useVscode <path>", "using specified config file instead of .vscode/settings.json")
     .option("--verbose", "makes output more verbose")
     .option("-v, --version", "output the version number")
     .action((opts, args) => {
@@ -64,6 +66,7 @@ let root = commandpost
         let tsfmt = !!opts.tsfmt;
         let tsconfigFile = opts.useTsconfig[0] ? path.join(process.cwd(), opts.useTsconfig[0]) : null;
         let tslintFile = opts.useTslint[0] ? path.join(process.cwd(), opts.useTslint[0]) : null;
+        let vscodeFile = opts.useVscode[0] ? path.join(process.cwd(), opts.useVscode[0]) : null;
         let tsfmtFile = opts.useTsfmt[0] ? path.join(process.cwd(), opts.useTsfmt[0]) : null;
         let verbose = !!opts.verbose;
         let version = !!opts.version;
@@ -132,6 +135,9 @@ let root = commandpost
             }
             printSetting("editorconfig", editorconfig);
             printSetting("vscode", vscode);
+            if (vscodeFile) {
+                printSetting("specified vscode settings.json", vscodeFile);
+            }
             printSetting("tsfmt", tsfmt);
             if (tsfmtFile) {
                 printSetting("specified tsfmt.json", tsfmtFile);
@@ -156,6 +162,7 @@ let root = commandpost
                     tslintFile: tslintFile,
                     editorconfig: editorconfig,
                     vscode: vscode,
+                    vscodeFile: vscodeFile,
                     tsfmt: tsfmt,
                     tsfmtFile: tsfmtFile,
                     verbose: verbose,
@@ -179,6 +186,7 @@ let root = commandpost
                     tslintFile: tslintFile,
                     editorconfig: editorconfig,
                     vscode: vscode,
+                    vscodeFile: vscodeFile,
                     tsfmt: tsfmt,
                     tsfmtFile: tsfmtFile,
                     verbose: verbose,
