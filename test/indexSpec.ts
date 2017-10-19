@@ -122,6 +122,7 @@ describe("tsfmt test", () => {
                             tslintFile: null,
                             editorconfig: true,
                             vscode: true,
+                            vscodeFile: null,
                             tsfmt: true,
                             tsfmtFile: null,
                         })
@@ -180,6 +181,7 @@ describe("tsfmt test", () => {
                     tslintFile: null,
                     editorconfig: true,
                     vscode: true,
+                    vscodeFile: null,
                     tsfmt: true,
                     tsfmtFile: null,
                 })
@@ -207,6 +209,7 @@ describe("tsfmt test", () => {
                     tslintFile: null,
                     editorconfig: true,
                     vscode: true,
+                    vscodeFile: null,
                     tsfmt: true,
                     tsfmtFile: null,
                 })
@@ -246,6 +249,13 @@ describe("tsfmt test", () => {
                 },
                 targetFile: "./test/fixture/specified-config/tsfmt/main.ts",
             },
+            {
+                name: "vscode settings.json",
+                settings: {
+                    vscodeFile: "alt-vscode-settings.json",
+                },
+                targetFile: "./test/fixture/specified-config/vscode/main.ts",
+            },
         ];
 
         list.forEach(matrix => {
@@ -261,6 +271,7 @@ describe("tsfmt test", () => {
                         tslintFile: null,
                         editorconfig: true,
                         vscode: true,
+                        vscodeFile: null,
                         tsfmt: true,
                         tsfmtFile: null,
                     }, matrix.settings))
