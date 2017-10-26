@@ -5,6 +5,7 @@ import path = require("path");
 import childProcess = require("child_process");
 import stream = require("stream");
 import mkdirp = require("mkdirp");
+const crossSpawn = require("cross-spawn");
 
 import lib = require("../lib/");
 
@@ -30,6 +31,23 @@ interface ExecResult {
     stderr: string;
 }
 
+function normalizePathSeparators(p: string): string {
+    if (path.sep === "\\") {
+        return p.replace(/\\/g, "/");
+    } else {
+        return p;
+    }
+}
+
+function execTsfmt(args: string[], options: childProcess.SpawnOptions): Promise<ExecResult> {
+    const tsfmtBin = path.resolve("./bin/tsfmt");
+    if (process.platform === "win32") {
+        return exec("node", [tsfmtBin, ...args], options);
+    } else {
+        return exec(tsfmtBin, args, options);
+    }
+}
+
 function exec(cmd: string, args: string[], options: childProcess.SpawnOptions): Promise<ExecResult> {
     let process = childProcess.spawn(cmd, args, options);
 
@@ -51,7 +69,7 @@ function exec(cmd: string, args: string[], options: childProcess.SpawnOptions): 
 }
 
 function checkByTslint(configFileName: string, tsfileName: string, errorExpected: boolean): Promise<boolean> {
-    let process = childProcess.spawn("./node_modules/.bin/tslint", ["-c", configFileName, tsfileName]);
+    let process = crossSpawn.spawn(`./node_modules/.bin/tslint`, ["-c", configFileName, tsfileName]);
 
     let stdout = "";
     process.stdout.on("data", (data: any) => {
@@ -302,7 +320,7 @@ describe("tsfmt test", () => {
 
     describe("CLI test", () => {
         it("should reformat files specified at files in tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve("./test/cli/files") }).then(result => {
+            return execTsfmt([], { cwd: path.resolve("./test/cli/files") }).then(result => {
                 assert.equal(result.status, 0);
                 assert.equal(result.stdout.trim(), `
 class TestCLI {
@@ -315,7 +333,7 @@ class TestCLI {
         });
 
         it("should reformat files specified at include, exclude in tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), [], { cwd: path.resolve("./test/cli/includeExclude") }).then(result => {
+            return execTsfmt([], { cwd: path.resolve("./test/cli/includeExclude") }).then(result => {
                 assert.equal(result.status, 0);
                 assert.equal(result.stdout.trim(), `
 export class TestCLI {
@@ -327,10 +345,10 @@ export class TestCLI {
         });
 
         it("should pickup files from --useTsconfig specified tsconfig.json", () => {
-            return exec(path.resolve("./bin/tsfmt"), ["--verify", "--useTsconfig", "./tsconfig.main.json"], { cwd: path.resolve("./test/cli/useTsconfig") }).then(result => {
+            return execTsfmt(["--verify", "--useTsconfig", "./tsconfig.main.json"], { cwd: path.resolve("./test/cli/useTsconfig") }).then(result => {
                 assert.equal(result.status, 1);
                 assert.equal(result.stdout.trim(), "");
-                assert.equal(result.stderr.replace(process.cwd(), "**").trim(), `
+                assert.equal(result.stderr.replace(normalizePathSeparators(process.cwd()), "**").trim(), `
 **/test/cli/useTsconfig/include.ts is not formatted
 `.trim().replace(/\n/g, "\r\n"));
             });
