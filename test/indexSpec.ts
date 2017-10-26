@@ -94,10 +94,7 @@ describe("tsfmt test", () => {
         fileNames
             .filter(fileName => /\.tsx?$/.test(fileName))
             .forEach(fileName => {
-                let ignoreList = [
-                    "./test/fixture/editorconfig/space/main.ts", // TypeScript ignore indentSize: 8
-                    "./test/fixture/tsfmt/a/main.ts", // TypeScript ignore indentSize: 1
-                    "./test/fixture/tslint/indent/main.ts", // TypeScript ignore indentSize: 6
+                let ignoreList: string[] = [
                 ];
                 if (ignoreList.indexOf(fileName) !== -1) {
                     it.skip(fileName, () => {
