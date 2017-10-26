@@ -1,3 +1,14 @@
+<a name="6.1.0"></a>
+# [6.1.0](https://github.com/vvakame/typescript-formatter/compare/6.0.0...6.1.0) (2017-10-26)
+
+
+### Features
+
+* **tsfmt:** Adds --useVscode flag that specifies an alternative path to .vscode/settings.json configuration. thanks @cspotcode ([5c0072a](https://github.com/vvakame/typescript-formatter/commit/5c0072a))
+* **tsfmt:** update dependencies ([7a12cca](https://github.com/vvakame/typescript-formatter/commit/7a12cca))
+
+
+
 <a name="6.0.0"></a>
 # [6.0.0](https://github.com/vvakame/typescript-formatter/compare/5.2.0...6.0.0) (2017-08-22)
 
