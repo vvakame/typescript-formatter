@@ -30,7 +30,12 @@ interface VSCodeSettings {
 export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName = getConfigFileName(baseDir, "./.vscode/settings.json");
+    let configFileName: string | null;
+    if (opts.vscodeFile && path.isAbsolute(opts.vscodeFile)) {
+        configFileName = opts.vscodeFile;
+    } else {
+        configFileName = getConfigFileName(baseDir, opts.vscodeFile || ".vscode/settings.json");
+    }
     if (!configFileName) {
         return formatSettings;
     }
