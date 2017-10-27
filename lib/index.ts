@@ -12,6 +12,7 @@ import * as tsconfigjson from "./provider/tsconfigjson";
 import * as editorconfig from "./provider/editorconfig";
 import * as tslintjson from "./provider/tslintjson";
 import * as vscodesettings from "./provider/vscodesettings";
+import { EOL } from "os";
 
 const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json")).toString());
 export const version = packageJson.version;
@@ -163,7 +164,7 @@ export function processString(fileName: string, content: string, opts: Options):
     }
     processor.addPostProcess((_fileName: string, formattedCode: string, _opts: Options, formatSettings: ts.FormatCodeSettings) => {
         // replace newline code. maybe NewLineCharacter params affect to only "new" newline by language service.
-        formattedCode = formattedCode.replace(/\r?\n/g, formatSettings.newLineCharacter || "\n");
+        formattedCode = formattedCode.replace(/\r?\n/g, formatSettings.newLineCharacter || EOL);
         return Promise.resolve(formattedCode);
     });
 
