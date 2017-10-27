@@ -1,3 +1,14 @@
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/vvakame/typescript-formatter/compare/6.1.0...7.0.0) (2017-10-27)
+
+
+### Features
+
+* **tsfmt:** Use host EOL by default. thanks @vegansk ([9021fc6](https://github.com/vvakame/typescript-formatter/commit/9021fc6))
+* **ci:** Update .travis.yml, add Node.js v8 env ([78a1128](https://github.com/vvakame/typescript-formatter/commit/78a1128))
+
+
+
 <a name="6.1.0"></a>
 # [6.1.0](https://github.com/vvakame/typescript-formatter/compare/6.0.0...6.1.0) (2017-10-26)
 
