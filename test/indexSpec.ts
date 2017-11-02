@@ -58,6 +58,7 @@ function checkByTslint(configFileName: string, tsfileName: string, errorExpected
         stdout += data.toString();
     });
 
+    // @ts-ignore
     let stderr = "";
     process.stderr.on("data", (data: any) => {
         stderr += data.toString();
