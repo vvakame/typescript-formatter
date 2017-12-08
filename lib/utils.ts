@@ -3,6 +3,9 @@ import * as ts from "typescript";
 import * as fs from "fs";
 import * as path from "path";
 
+declare type CONFIG_CACHE<T> = { [file: string]: T };
+const TSCONFIG_CACHE: CONFIG_CACHE<ts.ParsedCommandLine> = {};
+
 export function createDefaultFormatCodeSettings(): ts.FormatCodeSettings {
 
     return {
@@ -49,6 +52,8 @@ export function readFilesFromTsconfig(configPath: string): string[] {
 }
 
 export function readTsconfig(configPath: string): ts.ParsedCommandLine {
+    if (TSCONFIG_CACHE[configPath]) return TSCONFIG_CACHE[configPath];
+
     // for `extends` support. It supported from TypeScript 2.1.1.
     // `& { readFile(path: string): string; }` is backword compat for TypeScript compiler 2.0.3 support.
     const host: ts.ParseConfigHost & { readFile(path: string): string; } = {
@@ -62,6 +67,8 @@ export function readTsconfig(configPath: string): ts.ParsedCommandLine {
     if (parsed.errors && parsed.errors.length !== 0) {
         throw new Error(parsed.errors.map(e => e.messageText).join("\n"));
     }
+
+    TSCONFIG_CACHE[configPath] = parsed;
 
     return parsed;
 }
