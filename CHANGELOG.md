@@ -1,3 +1,11 @@
+<a name="7.0.1"></a>
+## [7.0.1](https://github.com/vvakame/typescript-formatter/compare/7.0.0...7.0.1) (2017-12-17)
+
+### Features
+
+* **tsfmt:** cache tsconfig.json. thanks @stweedie ([0e42c1b](https://github.com/vvakame/typescript-formatter/commit/0e42c1b))
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/vvakame/typescript-formatter/compare/6.1.0...7.0.0) (2017-10-27)
 
