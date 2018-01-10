@@ -29,6 +29,7 @@ export function createDefaultFormatCodeSettings(): ts.FormatCodeSettings {
         insertSpaceBeforeFunctionParenthesis: false,
         placeOpenBraceOnNewLineForFunctions: false,
         placeOpenBraceOnNewLineForControlBlocks: false,
+        insertSpaceBeforeTypeAnnotation: false,
     };
 }
 

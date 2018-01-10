@@ -22,6 +22,7 @@ interface TsfmtSettings {
     insertSpaceBeforeFunctionParenthesis?: boolean;
     placeOpenBraceOnNewLineForFunctions?: boolean;
     placeOpenBraceOnNewLineForControlBlocks?: boolean;
+    insertSpaceBeforeTypeAnnotation?: boolean;
     baseIndentSize?: number;
     indentSize?: number;
     // 0, 1, 2 or None, Block, Smart
@@ -93,6 +94,9 @@ export function makeFormatCodeOptions(fileName: string, opts: Options, formatSet
     if (typeof config.placeOpenBraceOnNewLineForControlBlocks === "boolean") {
         formatSettings.placeOpenBraceOnNewLineForControlBlocks = config.placeOpenBraceOnNewLineForControlBlocks;
     }
+    if (typeof config.insertSpaceBeforeTypeAnnotation === "boolean") {
+        formatSettings.insertSpaceBeforeTypeAnnotation = config.insertSpaceBeforeTypeAnnotation;
+    }
     if (typeof config.baseIndentSize === "number") {
         formatSettings.baseIndentSize = config.baseIndentSize;
     }
@@ -102,7 +106,7 @@ export function makeFormatCodeOptions(fileName: string, opts: Options, formatSet
     if (typeof config.indentStyle === "number") {
         formatSettings.indentStyle = config.indentStyle as number;
     } else if (typeof config.indentStyle === "string") {
-        formatSettings.indentStyle = (ts.IndentStyle as any)[config.indentStyle] as number;
+        formatSettings.indentStyle = (ts.IndentStyle as any) [config.indentStyle] as number;
     }
     if (typeof config.tabSize === "number") {
         formatSettings.tabSize = config.tabSize;

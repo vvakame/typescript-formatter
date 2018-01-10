@@ -83,6 +83,7 @@ export function makeFormatCodeOptions(fileName: string, opts: Options, formatSet
     if (config["typescript.format.placeOpenBraceOnNewLineForControlBlocks"] != null) {
         formatSettings.placeOpenBraceOnNewLineForControlBlocks = config["typescript.format.placeOpenBraceOnNewLineForControlBlocks"];
     }
+    // TODO insertSpaceAfterTypeAssertion
 
     return formatSettings;
 }

@@ -14,11 +14,11 @@
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+  "insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
   "insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
   "insertSpaceAfterTypeAssertion": false,
   "insertSpaceBeforeFunctionParenthesis": false,
   "placeOpenBraceOnNewLineForFunctions": false,
   "placeOpenBraceOnNewLineForControlBlocks": false,
-  "insertSpaceBeforeTypeAnnotation": false
+  "insertSpaceBeforeTypeAnnotation": true
 }

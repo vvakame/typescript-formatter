@@ -25,7 +25,7 @@ class Sample {
         return "";
     }
 
-    f( @parameterDecorator str: string): string {
+    f(@parameterDecorator str: string): string {
         return `Hello, ${str}`;
     }
 }
