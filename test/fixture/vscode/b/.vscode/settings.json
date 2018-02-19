@@ -2,6 +2,7 @@
     // comment
     "typescript.format.enable": false,
     "typescript.format.insertSpaceAfterCommaDelimiter": false,
+    "typescript.format.insertSpaceAfterConstructor": false,
     "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
     "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": false,
     "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
@@ -11,6 +12,7 @@
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+    "typescript.format.insertSpaceAfterTypeAssertion": false,
     "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
     "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
     "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false
