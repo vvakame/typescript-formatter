@@ -1,3 +1,14 @@
+<a name="7.1.0"></a>
+# [7.1.0](https://github.com/vvakame/typescript-formatter/compare/7.0.1...7.1.0) (2018-02-19)
+
+
+### Features
+
+* **tsfmt:** add insertSpaceAfterConstructor and insertSpaceAfterTypeAssertion support to .vscode/settings.json ([0f8b1e3](https://github.com/vvakame/typescript-formatter/commit/0f8b1e3))
+* **tsfmt:** add insertSpaceBeforeTypeAnnotation support refs [#108](https://github.com/vvakame/typescript-formatter/issues/108) ([68bd800](https://github.com/vvakame/typescript-formatter/commit/68bd800))
+
+
+
 <a name="7.0.1"></a>
 ## [7.0.1](https://github.com/vvakame/typescript-formatter/compare/7.0.0...7.0.1) (2017-12-17)
 
