@@ -19,5 +19,6 @@
   "insertSpaceAfterTypeAssertion": true,
   "insertSpaceBeforeFunctionParenthesis": true,
   "placeOpenBraceOnNewLineForFunctions": false,
-  "placeOpenBraceOnNewLineForControlBlocks": false
+  "placeOpenBraceOnNewLineForControlBlocks": false,
+  "insertSpaceBeforeTypeAnnotation": false
 }

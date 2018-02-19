@@ -111,7 +111,8 @@ tsfmt -r
   "insertSpaceAfterTypeAssertion": false,
   "insertSpaceBeforeFunctionParenthesis": false,
   "placeOpenBraceOnNewLineForFunctions": false,
-  "placeOpenBraceOnNewLineForControlBlocks": false
+  "placeOpenBraceOnNewLineForControlBlocks": false,
+  "insertSpaceBeforeTypeAnnotation": true
 }
 ```
 
