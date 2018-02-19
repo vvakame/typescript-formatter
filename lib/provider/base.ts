@@ -106,7 +106,7 @@ export function makeFormatCodeOptions(fileName: string, opts: Options, formatSet
     if (typeof config.indentStyle === "number") {
         formatSettings.indentStyle = config.indentStyle as number;
     } else if (typeof config.indentStyle === "string") {
-        formatSettings.indentStyle = (ts.IndentStyle as any) [config.indentStyle] as number;
+        formatSettings.indentStyle = (ts.IndentStyle as any)[config.indentStyle] as number;
     }
     if (typeof config.tabSize === "number") {
         formatSettings.tabSize = config.tabSize;
