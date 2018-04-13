@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import { IOptions } from "tslint";
+import { IOptions as TslintOptions } from "tslint";
 import * as path from "path";
 
 import { Options } from "../";
@@ -73,10 +73,10 @@ export async function postProcess(fileName: string, formattedCode: string, opts:
     return formattedCode;
 }
 
-async function getRules(fileName: string, opts: Options): Promise<Map<string, Partial<IOptions>> | undefined> {
+async function getRules(fileName: string, opts: Options): Promise<Map<string, Partial<TslintOptions>> | undefined> {
     const baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName: string | null;
 
+    let configFileName: string | null;
     if (opts.tslintFile && path.isAbsolute(opts.tslintFile)) {
         configFileName = opts.tslintFile;
     } else {
