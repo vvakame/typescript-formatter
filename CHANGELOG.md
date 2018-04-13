@@ -1,3 +1,15 @@
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/vvakame/typescript-formatter/compare/7.1.0...7.2.0) (2018-04-13)
+
+
+### Features
+
+* **ci:** remove Node.js v4 from .travis.yml ([e657ccb](https://github.com/vvakame/typescript-formatter/commit/e657ccb))
+* **tsfmt:** update dependencies & use npm again ([850b369](https://github.com/vvakame/typescript-formatter/commit/850b369))
+* **tslint:** add support to read extended `tslint.json` ([9c55670](https://github.com/vvakame/typescript-formatter/commit/9c55670)), closes [#123](https://github.com/vvakame/typescript-formatter/issues/123)
+
+
+
 <a name="7.1.0"></a>
 # [7.1.0](https://github.com/vvakame/typescript-formatter/compare/7.0.1...7.1.0) (2018-02-19)
 
