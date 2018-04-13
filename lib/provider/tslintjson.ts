@@ -1,78 +1,56 @@
 import * as ts from "typescript";
-
+import { IOptions } from "tslint";
 import * as path from "path";
-import * as fs from "fs";
 
 import { Options } from "../";
-import { getConfigFileName, parseJSON } from "../utils";
+import { getConfigFileName } from "../utils";
 
-interface TslintSettings {
-    rules: {
-        indent: {
-            0: boolean;
-            1: string;
-        };
-        "no-consecutive-blank-lines": boolean,
-        whitespace: {
-            0: boolean;
-            1: string;
-            2: string;
-            3: string;
-            4: string;
-            5: string;
-            [key: string]: any;
-        };
-    };
-}
 
 export interface AdditionalFormatSettings {
     $noConsecutiveBlankLines: boolean;
 }
 
-export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
+export async function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): Promise<ts.FormatCodeSettings> {
 
-    let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName: string | null;
-    if (opts.tslintFile && path.isAbsolute(opts.tslintFile)) {
-        configFileName = opts.tslintFile;
-    } else {
-        configFileName = getConfigFileName(baseDir, opts.tslintFile || "tslint.json");
-    }
-    if (!configFileName) {
+    const rules = await getRules(fileName, opts);
+
+    if (!rules) {
         return formatSettings;
     }
 
-    if (opts.verbose) {
-        console.log(`read ${configFileName} for ${fileName}`);
-    }
+    const indent = rules.get("indent");
+    const whitespace = rules.get("whitespace");
 
-    let config: TslintSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
-    if (!config.rules) {
-        return formatSettings;
-    }
-    if (config.rules.indent && config.rules.indent[0]) {
-        if (config.rules.indent[1] === "spaces") {
-            formatSettings.convertTabsToSpaces = true;
-        } else if (config.rules.indent[1] === "tabs") {
-            formatSettings.convertTabsToSpaces = false;
+    if (indent && indent.ruleArguments) {
+        switch (indent.ruleArguments[0]) {
+            case "spaces":
+                formatSettings.convertTabsToSpaces = true;
+                break;
+            case "tabs":
+                formatSettings.convertTabsToSpaces = false;
+                break;
+            default:
+                break;
         }
     }
-    if (config.rules.whitespace && config.rules.whitespace[0]) {
-        for (let p in config.rules.whitespace) {
-            let value = config.rules.whitespace[p];
-            if (value === "check-branch") {
-                formatSettings.insertSpaceAfterKeywordsInControlFlowStatements = true;
-            } else if (value === "check-decl") {
-                // none?
-            } else if (value === "check-operator") {
-                formatSettings.insertSpaceBeforeAndAfterBinaryOperators = true;
-            } else if (value === "check-separator") {
-                formatSettings.insertSpaceAfterCommaDelimiter = true;
-                formatSettings.insertSpaceAfterSemicolonInForStatements = true;
-            } else if (value === "check-type") {
-                // none?
-            } else if (value === "check-typecast") {
-                formatSettings.insertSpaceAfterTypeAssertion = true;
+    if (whitespace && whitespace.ruleArguments) {
+        for (let p in whitespace.ruleArguments) {
+            switch (whitespace.ruleArguments[p]) {
+                case "check-branch":
+                    formatSettings.insertSpaceAfterKeywordsInControlFlowStatements = true;
+                    break;
+                case "check-operator":
+                    formatSettings.insertSpaceBeforeAndAfterBinaryOperators = true;
+                    break;
+                case "check-separator":
+                    formatSettings.insertSpaceAfterCommaDelimiter = true;
+                    formatSettings.insertSpaceAfterSemicolonInForStatements = true;
+                    break;
+                case "check-typecast":
+                    formatSettings.insertSpaceAfterTypeAssertion = true;
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -80,39 +58,40 @@ export function makeFormatCodeOptions(fileName: string, opts: Options, formatSet
     return formatSettings;
 }
 
-export function postProcess(fileName: string, formattedCode: string, opts: Options, _formatSettings: ts.FormatCodeSettings): string {
+export async function postProcess(fileName: string, formattedCode: string, opts: Options, _formatSettings: ts.FormatCodeSettings): Promise<string> {
 
-    let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
-    let configFileName: string | null;
-    if (opts.tslintFile && path.isAbsolute(opts.tslintFile)) {
-        configFileName = opts.tslintFile;
-    } else {
-        configFileName = getConfigFileName(baseDir, opts.tslintFile || "tslint.json");
-    }
-    if (!configFileName) {
+    const rules = await getRules(fileName, opts);
+
+    if (!rules) {
         return formattedCode;
     }
 
-    let config: TslintSettings = parseJSON(fs.readFileSync(configFileName, "utf-8"));
-    if (!config.rules) {
-        return formattedCode;
-    }
-
-    let additionalOptions = createDefaultAdditionalFormatCodeSettings();
-    if (config.rules["no-consecutive-blank-lines"] === true) {
-        additionalOptions.$noConsecutiveBlankLines = true;
-    }
-
-    if (additionalOptions.$noConsecutiveBlankLines) {
+    if (rules.has("no-consecutive-blank-lines")) {
         formattedCode = formattedCode.replace(/\n+^$/mg, "\n");
     }
 
     return formattedCode;
 }
 
-function createDefaultAdditionalFormatCodeSettings(): AdditionalFormatSettings {
+async function getRules(fileName: string, opts: Options): Promise<Map<string, Partial<IOptions>> | undefined> {
+    const baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
+    let configFileName: string | null;
 
-    return {
-        $noConsecutiveBlankLines: false,
-    };
+    if (opts.tslintFile && path.isAbsolute(opts.tslintFile)) {
+        configFileName = opts.tslintFile;
+    } else {
+        configFileName = getConfigFileName(baseDir, opts.tslintFile || "tslint.json");
+    }
+
+    if (!configFileName) {
+        return undefined;
+    }
+
+    if (opts.verbose) {
+        console.log(`read ${configFileName} for ${fileName}`);
+    }
+
+    const { Configuration } = await import("tslint");
+    const { rules } = Configuration.loadConfigurationFromPath(configFileName);
+    return rules;
 }
