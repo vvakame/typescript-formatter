@@ -110,9 +110,9 @@ tsfmt -r
   "insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
   "insertSpaceAfterTypeAssertion": false,
   "insertSpaceBeforeFunctionParenthesis": false,
+  "insertSpaceBeforeTypeAnnotation": true,
   "placeOpenBraceOnNewLineForFunctions": false,
-  "placeOpenBraceOnNewLineForControlBlocks": false,
-  "insertSpaceBeforeTypeAnnotation": true
+  "placeOpenBraceOnNewLineForControlBlocks": false
 }
 ```
 
