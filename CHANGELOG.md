@@ -1,3 +1,8 @@
+<a name="7.2.2"></a>
+## [7.2.2](https://github.com/vvakame/typescript-formatter/compare/7.2.1...7.2.2) (2018-06-01)
+
+I failed git rebase 😩, released again... (sorry!)
+
 <a name="7.2.1"></a>
 ## [7.2.1](https://github.com/vvakame/typescript-formatter/compare/7.2.0...7.2.1) (2018-06-01)
 
