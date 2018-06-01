@@ -1,3 +1,8 @@
+<a name="7.2.1"></a>
+## [7.2.1](https://github.com/vvakame/typescript-formatter/compare/7.2.0...7.2.1) (2018-06-01)
+
+checked by TypeScript 2.9.1
+
 <a name="7.2.0"></a>
 # [7.2.0](https://github.com/vvakame/typescript-formatter/compare/7.1.0...7.2.0) (2018-04-13)
 
