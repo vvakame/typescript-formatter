@@ -91,7 +91,11 @@ async function getRules(fileName: string, opts: Options): Promise<Map<string, Pa
         console.log(`read ${configFileName} for ${fileName}`);
     }
 
-    const { Configuration } = await import("tslint");
-    const { rules } = Configuration.loadConfigurationFromPath(configFileName);
-    return rules;
+    try {
+        const { Configuration } = await import("tslint");
+        const { rules } = Configuration.loadConfigurationFromPath(configFileName);
+        return rules;
+    } catch {
+        return undefined;
+    }
 }
