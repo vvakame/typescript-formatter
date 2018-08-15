@@ -9,7 +9,7 @@ import * as ts from "typescript";
 import * as fs from "fs";
 import * as path from "path";
 import * as commandpost from "commandpost";
-
+import * as globArgs from "glob-args";
 import * as lib from "./";
 import { getConfigFileName, readFilesFromTsconfig } from "./utils";
 
@@ -94,6 +94,7 @@ let root = commandpost
             process.stdout.write(root.helpText() + "\n");
             return;
         }
+        files = globArgs(files);
 
         if (verbose) {
             const printPool: { [name: string]: string; } = {};
