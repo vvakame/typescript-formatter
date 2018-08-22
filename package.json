@@ -33,12 +33,14 @@
   },
   "dependencies": {
     "commandpost": "^1.0.0",
-    "editorconfig": "^0.15.0"
+    "editorconfig": "^0.15.0",
+    "glob": "^7.1.2"
   },
   "peerDependencies": {
     "typescript": "^2.1.6 || ^3.0.0 || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev"
   },
   "devDependencies": {
+    "@types/glob": "^5.0.35",
     "@types/mkdirp": "^0.5.0",
     "@types/mocha": "^5.0.0",
     "@types/node": "^10.3.0",
