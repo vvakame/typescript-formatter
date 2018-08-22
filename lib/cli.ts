@@ -97,8 +97,8 @@ let root = commandpost
         let matchedFiles = new Array();
         files.forEach((pattern) => {
             const matched = glob.sync(pattern);
-            if (matched) {
-                matchedFiles.concat(matched);
+            if (matched && matched.length > 0) {
+                matchedFiles = matchedFiles.concat(matched);
             }
         });
         files = matchedFiles;
