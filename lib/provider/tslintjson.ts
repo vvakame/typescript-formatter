@@ -22,7 +22,8 @@ export async function makeFormatCodeOptions(fileName: string, opts: Options, for
     const whitespace = rules.get("whitespace");
 
     if (indent && indent.ruleArguments) {
-        switch (indent.ruleArguments[0]) {
+        const [character, size] = indent.ruleArguments;
+        switch (character) {
             case "spaces":
                 formatSettings.convertTabsToSpaces = true;
                 break;
@@ -31,6 +32,9 @@ export async function makeFormatCodeOptions(fileName: string, opts: Options, for
                 break;
             default:
                 break;
+        }
+        if (typeof size === 'number') {
+            formatSettings.indentSize = size;
         }
     }
     if (whitespace && whitespace.ruleArguments) {
