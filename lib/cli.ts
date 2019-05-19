@@ -15,6 +15,8 @@ import { getConfigFileName, readFilesFromTsconfig } from "./utils";
 
 const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json")).toString());
 
+const resolvePath = (filePath: string) => path.isAbsolute(filePath) ? filePath : path.join(process.cwd(), filePath);
+
 interface RootOptions {
     replace: boolean;
     verify: boolean;
@@ -64,10 +66,10 @@ let root = commandpost
         let editorconfig = !!opts.editorconfig;
         let vscode = !!opts.vscode;
         let tsfmt = !!opts.tsfmt;
-        let tsconfigFile = opts.useTsconfig[0] ? path.join(process.cwd(), opts.useTsconfig[0]) : null;
-        let tslintFile = opts.useTslint[0] ? path.join(process.cwd(), opts.useTslint[0]) : null;
-        let vscodeFile = opts.useVscode[0] ? path.join(process.cwd(), opts.useVscode[0]) : null;
-        let tsfmtFile = opts.useTsfmt[0] ? path.join(process.cwd(), opts.useTsfmt[0]) : null;
+        let tsconfigFile = opts.useTsconfig[0] ? resolvePath(opts.useTsconfig[0]) : null;
+        let tslintFile = opts.useTslint[0] ? resolvePath(opts.useTslint[0]) : null;
+        let vscodeFile = opts.useVscode[0] ? resolvePath(opts.useVscode[0]) : null;
+        let tsfmtFile = opts.useTsfmt[0] ? resolvePath(opts.useTsfmt[0]) : null;
         let verbose = !!opts.verbose;
         let version = !!opts.version;
 
