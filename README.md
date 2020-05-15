@@ -162,7 +162,7 @@ insert_final_newline = true
 
 5th. Read settings from .vscode/settings.json ([VisualStudio Code](https://code.visualstudio.com/Docs/customization/userandworkspace))
 
-```json
+```jsonc
 {
   // Place your settings in this file to overwrite default and user settings.
   "typescript.format.enable": true,
