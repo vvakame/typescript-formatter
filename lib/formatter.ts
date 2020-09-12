@@ -24,14 +24,11 @@ export function format(fileName: string, text: string, options = createDefaultFo
 
     const languageService = ts.createLanguageService(host);
     const edits = languageService.getFormattingEditsForDocument(fileName, options);
-    edits
+    const [lastEnd, result] = edits
         .sort((a, b) => a.span.start - b.span.start)
-        .reverse()
-        .forEach(edit => {
-            const head = text.slice(0, edit.span.start);
-            const tail = text.slice(edit.span.start + edit.span.length);
-            text = `${head}${edit.newText}${tail}`;
-        });
-
-    return text;
+        .reduce<[number, string]>(
+            ([lastEnd, result], edit) =>
+                [edit.span.start + edit.span.length, result + text.slice(lastEnd, edit.span.start) + edit.newText],
+            [0, ""]);
+    return result + text.slice(lastEnd);
 }
