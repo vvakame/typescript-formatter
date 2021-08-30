@@ -1,7 +1,7 @@
 <View style={styles.container}>
     <Text>
         I am a lightbox!
-        </Text>
+    </Text>
     <TouchableOpacity onPress={this.dismissLightBox.bind(this)}>
         <Text>Close Me!</Text>
     </TouchableOpacity>

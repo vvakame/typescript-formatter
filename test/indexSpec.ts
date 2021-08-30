@@ -36,8 +36,8 @@ function exec(cmd: string, args: string[], options: childProcess.SpawnOptions): 
     let stdout = "";
     let stderr = "";
 
-    process.stdout.on("data", (data: Buffer) => stdout += data.toString());
-    process.stderr.on("data", (data: Buffer) => stderr += data.toString());
+    process.stdout!.on("data", (data: Buffer) => stdout += data.toString());
+    process.stderr!.on("data", (data: Buffer) => stderr += data.toString());
 
     return new Promise((resolve, _reject) => {
         process.on("exit", (status: number) => {
