@@ -5,6 +5,7 @@ import * as fs from "fs";
 
 import { Options } from "../";
 import { getConfigFileName, parseJSON } from "../utils";
+import { Writable } from "./base";
 
 // https://code.visualstudio.com/Docs/customization/userandworkspace
 interface VSCodeSettings {
@@ -16,6 +17,7 @@ interface VSCodeSettings {
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": boolean;
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": boolean;
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": boolean;
@@ -28,7 +30,7 @@ interface VSCodeSettings {
     // baseIndentSize
 }
 
-export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
+export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: Writable<ts.FormatCodeSettings>): ts.FormatCodeSettings {
 
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName: string | null;
@@ -71,6 +73,9 @@ export function makeFormatCodeOptions(fileName: string, opts: Options, formatSet
     }
     if (config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces"] != null) {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces"];
+    }
+    if (config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces"] != null) {
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces"];
     }
     if (config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces"] != null) {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = config["typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces"];

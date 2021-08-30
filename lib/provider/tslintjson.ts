@@ -4,13 +4,14 @@ import * as path from "path";
 
 import { Options } from "../";
 import { getConfigFileName } from "../utils";
+import { Writable } from "./base";
 
 
 export interface AdditionalFormatSettings {
     $noConsecutiveBlankLines: boolean;
 }
 
-export async function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): Promise<ts.FormatCodeSettings> {
+export async function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: Writable<ts.FormatCodeSettings>): Promise<ts.FormatCodeSettings> {
 
     const rules = await getRules(fileName, opts);
 

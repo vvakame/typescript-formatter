@@ -15,6 +15,7 @@ interface TsfmtSettings {
     insertSpaceAfterFunctionKeywordForAnonymousFunctions?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets?: boolean;
+    insertSpaceAfterOpeningAndBeforeClosingEmptyBraces?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces?: boolean;
     insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces?: boolean;
@@ -32,7 +33,11 @@ interface TsfmtSettings {
     convertTabsToSpaces?: boolean;
 }
 
-export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: ts.FormatCodeSettings): ts.FormatCodeSettings {
+export type Writable<T> = {
+    -readonly [K in keyof T]: T[K];
+};
+
+export function makeFormatCodeOptions(fileName: string, opts: Options, formatSettings: Writable<ts.FormatCodeSettings>): ts.FormatCodeSettings {
     let baseDir = opts.baseDir ? path.resolve(opts.baseDir) : path.dirname(path.resolve(fileName));
     let configFileName: string | null;
     if (opts.tsfmtFile && path.isAbsolute(opts.tsfmtFile)) {
@@ -69,6 +74,9 @@ export function makeFormatCodeOptions(fileName: string, opts: Options, formatSet
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis === "boolean") {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis;
+    }
+    if (typeof config.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces === "boolean") {
+        formatSettings.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = config.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces;
     }
     if (typeof config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces === "boolean") {
         formatSettings.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = config.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces;
